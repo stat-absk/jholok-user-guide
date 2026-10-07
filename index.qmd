@@ -1,0 +1,49 @@
+# Welcome {.unnumbered}
+
+::: {.audience}
+For everyone
+:::
+
+Jholok helps a jewellery shop know what it has. It keeps a list of your
+products, records every piece that comes in or goes out, and helps you count
+what is really on the shelves, so you can see what is missing before it costs
+you.
+
+This guide is for anyone using Jholok for the first time: the shop's owner,
+the people who approve counts, and the staff who count. You don't need to know
+anything about accounting. Each idea is explained the first time it appears,
+and every word is in the [Glossary](chapters/glossary.qmd).
+
+::: {.callout-note}
+## This guide is being written
+
+The chapters are being added one by one. Chapters that are not ready yet say
+so.
+:::
+
+## How this guide is arranged
+
+- **The ideas behind the app** explains stock, the ledger and counting in plain
+  words. Read this part first, even if you only count.
+- **Everyday use** sets the shop up and keeps the catalogue and stock up to
+  date.
+- **Counting** walks through a count, from opening it to counting boxes of
+  pieces.
+- **Checking a count** is for the owner and the people who approve counts.
+- **Looking after your shop** covers backups and privacy, and ends with stories
+  from a shop's year.
+
+Each chapter says who it is for, starts with what you'll learn and ends with
+what to remember.
+
+## The shop in this guide
+
+Every example and picture uses the same made-up shop, **Jholok Jewellers**,
+with its owner Bidisha and staff Sita, Ramesh and Meena. It is the same shop
+that the app's demo shows, so what you read here matches what you see on the
+screen. None of its stock is real.
+
+## Which app this guide describes
+
+This is guide 0.1, for Jholok 0.1. The [What changed](chapters/what-changed.qmd)
+page lists what is new in each edition of the guide.

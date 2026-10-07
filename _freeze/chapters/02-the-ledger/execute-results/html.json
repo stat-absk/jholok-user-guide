@@ -1,0 +1,15 @@
+{
+  "hash": "a082e6d2019ab79ad2a1a1fabb1c41fa",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# The ledger: why stock is a sum\n\n\n\n::: {.audience}\nFor everyone\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

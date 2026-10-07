@@ -1,0 +1,15 @@
+{
+  "hash": "9ffe779c7b0fb71c02bb27b503be07bf",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Stock basics\n\n\n\n::: {.audience}\nFor everyone\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

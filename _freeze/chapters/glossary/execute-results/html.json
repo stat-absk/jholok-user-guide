@@ -1,0 +1,15 @@
+{
+  "hash": "4021c4c8cb91e9f1e0a125e8af2a8623",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Glossary\n\n\n\n::: {.audience}\nFor everyone\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "hash": "9b78151cb98962d2dcf11a7972cd3924",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Results and the count report\n\n\n\n::: {.audience}\nFor the owner and approvers\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

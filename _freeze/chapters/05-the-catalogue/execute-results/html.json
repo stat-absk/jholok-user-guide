@@ -1,0 +1,15 @@
+{
+  "hash": "5a4f13775a8d04136a377ed84c96ff69",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# The catalogue\n\n\n\n::: {.audience}\nFor the owner\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

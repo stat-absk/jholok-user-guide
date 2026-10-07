@@ -1,0 +1,15 @@
+{
+  "hash": "32ca96aee3e1ca7f20680f9d007fdc76",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Recording what comes in and goes out\n\n\n\n::: {.audience}\nFor the owner and approvers\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

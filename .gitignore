@@ -1,0 +1,17 @@
+# Rendered book and Quarto's working files
+/_book/
+/.quarto/
+/_release/
+
+# R session files
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+**/*.quarto_ipynb
+/_cache/
+
+# The Swift tool that writes the app reference files
+/scripts/app-demo-dump/.build/
+/scripts/app-demo-dump/.swiftpm/

@@ -1,0 +1,83 @@
+project:
+  type: book
+  output-dir: _book
+  # Only the guide; PLAN, TRACKER and README are for the people writing it.
+  render:
+    - index.qmd
+    - chapters/*.qmd
+
+execute:
+  # Readers never need the R code; it only builds the examples.
+  echo: false
+  warning: false
+  message: false
+  freeze: auto
+
+book:
+  title: "Counting your stock with Jholok"
+  subtitle: "A guide for first-time users"
+  description: >
+    How to use Jholok, why it works the way it does, and the shop and
+    accounting ideas behind it, in plain words.
+  version: "Guide 0.1 · for Jholok 0.1"
+  date: last-modified
+  date-format: "D MMMM YYYY"
+  search: true
+  repo-actions: none
+  sidebar:
+    style: floating
+  page-navigation: true
+  chapters:
+    - index.qmd
+    - part: "The ideas behind the app"
+      chapters:
+        - chapters/01-stock-basics.qmd
+        - chapters/02-the-ledger.qmd
+        - chapters/03-counting-and-reconciliation.qmd
+    - part: "Everyday use"
+      chapters:
+        - chapters/04-setting-up.qmd
+        - chapters/05-the-catalogue.qmd
+        - chapters/06-recording-movements.qmd
+        - chapters/07-the-overview.qmd
+    - part: "Counting"
+      chapters:
+        - chapters/08-a-count-start-to-finish.qmd
+        - chapters/09-counting-boxes.qmd
+        - chapters/10-identify-later.qmd
+    - part: "Checking a count"
+      chapters:
+        - chapters/11-book-stock.qmd
+        - chapters/12-off-the-shelf-and-cut-off.qmd
+        - chapters/13-submit-review-complete.qmd
+        - chapters/14-results-and-report.qmd
+    - part: "Looking after your shop"
+      chapters:
+        - chapters/15-keeping-data-safe.qmd
+        - chapters/16-stories-from-the-shop.qmd
+  appendices:
+    - chapters/glossary.qmd
+    - chapters/questions.qmd
+    - chapters/what-changed.qmd
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles/light.scss, styles/rules.scss]
+      dark: [cosmo, styles/dark.scss, styles/rules.scss]
+    respect-user-color-scheme: true
+    toc: true
+    toc-depth: 2
+    toc-title: "On this page"
+    number-sections: true
+    number-depth: 2
+    fig-align: center
+    fig-responsive: true
+    link-external-newwindow: true
+    lang: en-GB
+
+knitr:
+  opts_chunk:
+    fig.width: 7
+    fig.height: 4
+    dev: svglite

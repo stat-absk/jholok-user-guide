@@ -1,0 +1,15 @@
+{
+  "hash": "cb777974c02f1ced0774f447a725eb2a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Pieces to identify later\n\n\n\n::: {.audience}\nFor counters\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

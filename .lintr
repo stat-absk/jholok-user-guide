@@ -1,0 +1,11 @@
+linters: linters_with_defaults(
+    line_length_linter(80),
+    # The random number generator and the day-by-day simulation keep their
+    # state in closures, as the app's Swift structs do.
+    assignment_linter(operator = c("<-", "<<-")),
+    # Chapters and tests source R/ as plain files and use dplyr's column
+    # names, which this linter can't see.
+    object_usage_linter = NULL
+  )
+exclusions: list("renv", "_book", "_freeze", "_cache", "scripts/app-demo-dump")
+encoding: "UTF-8"

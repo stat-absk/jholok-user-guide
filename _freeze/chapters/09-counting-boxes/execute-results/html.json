@@ -1,0 +1,15 @@
+{
+  "hash": "0ca2235526aead394da6ac1ce1e41af5",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Counting boxes: tags and photos\n\n\n\n::: {.audience}\nFor counters\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

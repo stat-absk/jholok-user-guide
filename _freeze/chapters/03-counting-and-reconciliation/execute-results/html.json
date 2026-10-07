@@ -1,0 +1,15 @@
+{
+  "hash": "908695f441172ff0bd6ec08de8e714c1",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Counting and checking against the books\n\n\n\n::: {.audience}\nFor everyone\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

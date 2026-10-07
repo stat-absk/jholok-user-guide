@@ -1,0 +1,26 @@
+/*-- scss:defaults --*/
+
+// Velvet & Gold, dark: the app's colour sets (Jholok/Assets.xcassets/Theme).
+$body-bg: #0D0C0A;          // SurfaceBase
+$body-color: #F2EDE3;
+$surface-raised: #1B1915;   // SurfaceRaised
+$surface-inset: #28251F;    // SurfaceInset
+$text-secondary: #A9A193;   // TextSecondary
+$hairline: #36322B;         // Hairline
+$gold-mid: #D9B44A;         // GoldMid: marks and rules, never text
+$gold-deep: #D9B44A;        // gold that is read: on a dark page the bright gold reads
+$on-gold: #1A1407;          // OnGold
+$jade: #3FC9A8;             // Jade
+$ruby: #E5707F;             // Ruby
+$sapphire: #6CB2FF;         // Sapphire
+
+$primary: $gold-mid;
+$link-color: $gold-mid;
+$border-color: $hairline;
+$code-bg: $surface-inset;
+$sidebar-bg: $body-bg;
+$toc-color: $text-secondary;
+$callout-color-note: $sapphire;
+$callout-color-tip: $jade;
+$callout-color-warning: $gold-mid;
+$callout-color-important: $ruby;

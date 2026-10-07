@@ -1,0 +1,16 @@
+# Setting up the shop
+
+```{r}
+#| include: false
+source(here::here("_common.R"))
+```
+
+::: {.audience}
+For the owner
+:::
+
+::: {.callout-note}
+## Not written yet
+
+This chapter is coming in a later edition of the guide.
+:::

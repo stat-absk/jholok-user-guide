@@ -1,0 +1,103 @@
+/*-- scss:defaults --*/
+
+// New York on Apple devices, as in the app's titles; a plain serif elsewhere.
+$headings-font-family: ui-serif, "New York", Georgia, "Times New Roman", serif;
+$headings-font-weight: 600;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+$font-size-root: 17px;
+$line-height-base: 1.6;
+
+/*-- scss:rules --*/
+
+body {
+  background-color: $body-bg;
+}
+
+main {
+  max-width: 44rem;
+}
+
+h1, h2, h3, .title {
+  letter-spacing: -0.01em;
+}
+
+// The one gold rule a page carries: under the chapter title.
+#title-block-header .title {
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid $gold-mid;
+}
+
+// Who a chapter is for: "For counters", "For the owner and approvers".
+.audience {
+  display: inline-block;
+  margin: 0 0 1.25rem;
+  padding: 0.2rem 0.75rem;
+  border: 1px solid $hairline;
+  border-radius: 999px;
+  background: $surface-raised;
+  color: $text-secondary;
+  font-size: 0.85rem;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+}
+
+// "What you'll learn" at the top of a chapter and "Remember" at the end.
+.learn,
+.remember {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid $hairline;
+  border-radius: 14px;
+  background: $surface-raised;
+}
+
+.learn > :last-child,
+.remember > :last-child {
+  margin-bottom: 0;
+}
+
+.learn::before,
+.remember::before {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: $text-secondary;
+  font-size: 0.85rem;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+}
+
+.learn::before {
+  content: "what you'll learn";
+}
+
+.remember::before {
+  content: "remember";
+}
+
+// App screenshots: a phone-sized picture with a soft edge.
+.screenshot img {
+  max-width: min(320px, 100%);
+  border: 1px solid $hairline;
+  border-radius: 28px;
+}
+
+// Short and over, as in the app: ruby for short, jade for over.
+.short {
+  color: $ruby;
+}
+
+.over {
+  color: $jade;
+}
+
+// Tables never push the page sideways on a phone.
+.cell-output-display {
+  overflow-x: auto;
+}
+
+.figure-caption,
+.table-caption,
+figcaption {
+  color: $text-secondary;
+}

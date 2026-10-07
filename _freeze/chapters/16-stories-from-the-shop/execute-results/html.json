@@ -1,0 +1,15 @@
+{
+  "hash": "32c3911752856c5a196915dcc52b53ac",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Stories from the shop\n\n\n\n::: {.audience}\nFor everyone\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

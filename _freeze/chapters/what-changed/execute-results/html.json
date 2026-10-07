@@ -1,0 +1,15 @@
+{
+  "hash": "214c0f7afa061ddb36424123fb2b11ed",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# What changed\n\n\n\n::: {.audience}\nFor everyone\n:::\n\n## Guide 0.1, for Jholok 0.1\n\n- The guide's outline and its first page.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

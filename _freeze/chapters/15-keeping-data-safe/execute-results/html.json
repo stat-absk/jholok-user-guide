@@ -1,0 +1,15 @@
+{
+  "hash": "a5fd9ec82353d612dd163ab80bb64b49",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Keeping your data safe\n\n\n\n::: {.audience}\nFor the owner\n:::\n\n::: {.callout-note}\n## Not written yet\n\nThis chapter is coming in a later edition of the guide.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
