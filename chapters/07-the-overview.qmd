@@ -1,16 +1,234 @@
-# Reading the Overview
+# Reading the Overview {#sec-overview}
 
 ```{r}
 #| include: false
 source(here::here("_common.R"))
+
+# The demo with no count open, as on the Overview screens here.
+demo <- load_shop(counting = FALSE)
+
+# The 6-month view: 26 weeks, the current one included.
+window_start <- week_of(demo$end_at) - 25 * 7
+before_window <- as.POSIXct(
+  paste(window_start - 1, "23:59"),
+  tz = shop_time_zone
+)
+
+type_now <- value_by_type(demo)
+type_then <- value_by_type(demo, before_window)
+type_change <- type_now |>
+  left_join(type_then, by = "type", suffix = c("_now", "_then")) |>
+  mutate(change = value_now - value_then)
+total_now <- sum(type_change$value_now)
+total_change <- sum(type_change$change)
+biggest <- slice_max(type_change, abs(change), n = 1)
+
+sales <- weekly_sales(demo) |>
+  filter(week >= window_start)
+complete_weeks <- filter(sales, week < week_of(demo$end_at))
+last_week <- slice_tail(complete_weeks, n = 1)
+busiest <- slice_max(complete_weeks, value, n = 1)
+busiest_name <- if (is.na(busiest$festival)) {
+  paste("the week of", date_words(busiest$week))
+} else {
+  paste0(busiest$festival, " week, ", date_words(busiest$week))
+}
+
+attention <- attention_lists(demo)
+lists <- count(attention, list)
 ```
 
 ::: {.audience}
 For the owner
 :::
 
-::: {.callout-note}
-## Not written yet
+::: {.learn}
+- What each part of the Overview tells you.
+- What makes a product "need attention", and what to do about it.
+- How to read the figures honestly: what they include, and what they leave
+  out.
+:::
 
-This chapter is coming in a later edition of the guide.
+## The idea
+
+The **Overview** is the first tab: a summary of the whole shop on one
+screen. It answers the owner's daily questions. What is my stock worth, and
+is that going up or down? Which types hold the money? What's selling, and
+what isn't? What needs doing? How did the last count go?
+
+Every figure comes from the ledger (@sec-ledger), worked out afresh when you
+open the app. Nothing on the Overview can be typed in.
+
+At the top, **3M**, **6M** and **1Y** choose how far back the charts look:
+13, 26 or 52 weeks, this week included. Needs attention always looks at the
+last 90 days.
+
+## In the app
+
+### Stock value
+
+```{r}
+screenshot("overview.png")
+```
+
+The large figure is what the stock is worth at cost,
+`r rupees_short(total_now)` "at today's cost". The sentence under it says how
+that changed over the period, and which type changed most: in the demo,
+"Down `r rupees_short(abs(total_change))`
+(`r percent_words(total_change / (total_now - total_change))`) since
+`r date_words(window_start)`, mostly
+`r biggest$type` (`r rupees_short(biggest$change)`)". The line shows the value
+week by week.
+
+Below it: the value at list price, what's in stock in each unit, and how many
+products there are. The small print says what the figure leaves out, such as
+products with no cost, and that past values use today's costs, so the line
+shows changes in stock, not in the price of gold.
+
+### By type, Needs attention, Sales, Best sellers and Last count
+
+```{r}
+screenshot("overview-lower.png")
+```
+
+- **By type** shows how the value is shared between types, and how each has
+  moved. Tap it for a chart of each type on the same scale.
+- **Needs attention** lists products that need something done (below).
+- **Sales** shows the value sold each week at list price, after returns.
+- **Best sellers** lists the five products that sold the most by value.
+- **Last count** says how the last count went, and which types have gone
+  longest without one.
+
+### Needs attention
+
+```{r}
+screenshot("overview-attention.png")
+```
+
+Each list has a rule, and something to do about it:
+
+| List | Means | What to do |
+|---|---|---|
+| Below zero | The ledger shows less than none: a movement is missing | Record the missing delivery, or count it |
+| Out of stock, still selling | None left, but it sold in the last 90 days | Reorder |
+| Running low | At its recent pace, the stock won't last the supplier lead time (21 days unless you change it) | Reorder soon |
+| Not selling | In stock, with no sale in 90 days | Consider a discount, a display change, or melting |
+| No cost, No price | In stock with no cost or no list price, so values leave it out | Add the missing amount |
+| Overdue memos | Stock on jangad or with the karigar more than a week past its due date | Chase it up, or record it back in |
+
+A product only just added (in the last 30 days) isn't called low or not
+selling: it hasn't had time to show its pace.
+
+### Sales
+
+```{r}
+screenshot("overview-sales.png")
+```
+
+Each bar is a week, Sunday to Saturday. The last complete week is gold. The
+busiest week is labelled with its festival, when there was one.
+
+## Why it works this way
+
+- **Values say their basis and date** ("at today's cost, 8 Oct"; "at today's
+  list price"), because a figure without them can mislead.
+- **Sales are valued at today's list price, not the price charged.** Jholok
+  doesn't record discounts, so this shows how much stock sold, not the
+  takings. Your billing system has the takings.
+- **Nothing is quietly left out.** Products with no cost or price, and types
+  being counted, are named in the small print.
+- **While a count is open, the stock of the types being counted is hidden**,
+  with a note at the top: "Stock for Necklaces is hidden while the count at
+  Showcase 2 is open." Sales, Best sellers and Last count stay.
+
+## How it works
+
+The value line takes each product's stock on each day, from the ledger, and
+values it at today's cost. Archived products are left out. A product's
+**pace** is the number it sold in the last 90 days, after returns, divided by
+the days it was in stock (at least 14), and its **cover** is how many days
+its stock lasts at that pace. Running low means cover shorter than the
+supplier lead time, which you can change in Settings → Preferences.
+
+The sales figures add up every unit sold, whatever its kind, and call them
+**items**: "9 items" can be pairs, sets and pieces together.
+
+## Try it
+
+These are the demo shop's sales over the last six months. Everything here is
+worked out from the ledger, the same way as the app.
+
+```{r}
+#| fig-cap: >-
+#|   Sales by week at today's list price, after returns. The festival weeks are
+#|   labelled.
+#| fig-alt: >-
+#|   Weekly bars over six months, highest in the Akshaya Tritiya week in
+#|   early May.
+#| fig-height: 3.4
+peak <- slice_max(complete_weeks, value, n = 1)
+ggplot(sales, aes(week, value)) +
+  geom_col(
+    aes(fill = week == last_week$week),
+    width = 5
+  ) +
+  geom_text(
+    aes(label = festival),
+    data = peak,
+    vjust = -0.6,
+    size = 3.4,
+    colour = guide_colours$text_secondary
+  ) +
+  scale_fill_manual(
+    values = c(
+      `TRUE` = guide_colours$gold_mid,
+      `FALSE` = guide_colours$neutral
+    ),
+    guide = "none"
+  ) +
+  scale_y_rupees(expand = expansion(mult = c(0, 0.15))) +
+  scale_x_date(date_labels = "%b") +
+  labs(x = NULL, y = NULL) +
+  theme_guide()
+```
+
+Last week the shop sold `r rupees_short(last_week$value)`,
+`r last_week$items` items. The busiest week was `r busiest_name`, with
+`r rupees_short(busiest$value)`.
+
+And these are the products that need attention:
+
+```{r}
+#| label: tbl-attention
+#| tbl-cap: >-
+#|   What needs attention in the demo shop. One product can be on two lists.
+attention |>
+  transmute(
+    List = as.character(list),
+    Product = paste(name, variant, sep = ", "),
+    SKU = sku
+  ) |>
+  table_guide()
+```
+
+That's `r n_distinct(attention$sku)` products, as the Overview says.
+
+**Question.** A pendant shows under **Not selling**. Does that mean it's
+been stolen?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+No. It means it's still in stock but hasn't sold in 90 days. It may be the
+wrong design for this season, or not on display. Only a count can tell you
+whether stock is missing.
+:::
+
+::: {.remember}
+- The Overview is worked out from the ledger every time; nothing on it is
+  typed in.
+- Every value says what it's based on: today's cost or today's list price.
+- Needs attention says what to do: reorder, chase a memo, add a cost, or
+  count.
+- While a count is open, the stock being counted is hidden here too.
 :::

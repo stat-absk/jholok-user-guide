@@ -128,7 +128,10 @@ test_that("stock below zero counts as none in the stock value", {
 })
 
 test_that("the same seed gives the same shop", {
-  expect_identical(simulate_shop(reference_end)$movements, shop$movements)
+  story <- shop$movements |>
+    filter(kind != "sent_out") |>
+    select(-place)
+  expect_identical(simulate_shop(reference_end)$movements, story)
 })
 
 test_that("moving the story keeps its weekdays and shifts every date alike", {

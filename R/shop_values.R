@@ -31,9 +31,12 @@ stock_history <- function(shop, product_sku) {
     mutate(on_hand = cumsum(quantity))
 }
 
-# The value of the whole shop's stock at the end of every day.
+# The value of the whole shop's stock at the end of every day. Archived
+# products are left out of every day, as on the Overview's line.
 daily_stock_value <- function(shop, basis = c("cost", "price")) {
   basis <- rlang::arg_match(basis)
+  shop$products <- filter(shop$products, is.na(archived_at))
+  shop$movements <- filter(shop$movements, sku %in% shop$products$sku)
   days <- seq(
     as.Date(min(shop$movements$date), tz = shop_time_zone),
     as.Date(shop$end_at, tz = shop_time_zone),

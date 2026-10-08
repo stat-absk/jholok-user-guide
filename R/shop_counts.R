@@ -23,7 +23,8 @@ load_shop <- function(end_on = screens_taken_on, counting = TRUE) {
   if (file.exists(path)) {
     return(readRDS(path))
   }
-  shop <- simulate_shop(end_on = end_on, counting = counting)
+  shop <- simulate_shop(end_on = end_on, counting = counting) |>
+    add_stock_out(sent_from = story_time(as_day(end_on), screens_minute))
   dir.create(dirname(path), showWarnings = FALSE)
   saveRDS(shop, path)
   shop
@@ -51,8 +52,9 @@ simulate_count <- function(shop, at, types = NULL,
     left_join(shop$types, by = "type") |>
     select(sku, type, unit, name, variant, cost, price)
 
-  ledger <- stock_on_hand(shop, at) |>
-    rename(expected = on_hand)
+  # A count expects what's in the shop, not what's out on jangad and such.
+  ledger <- stock_in_shop(shop, at) |>
+    rename(expected = in_shop)
 
   on_shelf <- ledger |>
     left_join(total_change(shelf_changes), by = "sku") |>

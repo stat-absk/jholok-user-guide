@@ -1,16 +1,220 @@
-# Setting up the shop
+# Setting up the shop {#sec-setting-up}
 
 ```{r}
 #| include: false
 source(here::here("_common.R"))
+
+demo_people <- tribble(
+  ~Name, ~Role,
+  "Bidisha", "Owner",
+  "Sita", "Approver",
+  "Ramesh", "Counter",
+  "Meena", "Counter"
+)
+
+yes <- "Yes"
+who_does_what <- tribble(
+  ~`What`, ~Counter, ~Approver, ~Owner,
+  "Count, and submit a count", yes, yes, yes,
+  "Open Review and complete a count", "No",
+  "Yes, if they didn't count in it",
+  "Yes; if they counted in it, only when no other approver can",
+  "Reopen a submitted count", "No", yes, yes,
+  "Load the books into a count", "No", yes, yes,
+  "Send stock out, and sign it back in", "No", yes, yes,
+  "Mark a tag sold from the books", "No", "No", yes,
+  "Change People, export, back up", "No", "No", yes
+)
 ```
 
 ::: {.audience}
 For the owner
 :::
 
-::: {.callout-note}
-## Not written yet
+::: {.learn}
+- What to set up before the first count, and in what order.
+- How people, roles and PINs work, and why counting and approving are kept
+  apart.
+- How Jholok keeps the shop's stock and costs private.
+:::
 
-This chapter is coming in a later edition of the guide.
+## The idea
+
+Jholok works on its own from the first launch: it already knows the usual
+types of jewellery and how each is counted. A few minutes of setting up makes
+it fit your shop:
+
+1. **Product types**: check that the types match how your shop groups its
+   stock.
+2. **Products**: add them one by one, or import a spreadsheet (@sec-catalogue).
+3. **Shop details**: your shop's name and address, printed on count reports.
+4. **People**: who counts and who approves, each with their own PIN.
+5. **The lock**: on by default, so the app stays private.
+
+### Owner, approvers and counters
+
+Everyone who uses Jholok has a **role**:
+
+- The **owner** runs the shop in Jholok. There is one owner, who sets up the
+  people and proves it's them for exports and backups.
+- An **approver** opens a count's Review and completes it, but only for a
+  count they didn't count in. Approvers can count too.
+- A **counter** counts, and submits the count for review.
+
+This is the separation of duties from @sec-counting: one person counts,
+another checks. The owner may approve a count they counted in only when
+nobody else can, and the count then says so: "Counted and approved by
+Bidisha (one person)".
+
+Each person has a **PIN** of 4 to 6 digits. It shows who entered each figure,
+and an approver's PIN is their signature on a completed count.
+
+## In the app
+
+### Product types
+
+Open **Settings**, then **Product types**. Each type shows how many products
+it has and the unit it's counted in.
+
+```{r}
+screenshot("product-types.png")
+```
+
+- Tap **+** to add a type. Give it a name, choose what it's **counted in**
+  (pieces, pairs or sets), and pick a symbol.
+- Tap a type to rename it or change its unit. Changing the unit doesn't
+  convert existing stock: 4 pieces become 4 pairs. So choose the unit before
+  adding products.
+- Tap **Edit** to drag the types into the order you like.
+- A type that has products can't be deleted.
+
+### Shop details and preferences
+
+In **Settings**, under **Preferences**:
+
+- **Shop**: your shop's name and address. They head every count report. Add
+  your GSTIN after the address if your accountant wants it on the reports.
+- **Currency** and **Appearance** (light, dark, or the phone's setting).
+- **Supplier lead time**: how many days a reorder takes to arrive, 21 by
+  default. A product whose stock won't last that long at its recent pace of
+  sales shows as running low (@sec-overview).
+
+```{r}
+screenshot("settings.png")
+```
+
+### People
+
+Open **Settings**, then **People**. Until you set People up, Jholok asks
+nobody who's counting, and counts name nobody. That's fine for trying the app
+out, but set it up before your first real count.
+
+1. Enter your name and tap **Set up People**. On a phone with Face ID, Face
+   ID proves it's you; an owner PIN is optional, as a second way in. On a
+   phone without Face ID, set an owner PIN.
+2. Tap **Add person** for each member of staff. Enter their name, choose
+   **Counter** or **Approver**, and let them choose their own PIN.
+
+```{r}
+screenshot("add-person.png")
+```
+
+```{r}
+screenshot("settings-people.png", caption = "The demo shop's people.")
+```
+
+A PIN must be 4 to 6 digits. Jholok refuses easy ones: one digit repeated
+(1111), a run (1234) and the most common PINs. After 5 wrong tries in a row,
+the person waits a minute before trying again, and longer after each further
+5 wrong tries.
+
+To change someone's role or reset their PIN, tap their name. When someone
+leaves, **Archive** them: they can no longer sign in, and the log keeps their
+name. Nobody is ever deleted, so the history stays complete.
+
+### The activity log
+
+At the bottom of People, **Activity log** lists everything that happened:
+every count entry, box, review, completion and movement, and every change to
+People, each with who and when. Nothing in it can be edited or removed.
+
+```{r}
+screenshot("activity-log.png")
+```
+
+### The lock
+
+In **Settings**, under **Security**, **Require Face ID** is on from the
+start. Jholok asks for Face ID, or the phone's passcode, when it opens and
+when you come back after a minute away. You can choose how soon it locks:
+straight away, or after 1, 5 or 15 minutes. Whenever the app isn't in front,
+a plain cover hides it from the phone's list of open apps.
+
+Turning the lock off asks the owner to prove it's them.
+
+## Why it works this way
+
+- **Two people, not one.** Roles make sure the person who counts isn't the
+  person who accepts a loss.
+- **The owner proves it's them with Face ID or the owner PIN, never the
+  phone's passcode.** On a phone shared in the shop, staff may know the
+  passcode. Everything that takes data off the phone (exports, backups, box
+  photos) and every change to People asks the owner each time.
+- **Nobody is deleted, and the log can't be edited.** A shop's records are
+  only worth something if they can't be quietly changed later.
+- **The lock is on by default**, because costs and stock are private, and a
+  phone left on the counter shouldn't show them.
+
+## How it works
+
+PINs are never stored as typed: Jholok keeps them in a scrambled form that
+can't be turned back into the PIN. Each log entry carries a code made from
+its own details and the code of the entry before it, so the entries form a
+chain. If anyone changed or removed an entry in the phone's files, the chain
+would break, and the log would say so: "The log was changed after entry 12",
+instead of "intact".
+
+If the owner forgets their PIN on a phone without Face ID, it can be reset
+with the phone's passcode. The log records that, and the next count's result
+says so, so a reset can't go unnoticed.
+
+## Try it
+
+The demo shop has four people:
+
+```{r}
+#| label: tbl-demo-people
+#| tbl-cap: "Jholok Jewellers' people."
+table_guide(demo_people)
+```
+
+This is who may do what:
+
+```{r}
+#| label: tbl-who-does-what
+#| tbl-cap: >-
+#|   Who may do what. Everything a counter does, an approver and the owner can
+#|   do too.
+table_guide(who_does_what)
+```
+
+**Question.** Ramesh and Sita counted the strongroom together. Who can
+approve the count?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+Not Ramesh, who is a counter. Not Sita either: she is an approver, but she
+counted in this count. Bidisha, the owner, can approve it, because no other
+approver is left. The count will say "one person" approved it.
+:::
+
+::: {.remember}
+- Check the product types first: a type's unit can't convert stock later.
+- Set up People before the first real count: the owner, then each counter
+  and approver with their own PIN.
+- Counting and approving are kept apart. The owner approves alone only when
+  nobody else can.
+- The lock is on from the start, and only the owner can take data off the
+  phone.
 :::

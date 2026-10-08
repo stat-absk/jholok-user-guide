@@ -22,8 +22,10 @@ test_that("every movement is the app's, in the same order", {
       quantity = as.integer(quantity),
       note = coalesce(note, "")
     )
+  # The app records count adjustments as it completes the counts, and sends
+  # stock out when it starts, so neither is in the demo's story file.
   guide_movements <- shop$movements |>
-    filter(kind != "count_adjustment") |>
+    filter(!kind %in% c("count_adjustment", "sent_out")) |>
     transmute(sku, date = as_minutes(date), kind, quantity, note)
 
   expect_equal(guide_movements, app_movements)

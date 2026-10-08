@@ -1,16 +1,245 @@
-# Recording what comes in and goes out
+# Recording what comes in and goes out {#sec-movements}
 
 ```{r}
 #| include: false
 source(here::here("_common.R"))
+
+# The demo with no count open, as on the screens in this chapter.
+demo <- load_shop(counting = FALSE)
+
+melted <- demo$movements |>
+  filter(kind == "adjustment") |>
+  left_join(select(demo$products, sku, name, variant), by = "sku")
+
+out <- demo$out_records |>
+  left_join(select(demo$products, sku, name, variant, type), by = "sku") |>
+  left_join(demo$types, by = "type")
+karigar <- filter(out, place == "karigar")
+days_late <- as.integer(
+  difftime(demo$end_at, karigar$due_back, units = "days")
+)
+
+last_30_days <- demo$movements |>
+  filter(
+    date > demo$end_at - 30 * 86400,
+    kind %in% c("received", "sold")
+  ) |>
+  mutate(
+    day = as.Date(date, tz = shop_time_zone),
+    flow = if_else(kind == "received", "In: received", "Out: sold")
+  ) |>
+  summarise(units = sum(abs(quantity)), .by = c(day, flow))
 ```
 
 ::: {.audience}
 For the owner and approvers
 :::
 
-::: {.callout-note}
-## Not written yet
+::: {.learn}
+- How to record a delivery, a sale and a return.
+- How to put a wrong stock figure right.
+- How to send stock out to jangad, the karigar or an order, and bring it
+  back.
+:::
 
-This chapter is coming in a later edition of the guide.
+## The idea
+
+Between counts, the ledger stays right only if every movement is recorded:
+each delivery, each sale and each return. The billing system may record
+sales too; Jholok needs them as well, because its stock is the sum of its own
+movements (@sec-ledger).
+
+Three habits keep it right:
+
+- **Record it when it happens**, or as soon as you can, with the date it
+  really happened.
+- **Never fix a figure by guessing.** If the stock is wrong, find out why. If
+  you can't, count the product.
+- **Write a note** when it will help someone later: the supplier, the bill
+  number, why a piece was taken out.
+
+### Stock that leaves the shop for a while
+
+Not all stock is on the shelf. Jewellers often send pieces out and expect
+them back:
+
+- **Jangad**: pieces sent out on approval, with a memo, for a customer or
+  another jeweller to see.
+- **Karigar**: pieces with the craftsman, for repair or alteration.
+- **Order**: pieces set aside for a customer's order.
+
+These pieces are still the shop's: they count in its stock and its value. But
+they aren't on the shelf, so a count mustn't expect them there. Jholok keeps
+them apart: a product shows how many are **in the shop** and how many are
+**off the shelf**.
+
+```{r}
+#| fig-cap: >-
+#|   Where stock can be. All of it is the shop's; a count checks only the shop.
+#| fig-alt: >-
+#|   The shop in the middle, with arrows out to Jangad, Karigar and Order
+#|   labelled Sent out, and arrows back labelled Back in, or sold there.
+#| fig-height: 3.6
+diagram_places()
+```
+
+## In the app
+
+### Receive, sell and return
+
+Open the product and tap **Receive** or **Sell**. You can also tap **+** in
+the Ledger and choose the product, or **Record a sale** on the Overview.
+
+```{r}
+screenshot("record-sale.png")
+```
+
+1. Choose the kind: **Received**, **Sold** or **Returned**.
+2. Set the **quantity**.
+3. Add a **note** if it will help: the supplier, the bill number.
+4. Check the **date and time**. If the movement happened earlier, set when it
+   happened; Jholok keeps both, and the ledger shows the day it was entered
+   too. A date can't be in the future.
+5. **Entered by** shows who is recording it. If it isn't you, tap **Change**
+   and enter your PIN.
+6. Tap **Save**.
+
+Below the quantity, Jholok shows what the stock will be. If a sale would take
+it below zero, it says so, but lets you save: if the sale happened, record
+it, then count the product to find what's missing.
+
+### Put a stock figure right
+
+If a product's stock is wrong for a reason you know (a piece damaged and
+sent for melting, say), open it, tap **Adjust**, and enter the **correct
+stock**. A **reason** is required. Jholok records the difference as an
+adjustment, with your reason, in the ledger.
+
+In the demo, a `r tolower(melted$name)` (`r melted$variant`) was taken out
+on `r date_words(melted$date, "%B")`: "`r melted$note`".
+
+Adjust is turned off for a product while a count covers it, until the count
+is reviewed. Use the count to put its stock right instead.
+
+### Send stock out, and bring it back
+
+Open the product and tap **Send out**. An approver or the owner signs it
+with their PIN.
+
+```{r}
+screenshot("send-out.png")
+```
+
+- **To**: Jangad, Karigar or Order.
+- **How many**, or choose the pieces by their tags.
+- **Party**: who has it, and **Memo**: the memo number.
+- **Due back**: when it should come back. Jholok suggests 7 days for jangad
+  and 30 for the karigar, and none for an order; change it if you agreed
+  otherwise.
+
+The product's page then shows an **Off the shelf** section, with each memo,
+who has it and when it's due. When the pieces come back, tap the memo and
+choose **Back in**. If the customer keeps them, choose **Sold from here**.
+Both are signed by an approver or the owner.
+
+A memo more than a week overdue appears under **Needs attention** on the
+Overview (@sec-overview).
+
+## Why it works this way
+
+- **A movement can't be edited or deleted.** A mistake is put right with
+  another movement, usually an Adjust with its reason, so the ledger keeps
+  the whole story (@sec-ledger).
+- **The date is when it happened; Jholok also keeps when it was entered.**
+  A sale entered late still lands on the right day, and anyone can see it was
+  entered late.
+- **A sale below zero is allowed.** Refusing it would leave a real sale
+  unrecorded. Jholok records the truth and points to the missing piece.
+- **Adjust waits while a product is being counted.** Changing the ledger in
+  the middle of a count would change what the count is checked against.
+- **Sending out needs a second person.** Stock leaving the shop is when
+  pieces go missing, so an approver or the owner signs for it, and every
+  memo is logged.
+
+## How it works
+
+Each movement stores its date, its kind, its quantity and note, who entered
+it and when it was entered. An Adjust stores the difference between the
+stock before and the correct stock you entered.
+
+Sending out is two movements that add up to nothing: the stock leaves the
+shop and arrives at the place. So the stock the shop owns, and its value,
+don't change, while the stock in the shop goes down. Back in moves it the
+other way. Sold from here records a sale from that place.
+
+If you record a movement dated before a count that has already been
+completed, Jholok checks whether that count already accounted for it, so it
+isn't counted twice. Chapter 12 explains this.
+
+## Try it
+
+This is what came in and went out of Jholok Jewellers in the last 30 days,
+as the Ledger tab sums it up:
+
+```{r}
+#| fig-cap: >-
+#|   Pieces, pairs and sets received and sold each day in the last 30 days.
+#| fig-alt: >-
+#|   Two rows of bars by day: received above, sold below, on the same scale.
+#| fig-height: 3.2
+ggplot(last_30_days, aes(day, units)) +
+  geom_col(aes(fill = flow), width = 0.7) +
+  facet_wrap(vars(flow), ncol = 1) +
+  scale_fill_manual(
+    values = c(
+      "In: received" = guide_colours$jade,
+      "Out: sold" = guide_colours$gold_deep
+    ),
+    guide = "none"
+  ) +
+  scale_x_date(date_labels = "%d %b", breaks = scales::breaks_pretty(5)) +
+  labs(x = NULL, y = NULL) +
+  theme_guide() +
+  theme(strip.text = element_text(hjust = 0, face = "bold"))
+```
+
+And this is the stock the demo has out of the shop:
+
+```{r}
+#| label: tbl-out-of-shop
+#| tbl-cap: "Stock off the shelf in the demo shop."
+out |>
+  transmute(
+    Product = paste(name, variant, sep = ", "),
+    Where = paste0(toupper(substr(place, 1, 1)), substring(place, 2)),
+    How_many = describe_units(units, unit),
+    Party = party,
+    Memo = memo,
+    `Due back` = if_else(is.na(due_back), "–", date_words(due_back))
+  ) |>
+  rename(`How many` = How_many) |>
+  table_guide()
+```
+
+The chain with the karigar was due back `r days_late` days ago, so it is
+listed under Needs attention.
+
+**Question.** A delivery of 3 pairs arrived on Monday, but you enter it on
+Wednesday. What date do you give it?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+Monday, when it arrived. Jholok keeps Wednesday too, as the day it was
+entered, and the ledger shows both.
+:::
+
+::: {.remember}
+- Record every delivery, sale and return, dated when it happened.
+- A movement is never edited. Put a wrong figure right with Adjust, and give
+  the reason.
+- Adjust waits while the product is being counted.
+- Stock on jangad, with the karigar or kept for an order is still the shop's,
+  but a count doesn't expect it on the shelf. An approver or the owner signs
+  it out and back.
 :::

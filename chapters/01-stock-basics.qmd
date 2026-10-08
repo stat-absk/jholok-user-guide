@@ -62,15 +62,20 @@ Rings, Necklaces, Bangles, Sets, Coins and Other. A type decides the [**unit**](
 its products are counted in:
 
 - **Earrings are counted in pairs.** A pair is sold together, so it is
-  counted together. A single earring found on its own is not half a pair:
-  Jholok marks it as an odd single and never rounds it into a pair.
+  counted together. A single earring found on its own is not half a pair,
+  so it is never rounded into one: count only whole pairs, and tell whoever
+  approves the count about the single one.
 - **Sets are counted as one.** A necklace with its matching earrings is one
   set, and counts as 1, because it is sold as one.
 - **Everything else is counted in pieces**: a ring, a chain, a coin.
 
-Because the units are different, Jholok never adds them together. It says
-"`r units_line`", never one total of "items". Adding a pair of
-studs to a bridal set gives a number that means nothing.
+Because the units are different, Jholok keeps them apart when it says what
+is in stock: "`r units_line`", not one total. Adding a pair of studs to a
+bridal set gives a number that means little.
+
+The one place you'll see them added is in the sales figures, which say how
+many **items** were sold, such as "9 items": there an item is any one unit,
+a pair, a set or a piece.
 
 ### Cost, list price and value
 
@@ -116,8 +121,8 @@ screenshot("overview.png")
 
 ## Why it works this way
 
-- **Units are kept apart** so that every total means something. "20 sets" tells
-  you something; "`r all_units` items" doesn't.
+- **Stock is kept in its units** so that every total means something. "20
+  sets" tells you something; "`r all_units` items" doesn't.
 - **A value always says what it is based on, and when.** Value at cost and
   value at list price differ by the shop's margin, and gold prices move. So
   Jholok writes "`r rupees_short(total_at_cost)` at today's cost", never just
@@ -174,7 +179,7 @@ as `r rupees_short(antique_jhumka$on_hand * antique_jhumka$cost)`.
 ::: {.remember}
 - One design is one product, with its own SKU.
 - Earrings are counted in pairs, sets as one and the rest in pieces, and
-  these are never added together.
+  stock is shown in those units, not as one total.
 - Stock value is stock on hand times cost (or list price). It always says
   which, and from when.
 :::

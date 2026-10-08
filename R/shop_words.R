@@ -125,7 +125,9 @@ movement_names <- c(
   sold = "Sold",
   returned = "Returned",
   adjustment = "Adjustment",
-  count_adjustment = "Count adjustment"
+  count_adjustment = "Count adjustment",
+  sent_out = "Sent out",
+  came_back = "Back in"
 )
 
 movement_name <- function(kind) {

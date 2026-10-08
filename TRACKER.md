@@ -2,7 +2,7 @@
 
 The plan is in [PLAN.md](PLAN.md). Status: ☐ to do · ◐ in progress · ☑ done · ⏸ waiting on you.
 
-Last updated 8 Oct 2026. Phases 0, 1 and 2 done; phase 3 drafted, waiting for your review.
+Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 and 4 drafted.
 
 ## Waiting on you
 
@@ -41,7 +41,7 @@ Last updated 8 Oct 2026. Phases 0, 1 and 2 done; phase 3 drafted, waiting for yo
 | 1.9 | Matches the app exactly: all 713 movements, 43 products and 59 count lines are identical to the app's output (`scripts/app-demo-dump`) | ☑ |
 | 1.10 | `lintr` clean; `styler` changes nothing | ☑ |
 | 1.11 | Later, for chapters 9 to 11: the `-demo-boxes` story (the open count "Strongroom", the demo tag list and the sample boxes' tags, `DemoBoxes.swift`, `DemoTags.swift`) | ☐ |
-| 1.12 | Later, for chapter 12: the `-off-shelf` story (stock sent to jangad and the karigar inside the open count, `DemoStockStates.swift`) | ☐ |
+| 1.12 | `add_stock_out()`: the stock the demo sends out at launch (jangad, karigar, order), skipping products an open count covers; `stock_in_shop()` apart from owned stock; counts expect the shop. The `-off-shelf` variant (inside the open count) is still to do, for chapter 12 | ◐ |
 
 ## Phase 2: screenshots and box pictures
 
@@ -69,11 +69,11 @@ Last updated 8 Oct 2026. Phases 0, 1 and 2 done; phase 3 drafted, waiting for yo
 | C2 | The ledger: movements, why stock is never typed, below zero | everyone | CLAUDE.md (Non-negotiables), DECISIONS | ☑ draft |
 | C3 | Counting and checking against the books: short and over, blind counts, recount first, separation of duties | everyone | honest-summaries, people-and-log, CLAUDE.md (Counting rules) | ☑ draft |
 | — | **Review point: tone and depth** | you | | ⏸ waiting for you |
-| C4 | Setting up the shop | owner | people-and-log, Settings | ☐ |
-| C5 | The catalogue | owner | Catalogue, tag list import | ☐ |
-| C6 | Recording movements | owner, approvers | stock-states | ☐ |
-| C7 | Reading the Overview | owner | visual-layer, honest-summaries | ☐ |
-| C8 | A count from start to finish | counters | CLAUDE.md (Counting rules) | ☐ |
+| C4 | Setting up the shop: types, shop details, People, roles and PINs, the log, the lock; who may do what | owner | people-and-log, Settings | ☑ draft |
+| C5 | The catalogue: adding products, photos, importing a spreadsheet safely, barcodes and piece tags | owner | Catalogue, tag list import | ☑ draft |
+| C6 | Recording what comes in and goes out: receive, sell, return, Adjust, send out and back in | owner, approvers | stock-states | ☑ draft |
+| C7 | Reading the Overview: stock value, by type, Needs attention, sales, best sellers, last count | owner | visual-layer, honest-summaries | ☑ draft |
+| C8 | A count from start to finish: start, who's counting, counting one-handed, Undo, Find by code, submit | counters | CLAUDE.md (Counting rules) | ☑ draft |
 | C9 | Counting boxes: tags and photos | counters | photo-counting, box-review | ☐ |
 | C10 | Pieces to identify later | counters | box-review | ☐ |
 | C11 | Book stock | owner, approvers | book-stock | ☐ |
@@ -119,3 +119,4 @@ Last updated 8 Oct 2026. Phases 0, 1 and 2 done; phase 3 drafted, waiting for yo
 | 8 Oct 2026 | Phase 2 except 2.12: 28 screenshots, box pictures drawn from the sample boxes' label files, and three idea diagrams. `screens_taken_on` (8 Oct 2026) moves the R shop to the screenshots' dates (the app moves its demo by 14 days today). Figures sit on a raised card so they read in dark mode. 66 tests pass. |
 | 8 Oct 2026 | 2.12 done with a screenshot UI test in the app repo; 55 screenshots. The demo's book file asks no status-word question (its words are all known), so that question has no screenshot. |
 | 8 Oct 2026 | Phase 3 drafted: the welcome page, chapters 1 to 3 and the glossary. Every figure in the text is computed from the R shop and matches the screenshots. `date_words()` and `movement_name()` added; 68 tests pass. |
+| 8 Oct 2026 | Phase 4 drafted: chapters 4 to 8, from three fact sheets read out of the app's code. Corrections they found, now in the guide: the app has no way to flag an odd single earring (the guide says count whole pairs and tell the approver), and the Overview's sales figures add units into "items" (the guide says so). The R shop now sends stock out as the demo does, and leaves archived products out of the value line; the Overview's ₹15.1 L fall, its Bangles and Sets changes, its 11 products needing attention and its weekly sales all match. 76 tests pass. |

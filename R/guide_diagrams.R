@@ -108,8 +108,9 @@ diagram_ledger <- function(shop, product_sku) {
     adjustment = "Adjustments",
     count_adjustment = "Count adjustments"
   )
+  # Sending out and bringing back add up to nothing owned, so they're left out.
   steps <- shop$movements |>
-    filter(sku == product_sku) |>
+    filter(sku == product_sku, kind %in% names(kinds)) |>
     summarise(change = sum(quantity), .by = kind) |>
     mutate(kind = factor(kind, levels = names(kinds))) |>
     arrange(kind) |>

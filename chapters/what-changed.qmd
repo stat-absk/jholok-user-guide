@@ -14,4 +14,7 @@ For everyone
 - The guide's outline and its welcome page.
 - The ideas behind the app: @sec-stock-basics, @sec-ledger and
   @sec-counting.
+- Everyday use: @sec-setting-up, @sec-catalogue, @sec-movements and
+  @sec-overview.
+- Counting: @sec-a-count.
 - The [Glossary](glossary.qmd).

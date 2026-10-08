@@ -5,6 +5,21 @@
 source(here::here("_common.R"))
 
 jhumka_moves <- stock_history(shop, "EAR-0001")
+jhumka_out <- filter(shop$out_records, sku == "EAR-0001")
+jhumka_in_shop <- stock_in_shop(shop) |>
+  filter(sku == "EAR-0001") |>
+  pull(in_shop)
+
+# The ledger shows a send-out as one row, the shop's side, with where it went.
+jhumka_rows <- jhumka_moves |>
+  filter(!(kind == "sent_out" & is.na(place))) |>
+  mutate(
+    shown = if_else(
+      kind == "sent_out",
+      paste(quantity, "to", place),
+      sub("-", minus_sign, sprintf("%+d", quantity), fixed = TRUE)
+    )
+  )
 jhumka_by_kind <- jhumka_moves |>
   summarise(change = sum(quantity), .by = kind)
 change_of <- \(kind_name) {
@@ -67,7 +82,10 @@ Here is the antique jhumka's year. It opened with
 `r change_of("returned")` was returned and `r -change_of("sold")` were sold. A
 count found one pair fewer than the ledger expected, and the approver
 accepted it. That leaves
-`r describe_units(sum(jhumka_moves$quantity), "pair")` on hand.
+`r describe_units(sum(jhumka_moves$quantity), "pair")` on hand. Two of them
+are out on jangad with `r jhumka_out$party`, so the product's page shows
+`r jhumka_in_shop` in the shop and `r jhumka_out$units` off the shelf: still
+the shop's, but not on the shelf (@sec-movements).
 
 ```{r}
 #| fig-cap: >-
@@ -138,18 +156,20 @@ do: record the missing delivery, or count the product.
 ## Try it
 
 These are the antique jhumka's last eight movements. The last column is the
-running total: each row's change added to the one before.
+running total of the stock the shop owns: each row's change added to the one
+before. Sending pairs out on jangad doesn't change it, because they are still
+the shop's.
 
 ```{r}
 #| label: tbl-jhumka-moves
 #| tbl-cap: >-
 #|   The antique jhumka's last eight movements, with the stock after each.
-jhumka_moves |>
+jhumka_rows |>
   slice_tail(n = 8) |>
   transmute(
     Date = date_words(date, "%b %Y, %H:%M"),
     Movement = movement_name(kind),
-    Pairs = signed(quantity),
+    Pairs = shown,
     Note = note,
     `On hand` = on_hand
   ) |>

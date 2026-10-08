@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='259.20pt' viewBox='0 0 504.00 259.20'>
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFDF8;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1MDQuMDB8MC4wMHwyNTkuMjA='>
+    <rect x='0.00' y='0.00' width='504.00' height='259.20' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwyNTkuMjA=)'>
+<rect x='0.00' y='0.000000000000057' width='504.00' height='259.20' style='stroke-width: 0.00; stroke: none;' />
+<line x1='182.45' y1='115.68' x2='313.36' y2='35.35' style='stroke-width: 1.07; stroke: #6A6456; stroke-linecap: butt;' />
+<polygon points='311.20,39.33 313.36,35.35 308.83,35.47 ' style='stroke-width: 1.07; stroke: #6A6456; stroke-linecap: butt; fill: #6A6456;' />
+<line x1='182.45' y1='115.68' x2='313.36' y2='115.68' style='stroke-width: 1.07; stroke: #6A6456; stroke-linecap: butt;' />
+<polygon points='309.44,117.94 313.36,115.68 309.44,113.41 ' style='stroke-width: 1.07; stroke: #6A6456; stroke-linecap: butt; fill: #6A6456;' />
+<line x1='182.45' y1='115.68' x2='313.36' y2='196.01' style='stroke-width: 1.07; stroke: #6A6456; stroke-linecap: butt;' />
+<polygon points='308.83,195.89 313.36,196.01 311.20,192.02 ' style='stroke-width: 1.07; stroke: #6A6456; stroke-linecap: butt; fill: #6A6456;' />
+<line x1='313.36' y1='44.99' x2='182.45' y2='125.32' style='stroke-width: 1.07; stroke: #E2DACB; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
+<polygon points='184.62,121.33 182.45,125.32 186.99,125.19 ' style='stroke-width: 1.07; stroke: #E2DACB; stroke-dasharray: 2.85,2.85; stroke-linecap: butt; fill: #E2DACB;' />
+<line x1='313.36' y1='125.32' x2='182.45' y2='125.32' style='stroke-width: 1.07; stroke: #E2DACB; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
+<polygon points='186.38,123.05 182.45,125.32 186.38,127.58 ' style='stroke-width: 1.07; stroke: #E2DACB; stroke-dasharray: 2.85,2.85; stroke-linecap: butt; fill: #E2DACB;' />
+<line x1='313.36' y1='205.65' x2='182.45' y2='125.32' style='stroke-width: 1.07; stroke: #E2DACB; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
+<polygon points='186.99,125.44 182.45,125.32 184.62,129.30 ' style='stroke-width: 1.07; stroke: #E2DACB; stroke-dasharray: 2.85,2.85; stroke-linecap: butt; fill: #E2DACB;' />
+<text transform='translate(249.23,52.24) rotate(-24)' text-anchor='middle' style='font-size: 9.10px;fill: #6A6456; font-family: "Arial";' textLength='33.91px' lengthAdjust='spacingAndGlyphs'>Sent out</text>
+<text transform='translate(246.59,188.80) rotate(24)' text-anchor='middle' style='font-size: 9.10px;fill: #6A6456; font-family: "Arial";' textLength='85.48px' lengthAdjust='spacingAndGlyphs'>Back in, or sold there</text>
+<polygon points='78.07,129.79 131.38,129.79 131.16,129.79 132.04,129.75 132.90,129.57 133.72,129.26 134.49,128.82 135.17,128.27 135.75,127.61 136.22,126.87 136.56,126.06 136.77,125.20 136.84,124.33 136.84,124.33 136.84,113.45 136.84,113.45 136.77,112.58 136.56,111.72 136.22,110.91 135.75,110.17 135.17,109.51 134.49,108.96 133.72,108.52 132.90,108.20 132.04,108.03 131.38,107.99 78.07,107.99 78.73,108.03 77.85,107.99 76.98,108.10 76.14,108.34 75.34,108.72 74.62,109.22 73.98,109.83 73.46,110.53 73.05,111.31 72.77,112.14 72.63,113.01 72.61,113.45 72.61,124.33 72.63,123.89 72.63,124.77 72.77,125.63 73.05,126.47 73.46,127.25 73.98,127.95 74.62,128.56 75.34,129.06 76.14,129.43 76.98,129.68 77.85,129.79 ' style='stroke-width: 0.64; stroke: #1C1A16; fill: #FFFDF8;' />
+<text x='104.73' y='122.96' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #1C1A16; font-family: "Arial";' textLength='50.58px' lengthAdjust='spacingAndGlyphs'>The shop</text>
+<polygon points='361.62,49.46 404.20,49.46 403.98,49.45 404.86,49.42 405.72,49.24 406.54,48.93 407.30,48.49 407.98,47.94 408.56,47.28 409.03,46.53 409.38,45.73 409.59,44.87 409.66,44.00 409.66,44.00 409.66,33.12 409.66,33.12 409.59,32.25 409.38,31.39 409.03,30.58 408.56,29.84 407.98,29.18 407.30,28.63 406.54,28.19 405.72,27.87 404.86,27.70 404.20,27.66 361.62,27.66 362.28,27.70 361.40,27.66 360.53,27.77 359.68,28.01 358.89,28.39 358.17,28.89 357.53,29.50 357.00,30.20 356.60,30.98 356.32,31.81 356.18,32.68 356.16,33.12 356.16,44.00 356.18,43.56 356.18,44.44 356.32,45.30 356.60,46.14 357.00,46.92 357.53,47.62 358.17,48.23 358.89,48.73 359.68,49.10 360.53,49.35 361.40,49.45 ' style='stroke-width: 0.64; stroke: #1C1A16; fill: #FFFDF8;' />
+<text x='382.91' y='42.63' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #1C1A16; font-family: "Arial";' textLength='39.84px' lengthAdjust='spacingAndGlyphs'>Jangad</text>
+<polygon points='361.63,129.79 404.19,129.79 403.97,129.79 404.85,129.75 405.71,129.57 406.53,129.26 407.29,128.82 407.97,128.27 408.56,127.61 409.03,126.87 409.37,126.06 409.58,125.20 409.65,124.33 409.65,124.33 409.65,113.45 409.65,113.45 409.58,112.58 409.37,111.72 409.03,110.91 408.56,110.17 407.97,109.51 407.29,108.96 406.53,108.52 405.71,108.20 404.85,108.03 404.19,107.99 361.63,107.99 362.29,108.03 361.41,107.99 360.54,108.10 359.69,108.34 358.90,108.72 358.17,109.22 357.54,109.83 357.01,110.53 356.60,111.31 356.33,112.14 356.18,113.01 356.17,113.45 356.17,124.33 356.18,123.89 356.18,124.77 356.33,125.63 356.60,126.47 357.01,127.25 357.54,127.95 358.17,128.56 358.90,129.06 359.69,129.43 360.54,129.68 361.41,129.79 ' style='stroke-width: 0.64; stroke: #1C1A16; fill: #FFFDF8;' />
+<text x='382.91' y='122.96' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #1C1A16; font-family: "Arial";' textLength='39.83px' lengthAdjust='spacingAndGlyphs'>Karigar</text>
+<polygon points='366.06,210.12 399.76,210.12 399.54,210.12 400.42,210.08 401.28,209.90 402.10,209.59 402.86,209.15 403.54,208.60 404.13,207.94 404.60,207.20 404.94,206.39 405.15,205.53 405.22,204.66 405.22,204.66 405.22,193.78 405.22,193.78 405.15,192.91 404.94,192.05 404.60,191.24 404.13,190.50 403.54,189.84 402.86,189.29 402.10,188.85 401.28,188.54 400.42,188.36 399.76,188.32 366.06,188.32 366.72,188.36 365.84,188.32 364.97,188.43 364.12,188.67 363.33,189.05 362.60,189.55 361.97,190.16 361.44,190.86 361.03,191.64 360.75,192.48 360.61,193.34 360.60,193.78 360.60,204.66 360.61,204.22 360.61,205.10 360.75,205.96 361.03,206.80 361.44,207.58 361.97,208.28 362.60,208.89 363.33,209.39 364.12,209.77 364.97,210.01 365.84,210.12 ' style='stroke-width: 0.64; stroke: #1C1A16; fill: #FFFDF8;' />
+<text x='382.91' y='203.29' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #1C1A16; font-family: "Arial";' textLength='30.97px' lengthAdjust='spacingAndGlyphs'>Order</text>
+<text x='104.73' y='147.69' text-anchor='middle' style='font-size: 8.82px;fill: #6A6456; font-family: "Arial";' textLength='79.91px' lengthAdjust='spacingAndGlyphs'>what a count checks</text>
+<text x='382.91' y='67.36' text-anchor='middle' style='font-size: 8.82px;fill: #6A6456; font-family: "Arial";' textLength='118.16px' lengthAdjust='spacingAndGlyphs'>out on approval, with a memo,</text>
+<text x='382.91' y='77.41' text-anchor='middle' style='font-size: 8.82px;fill: #6A6456; font-family: "Arial";' textLength='86.27px' lengthAdjust='spacingAndGlyphs'>usually back in 7 days</text>
+<text x='382.91' y='147.69' text-anchor='middle' style='font-size: 8.82px;fill: #6A6456; font-family: "Arial";' textLength='74.02px' lengthAdjust='spacingAndGlyphs'>with the craftsman,</text>
+<text x='382.91' y='157.74' text-anchor='middle' style='font-size: 8.82px;fill: #6A6456; font-family: "Arial";' textLength='91.17px' lengthAdjust='spacingAndGlyphs'>usually back in 30 days</text>
+<text x='382.91' y='228.02' text-anchor='middle' style='font-size: 8.82px;fill: #6A6456; font-family: "Arial";' textLength='55.41px' lengthAdjust='spacingAndGlyphs'>set aside for a</text>
+<text x='382.91' y='238.07' text-anchor='middle' style='font-size: 8.82px;fill: #6A6456; font-family: "Arial";' textLength='65.41px' lengthAdjust='spacingAndGlyphs'>customer's order</text>
+</g>
+</g>
+</svg>

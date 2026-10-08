@@ -75,6 +75,10 @@ each one. Chapters not written yet are given by number.
 :   What the ledger says should be in the shop. Counters never see it while
     counting. See @sec-counting.
 
+[Item]{#item}
+:   In sales figures, any one unit sold: a pair, a set or a piece. See
+    @sec-stock-basics.
+
 [Jangad]{#jangad}
 :   Stock sent out of the shop on approval, with a memo, for a customer or
     another jeweller to see. It is still the shop's stock until it is sold.
@@ -109,8 +113,9 @@ each one. Chapters not written yet are given by number.
     an adjustment or a count adjustment, and a few more. See @sec-ledger.
 
 [Odd single]{#odd-single}
-:   A single earring found without its pair. Jholok marks it and never rounds
-    it into a pair. See @sec-stock-basics.
+:   A single earring found without its pair. It is never rounded into a pair:
+    count only whole pairs, and tell whoever approves the count. See
+    @sec-stock-basics.
 
 [On hand, stock on hand]{#on-hand}
 :   How many of a product the shop has: the sum of all its movements. See
@@ -200,5 +205,5 @@ each one. Chapters not written yet are given by number.
     products are counted in. See @sec-stock-basics.
 
 [Unit]{#unit}
-:   What a type is counted in: pairs, sets or pieces. Different units are never
-    added together. See @sec-stock-basics.
+:   What a type is counted in: pairs, sets or pieces. Stock is shown in its
+    units, not as one total. See @sec-stock-basics.
