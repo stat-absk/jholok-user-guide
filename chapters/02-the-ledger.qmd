@@ -55,19 +55,20 @@ For everyone
 ## The idea
 
 A [**ledger**](glossary.qmd#ledger) is a record of every change to the stock, oldest first. Each
-change is a [**movement**](glossary.qmd#movement). A movement says which product, when, what kind of
-change it was, how many pieces it moved (more for stock coming in, fewer for
-stock going out), a note, and who entered it.
+change is a [**movement**](glossary.qmd#movement). A movement says which product, when, and what kind of
+change it was. It also says how many: a plus number for stock coming in, a
+minus number for stock going out. It has a note, and the name of who entered
+it.
 
 These are the kinds of movement you'll meet first:
 
 | Movement | What happened | Stock |
 |---|---|---|
-| Opening stock | The product was added to Jholok with stock already in the shop | goes up |
-| Received | A delivery came in from a supplier or the karigar | goes up |
+| [Opening stock](glossary.qmd#opening-stock) | The product was added to Jholok with stock already in the shop | goes up |
+| Received | A delivery came in from a supplier or the [karigar](glossary.qmd#karigar) | goes up |
 | Sold | A customer bought it | goes down |
 | Returned | A customer brought it back | goes up |
-| Adjustment | A correction outside a count, with a reason, such as a piece damaged and sent for melting | up or down |
+| [Adjustment](glossary.qmd#adjustment) | A correction outside a count, with a reason, such as a piece damaged and sent for melting | up or down |
 | Count adjustment | A count found a difference and the approver accepted it (@sec-counting) | up or down |
 
 There are a few more, for loading the shop's billing records and for stock
@@ -83,7 +84,7 @@ Here is the antique jhumka's year. It opened with
 count found one pair fewer than the ledger expected, and the approver
 accepted it. That leaves
 `r describe_units(sum(jhumka_moves$quantity), "pair")` on hand. Two of them
-are out on jangad with `r jhumka_out$party`, so the product's page shows
+are out on [jangad](glossary.qmd#jangad) with `r jhumka_out$party`, so the product's page shows
 `r jhumka_in_shop` in the shop and `r jhumka_out$units` off the shelf: still
 the shop's, but not on the shelf (@sec-movements).
 
@@ -109,9 +110,13 @@ screenshot("ledger.png")
 ```
 
 To record a movement by hand, open the product and tap **Receive**, **Sell**
-or **Adjust**. Choose how many, add a note if it helps, and check the date:
-it should be when the movement happened, which may be earlier than when you
-enter it. Jholok fills in who entered it.
+or **Adjust**. The kinds are also at the top of the screen, where you choose
+**Returned** for a customer's return. For Received, Sold or Returned, enter how
+many. For Adjust, enter the stock you really have and a reason. Check the
+date: it should be when the movement happened, which may be earlier than when
+you enter it. Once People is set up (@sec-setting-up), **Entered by** shows the
+owner; anyone else taps **Change** and enters their PIN, so the ledger shows
+their name.
 
 ```{r}
 screenshot("record-sale.png")
@@ -182,7 +187,7 @@ record it, and what happens to the ring's stock?
 ::: {.callout-tip collapse="true"}
 ## Answer
 
-Open the ring and record a **Returned** movement of 1. Its stock goes up by
+Open the ring, tap **Receive**, choose **Returned** at the top, and enter 1. Its stock goes up by
 one. The sale stays in the ledger too, so the history shows both: sold, then
 returned.
 :::

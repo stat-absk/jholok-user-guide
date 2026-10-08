@@ -5,12 +5,16 @@
 source(here::here("_common.R"))
 
 # A small spreadsheet, as a shop might keep its catalogue: two products the
-# demo shop already has, and one new one.
+# demo shop already has, each with a new price, and one new one. The band's
+# stock is the same as in the app; the jhumka's is out of date.
+band <- stock_on_hand(shop) |>
+  filter(sku == "RIN-0001")
 sample_file <- tribble(
   ~name, ~type, ~sku, ~variant, ~cost, ~price, ~on_hand,
   "Jhumka", "Earrings", "EAR-0002", "Temple Lakshmi, 22K, 14 g",
-  "2,06,010", "", "5",
-  "Band", "Rings", "RIN-0001", "Plain, 22K, 4 g", "", "₹63,400", "",
+  "2,06,010", "2,45,000", "5",
+  "Band", "Rings", "RIN-0001", "Plain, 22K, 4 g", "", "₹66,500",
+  as.character(band$on_hand),
   "Toe ring", "Rings", "", "Silver, 4 g", "Rs. 950", "1,400", "6"
 )
 
@@ -45,14 +49,14 @@ Two kinds of code can be printed on a label, and they're used differently:
 
 - A **barcode** belongs to a product. Every piece of the same design carries
   the same barcode, just like its SKU.
-- A **piece tag** belongs to one individual piece. No two pieces share a tag,
+- A [**piece tag**](glossary.qmd#piece-tag) belongs to one individual piece. No two pieces share a tag,
   even pieces of the same design. Billing software often prints one for each
   piece.
 
 Because a piece tag is unique, scanning it during a count counts exactly one
 piece, and scanning it twice is noticed. A barcode or SKU can't do that, so
-Jholok never accepts a product's barcode or SKU as a piece tag. The **tag
-list** says which product each piece tag belongs to.
+Jholok never accepts a product's barcode or SKU as a piece tag. The [**tag
+list**](glossary.qmd#tag-list) says which product each piece tag belongs to.
 
 ## In the app
 
@@ -75,15 +79,16 @@ screenshot("product-editor.png")
 - **Cost** and **Price**: what you paid for one, and what you ask. Cost puts a
   value on stock and on what a count finds short or over.
 - **Opening stock**: how many the shop has now. It goes into the ledger as an
-  opening stock movement. After that, stock changes only through receipts,
-  sales and counts.
+  opening stock movement. After that, stock changes only through movements:
+  receipts, sales, returns, adjustments and counts.
 
 Editing a product later never changes its stock.
 
 ### A product's page
 
 Tap a product in the catalogue to open its page. At the top, **On hand**,
-**Value** and **Cover** (@sec-stock-basics), then a sentence about its pace of
+**Value** and **Cover** (@sec-stock-basics), or **In the shop**, **Off the
+shelf** and **Value** when some of it is sent out (@sec-movements), then a sentence about its pace of
 sales, the buttons to record a movement (@sec-movements), its stock history,
 its details and every movement.
 
@@ -97,10 +102,12 @@ all can be deleted instead.
 
 ### Photos
 
-Photos make products easy to recognise during a count. From the catalogue's
+Photos help people recognise products during a count. Picture matching
+(@sec-boxes) compares [box photos](glossary.qmd#box-photo) only with product photos, never with
+drawings. From the catalogue's
 options menu, **Take photos** goes through every product without a photo,
 the most valuable first. For a catalogue that looks good together, use the
-same ivory card each time, in daylight, with the piece filling most of the
+same ivory [card](glossary.qmd#card) each time, in daylight, with the piece filling most of the
 frame.
 
 Where a product has no photo, Jholok draws one. During counting, a small
@@ -141,8 +148,9 @@ won't scan can be typed.
 ## Why it works this way
 
 - **Importing never changes the stock of a product Jholok already has.** A
-  spreadsheet is often out of date. If its stock differs, the preview says so,
-  and suggests counting the product instead. Stock only changes through
+  spreadsheet is often out of date. If its stock differs, the preview says how
+  many products differ and suggests counting them instead. While a count is
+  open, it doesn't compare stock at all. Stock only changes through
   movements (@sec-ledger).
 - **A blank cell never erases anything.** If the spreadsheet has no cost for
   a product that has one in Jholok, the cost stays.
@@ -156,9 +164,9 @@ won't scan can be typed.
 The import matches rows to products by SKU. A row with a SKU Jholok knows
 updates that product's details. A row with a new SKU, or no SKU, makes a new
 product, and its **on_hand** becomes its opening stock. A type Jholok hasn't
-seen becomes a new type: Jholok guesses pairs for a name with "earring" in
-it, sets for a name ending in "set", and pieces for the rest, and you can
-change it in Product types.
+seen becomes a new type. Jholok guesses its unit: pairs if the name has
+"earring" in it, sets if the name is or ends in "set" or "sets", and pieces
+for the rest. You can change it in Settings → Product types.
 
 ## Try it
 
@@ -172,11 +180,12 @@ table_guide(sample_file)
 
 Jholok would:
 
-- **update the Temple Lakshmi jhumka (EAR-0002)**: its cost stays the same,
-  and its stock stays at `r describe_units(temple_jhumka$on_hand, "pair")`,
-  although the file says 5. The preview points out the difference;
-- **update the plain band (RIN-0001)**: its price stays the same, and the
-  blank cost and stock change nothing;
+- **update the Temple Lakshmi jhumka (EAR-0002)**: its price becomes ₹2,45,000,
+  but its stock stays at `r describe_units(temple_jhumka$on_hand, "pair")`,
+  although the file says 5. The preview says "1 existing product has
+  different stock in the file", and suggests counting it;
+- **update the plain band (RIN-0001)**: its price becomes ₹66,500, and the
+  blank cost leaves its cost as it was;
 - **add the toe ring** as a new product, with a SKU made from its type,
   RIN-0006 (the next after RIN-0005), a cost of ₹950, a price of ₹1,400 and an opening stock of 6.
 

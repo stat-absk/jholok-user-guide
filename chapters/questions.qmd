@@ -1,16 +1,155 @@
-# Questions and answers
-
-```{r}
-#| include: false
-source(here::here("_common.R"))
-```
+# Questions and answers {#sec-questions}
 
 ::: {.audience}
 For everyone
 :::
 
-::: {.callout-note}
-## Not written yet
+Short answers to the questions people ask most, with the chapter that
+explains each one.
 
-This chapter is coming in a later edition of the guide.
-:::
+## Counting
+
+**I tapped + too many times.**
+Tap − to take one off. After a change of more than one, the bar at the bottom
+offers **Undo** for a few seconds. @sec-a-count
+
+**I typed the wrong count.**
+Tap the number again and choose **Set total**, or swipe left on the product
+and tap **Clear** to start again. @sec-a-count
+
+**The phone rang, or the app closed, in the middle of counting.**
+Nothing is lost: every tap is saved at once. Open the count again from the
+Count tab. It may ask who's counting: check that your name is the one
+chosen. @sec-a-count
+
+**Why can't I see how many there should be?**
+Counting is blind on purpose: knowing the answer changes what people find.
+The approver sees the expected numbers in Review. @sec-counting
+
+**I found a single earring without its pair.**
+Count the whole pairs, then add the odd one with **Singles** on the same
+sheet. A single is shown beside the pairs and is never rounded into a pair. @sec-stock-basics
+
+**A product I'm holding isn't in the list.**
+Search for it, or use **Find by code**. If it still isn't there, it may be
+a type this count doesn't cover, an archived product, or a design not yet in
+the catalogue: tell the owner. @sec-a-count
+
+**Two of us want to count the same count.**
+Take turns on the shop's phone. Each time, go back to the counts list, open
+the count and choose your own name. The count lists you both. @sec-a-count
+
+**What's the difference between "None here" and leaving a product blank?**
+"None here" counts 0: you looked and there were none. A product left with a
+dash wasn't counted, and keeps its stock unless the approver chooses Set to
+zero. @sec-a-count
+
+## Boxes and tags
+
+**The scan says "Product code".**
+That's a barcode or SKU, which is on every piece of a design, so it can't
+count one piece. Count those pieces on their rows, or with a box photo. @sec-boxes
+
+**The scan says "Already counted in Box 2".**
+That piece was counted earlier in this count. It adds nothing, so nothing is
+counted twice. @sec-boxes
+
+**The app asks "Is this Box 2 again?"**
+It thinks you may have photographed the same box twice. If you have, tap
+**Cancel**. @sec-boxes
+
+**Picture matches never suggest anything.**
+Picture matching compares pieces with product photos only. Products without a
+photo, showing a drawing, can't be matched. @sec-catalogue
+
+**I can't tell which product a piece in the To identify queue is.**
+Tap **See the box** to find it in the tray, then look at the piece itself.
+If it's a design the shop has no product for, choose **Not in the
+catalogue**. Otherwise **Skip** it and come back. @sec-identify-later
+
+## Review and completing
+
+**A shortage's tick won't turn on.**
+It hasn't been recounted. Tap it under **Recount first** and count it again. @sec-review
+
+**Complete is greyed out.**
+Some pieces in box photos aren't identified. Reopen the count so a counter
+can identify them. @sec-identify-later
+
+**Everyone who approves counted in this count.**
+Then the owner approves it. If the owner counted too, the count says one
+person counted and approved it. @sec-setting-up
+
+**We need to count some more after submitting.**
+An approver taps **Reopen for counting** on the count and gives a reason. @sec-review
+
+**The books are older than the counting.**
+Pieces sold in between would look missing. Load newer books, or give the
+reason and review anyway. @sec-book-stock
+
+## Stock and the catalogue
+
+**A product shows stock below zero.**
+A movement is missing, usually a delivery entered late. Record it with its
+real date, or count the product. @sec-ledger
+
+**A product's stock is wrong, and I know why.**
+Open it, tap **Adjust**, enter the correct stock and the reason. Adjust waits
+while the product is being counted. @sec-movements
+
+**Can I delete a movement I entered by mistake?**
+No. Put it right with another movement, usually an Adjust with the reason,
+so the ledger keeps the whole story. @sec-ledger
+
+**I imported a spreadsheet, but the stock didn't change.**
+Importing never changes the stock of a product Jholok already has. Count the
+product instead. @sec-catalogue
+
+**A tag won't link: it says it's a product code.**
+A product's barcode or SKU can't be a piece tag, because every piece of the
+design carries it. Use the piece's own tag. @sec-catalogue
+
+**Pieces are on jangad. Will the count call them missing?**
+No. Pieces sent out in Jholok are off the shelf, and a count doesn't expect
+them there. @sec-cut-off
+
+## Data and privacy
+
+**Does Jholok need the internet?**
+No. Everything stays on the phone; nothing is sent to a server or synced. @sec-keeping-data-safe
+
+**Can two phones share the shop's data?**
+No. Jholok keeps the shop on one phone. A backup can move it to another
+phone, but that replaces what the other phone had. @sec-keeping-data-safe
+
+**How often should I back up?**
+After every completed count, and at least once a week. Jholok doesn't back
+up by itself. @sec-keeping-data-safe
+
+**Why does every export ask for Face ID?**
+A file that leaves the phone can't be taken back, so the owner confirms each
+one. @sec-setting-up
+
+**I forgot the owner PIN.**
+On a phone with Face ID, use Face ID, then set a new PIN in Settings →
+People. On a phone without it, the owner PIN
+can be reset with the phone's passcode; the log and the next count's result
+say it was reset. @sec-setting-up
+
+**Jholok says it can't open its data.**
+Nothing has been deleted. Try again, restore a backup, or save the data file
+so it can be repaired. @sec-keeping-data-safe
+
+## Something went wrong
+
+**The app says something "wasn't saved, so it's back as it was".**
+The change didn't save, often because the phone is nearly full, so Jholok put
+everything back as it was. Free some space and try again. @sec-keeping-data-safe
+
+**The camera says it's paused.**
+It says why: a call, another app using the camera, the app beside another in
+Split View, or the phone being too warm. It comes back on its own, or when
+you open Jholok full screen. @sec-boxes
+
+**A photo is blurred, too dark or tilted.**
+Tap **Retake**, or **Use anyway** if you're happy with it. @sec-boxes

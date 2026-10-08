@@ -19,7 +19,9 @@ who_does_what <- tribble(
   "Open Review and complete a count", "No",
   "Yes, if they didn't count in it",
   "Yes; if they counted in it, only when no other approver can",
-  "Reopen a submitted count", "No", yes, yes,
+  "Reopen a submitted count", "No",
+  "Yes, if they didn't count in it",
+  "Yes; if they counted in it, only when no other approver can",
   "Load the books into a count", "No", yes, yes,
   "Send stock out, and sign it back in", "No", yes, yes,
   "Mark a tag sold from the books", "No", "No", yes,
@@ -66,7 +68,7 @@ another checks. The owner may approve a count they counted in only when
 nobody else can, and the count then says so: "Counted and approved by
 Bidisha (one person)".
 
-Each person has a **PIN** of 4 to 6 digits. It shows who entered each figure,
+Each counter and approver has a **PIN** of 4 to 6 digits. It shows who entered each figure,
 and an approver's PIN is their signature on a completed count.
 
 ## In the app
@@ -156,8 +158,9 @@ Turning the lock off asks the owner to prove it's them.
 
 - **Two people, not one.** Roles make sure the person who counts isn't the
   person who accepts a loss.
-- **The owner proves it's them with Face ID or the owner PIN, never the
-  phone's passcode.** On a phone shared in the shop, staff may know the
+- **Once People is set up, the owner proves it's them with Face ID or the
+  owner PIN, not the phone's passcode** (except to reset a forgotten owner
+  PIN). On a phone shared in the shop, staff may know the
   passcode. Everything that takes data off the phone (exports, backups, box
   photos) and every change to People asks the owner each time.
 - **Nobody is deleted, and the log can't be edited.** A shop's records are
@@ -205,8 +208,9 @@ approve the count?
 ## Answer
 
 Not Ramesh, who is a counter. Not Sita either: she is an approver, but she
-counted in this count. Bidisha, the owner, can approve it, because no other
-approver is left. The count will say "one person" approved it.
+counted in this count. Bidisha, the owner, didn't count, so she can approve
+it. If Bidisha had counted too, she could still approve, because no other
+approver is left, and the count would say "one person".
 :::
 
 ::: {.remember}

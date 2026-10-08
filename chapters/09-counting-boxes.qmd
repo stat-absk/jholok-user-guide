@@ -1,16 +1,293 @@
-# Counting boxes: tags and photos
+# Counting boxes: tags and photos {#sec-boxes}
 
 ```{r}
 #| include: false
 source(here::here("_common.R"))
+
+boxes <- sample_boxes()
+tagged <- filter(boxes, box == 1)
+outcomes <- box_tag_outcomes(1)
+by_outcome <- count(outcomes, outcome)
+outcome_n <- \(name) sum(by_outcome$n[by_outcome$outcome == name])
+to_identify <- outcome_n("no tag read") + outcome_n("tag not in the tag list")
+unknown_tag <- outcomes |>
+  filter(outcome == "tag not in the tag list") |>
+  pull(tag)
+by_tag <- outcome_n("identified by its tag")
+tag_list <- demo_tag_list()
 ```
 
 ::: {.audience}
 For counters
 :::
 
-::: {.callout-note}
-## Not written yet
+::: {.learn}
+- The two ways to count a whole box at once: scanning its tags, or taking a
+  photo.
+- How to check a box before adding it to the count.
+- What the app never does on its own, and why.
+:::
 
-This chapter is coming in a later edition of the guide.
+## The idea
+
+Counting a box of 15 pairs one tap at a time works, but it's slow. Jholok can
+count a whole box at once, in one of two ways:
+
+- **Scan tags.** If each piece carries its own piece tag (@sec-catalogue),
+  move the camera over the box. Each tag read counts its piece, once. This is
+  the most reliable way, which is why **Scan tags** is the gold button.
+- **Box photo.** Photograph the box. Jholok finds the box, straightens it,
+  finds each card, reads any tags it can see, and suggests a product for the
+  rest from their pictures.
+
+A box holds many designs of one type, each pair or set on its own card or in
+its own slot. So the app counts **cards**, not loose pieces: one card is one
+pair, or one set.
+
+Either way, the result is a [**proposal**](glossary.qmd#proposal). The review says "15 pairs
+proposed": nothing reaches the count until you've checked it and tapped
+**Add**.
+
+::: {.callout-important}
+## How well box photos work hasn't been measured yet
+
+The app's photo counting was built and tuned on drawn example boxes, like the
+ones in this guide, not on photos of real boxes. How often it gets a real
+shop's boxes right isn't known yet. That's why every box is checked before
+it's added, and why the app never adds a box by itself.
+:::
+
+```{r}
+#| fig-cap: >-
+#|   The app counts cards. Where a card may hold two, or cards touch, it
+#|   asks you; it never splits a piece on its own.
+#| fig-alt: >-
+#|   Three drawings: one card with a pair, counted 1; two overlapping cards
+#|   marked Make it 2?; two touching cards marked with a warning.
+#| fig-height: 2.6
+diagram_cards_not_pieces()
+```
+
+## In the app
+
+On the counting screen, the two buttons at the bottom open the camera:
+**Scan tags** and **Box photo**. The camera button beside each type's name
+photographs a box of that type.
+
+```{r}
+screenshot("counting-strongroom.png")
+```
+
+### Scan tags
+
+1. Tap **Scan tags**, and move the camera slowly over the tags. It reads
+   several at once.
+2. Each tag read joins the list with what happened to it. The phone gives a
+   different buzz when a tag is read again, so you know to move on.
+3. For a tag the camera can't read, tap **Type a tag** and type its code. It
+   counts once, like a scanned tag.
+4. Tap **Done** to see the summary.
+
+| You see | It means |
+|---|---|
+| +1 | Counted |
+| Already counted in Box 2 | This piece was counted earlier in the count, so it adds nothing |
+| Not in your tag list | The tag isn't linked to a product yet |
+| Product code | A barcode or SKU, which is on every piece of a design, so it can't count one |
+| Not in this count | A product this count doesn't cover |
+| Archived | A product no longer in the catalogue |
+| Customer's piece, not stock | A customer's own piece, which is never the shop's stock |
+
+The summary says what the scan found. A tag the list doesn't know must be
+linked to its product (**Link…**) or skipped before you can add the scan.
+Linked tags join your tag list when you add it.
+
+```{r}
+screenshot("box-tags-1.png")
+```
+
+Link or skip the unknown tag, then tap **Add … pairs to count**: in this
+scan, `r by_tag + 1` if you link it, `r by_tag` if you skip it. The scan is kept as "Tag scan 1", and each
+counted tag adds one to its product.
+
+### Take a box photo
+
+1. Tap **Box photo**. If the count covers several types, choose the box's
+   type at the top.
+2. Hold the phone flat above the box, with the whole box in the frame. If
+   it's tilted, the app says "Hold the phone flat". Tags it can read are
+   ticked as you frame.
+3. Tap the shutter. The app checks the photo, and if it's blurred, too dark,
+   too bright or tilted, offers **Retake** or **Use anyway**.
+4. It then finds the pieces, reads the tags and matches pictures, and opens
+   the box's review.
+
+```{r}
+screenshot(
+  "box-capture.png",
+  caption = paste(
+    "Taken on a test phone with no camera. Your phone shows the camera view",
+    "here, and has no Sample boxes button."
+  )
+)
+```
+
+You can also **Choose photo** to use one you took earlier.
+
+### Check the box
+
+The review shows the photo with every piece outlined and numbered. A small
+mark on each outline says how its product was found:
+
+- a **tag**: read from its tag;
+- **sparkles**: suggested by its picture, waiting for you to check it;
+- a **question mark**: still needs a product;
+- no mark: confirmed.
+
+A **dashed** outline is a piece left out, and a red **!** is a piece that may
+be two, or was found only by its tag.
+
+```{r}
+screenshot("box-review-1.png", caption = drawn_box)
+```
+
+Tap any piece to open it. The sheet shows its tag, its product, and the
+products it may be, with a search at the top. From there:
+
+- **choose the product**, or **accept** the suggested one;
+- **Make it 2**, on a piece marked with a red **!** as maybe two. If one
+  outline holds two pieces and isn't marked, use **Add piece**;
+- [**Not a piece**](glossary.qmd#not-a-piece), when the outline isn't jewellery (an empty card, a
+  label). You can undo it until your next change;
+- [**Not in the catalogue**](glossary.qmd#not-in-the-catalogue), for a design the shop has no product for;
+- **Identify later**, on a picture match you can't check now: it clears the
+  match, and the piece waits in the [To identify](glossary.qmd#to-identify) queue
+  (@sec-identify-later). A piece with no product goes there anyway.
+
+```{r}
+screenshot("piece-sheet.png", caption = drawn_box)
+```
+
+If the app missed a piece, tap **Add piece**, then tap where it is. For a tray
+with one piece per slot, such as rings, turn on **Count by tray grid**, set
+the rows and columns, and drag the corners to fit the tray.
+
+```{r}
+screenshot("add-piece.png", caption = drawn_box)
+```
+
+When everything looks right, tap **Add 15 pairs to count**. Any piece still
+without a product goes to the To identify queue. A piece whose picture match
+you haven't checked keeps the box from being added: accept it, change it, or
+choose Identify later first.
+
+### If the box was counted already
+
+If a box photo shares half or more of its tags with a box already added, or
+an untagged box looks just like one already added, the app asks first: "Is
+this Box 2 again?" If it is, tap **Cancel**, or its pieces would be counted
+twice.
+
+### After adding
+
+The count lists the box under **Boxes**, and its pieces add to each product's
+count, together with anything counted by hand. Tap a box to open its review
+again and update it, or swipe it to **Remove** it: its pieces come off the
+count, and its photo is deleted.
+
+```{r}
+screenshot("counting-after-box.png")
+```
+
+## Why it works this way
+
+- **Tags first.** A piece tag names one piece exactly, so scanning can't
+  mistake one design for another.
+- **A tag counts once per count.** Whether it's scanned twice, or appears in
+  a photo and a scan, the piece is counted once.
+- **Cards, not loose pieces, and never a guessed split.** Earrings lie close
+  together and sets are large; guessing would be wrong too often. Where one
+  outline may hold two, the app asks; where pieces touch, it warns.
+- **A proposal, never automatic.** The app can't yet show it counts real boxes
+  well, so a person checks every box. Settings → Photo counting keeps score.
+- **Not a piece is kept, left out.** What the app got wrong is exactly what a
+  better version needs to learn from, so the outline stays with the box,
+  marked, and is never counted.
+- **Picture matching never looks at stock.** It compares the piece's picture
+  with product photos of the box's type only.
+
+## How it works
+
+Every added box keeps its photo, the straightened box, and every piece you
+confirmed. These are kept so that, in future, the app can learn from your
+real boxes. The owner can export them from Settings → Export → Box photos and
+labels, which asks the owner to confirm each time.
+
+Settings → Photo counting compares the app's count of each box with the
+count you added after checking it. Those numbers lean towards the app,
+because you saw its proposal first, so they aren't an independent measure.
+
+```{r}
+screenshot("settings-photo-counting.png")
+```
+
+## Try it
+
+This is the demo's tagged box of earrings, with each piece numbered as in
+its review.
+
+```{r}
+#| fig-cap: !expr box_caption("The tagged box of earrings.")
+#| fig-alt: >-
+#|   A maroon velvet box of 15 pairs of earrings on white cards, each outlined
+#|   and numbered, with one empty card.
+#| fig-height: 6
+plot_box_photo(1)
+```
+
+Its `r tagged$pieces` pieces carry tags, but a photo of it doesn't read them
+all:
+
+```{r}
+#| label: tbl-box-one-tags
+#| tbl-cap: "What happens to each piece's tag in the tagged box."
+by_outcome |>
+  transmute(
+    `What happened` = paste0(
+      toupper(substr(outcome, 1, 1)),
+      substring(outcome, 2)
+    ),
+    Pieces = n
+  ) |>
+  arrange(desc(Pieces)) |>
+  table_guide()
+```
+
+`r outcome_n("identified by its tag")` pairs are identified by their tags.
+The tag on one pair, `r unknown_tag`, isn't among the `r nrow(tag_list)` tags
+in the demo's tag list: that pair arrived after the list was exported, so the
+review asks to link it. Two tags can't be read. That leaves `r to_identify`
+pairs to identify, as the review says: "`r to_identify` to identify later,
+from the count."
+
+The empty card in the bottom corner holds no jewellery. If the app had
+outlined it, you would tap it and choose **Not a piece**.
+
+**Question.** You scan a box and the list shows "Already counted in Box 2"
+for every tag. What happened?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+This box was already counted, as Box 2, earlier in the count. Its pieces add
+nothing, so nothing is counted twice. Don't add the scan.
+:::
+
+::: {.remember}
+- Scan tags when pieces have tags; take a box photo when they don't.
+- Every box is a proposal: check it, then Add. Nothing is added by itself.
+- The app counts cards, asks when one may be two, and never splits a piece.
+- A tag counts once per count. If the app asks whether a box was counted
+  already, believe it until you've checked.
+- How well box photos work on real boxes hasn't been measured yet.
 :::

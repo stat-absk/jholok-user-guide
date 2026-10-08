@@ -1,16 +1,239 @@
-# Submit, review and complete
+# Submit, review and complete {#sec-review}
 
 ```{r}
 #| include: false
 source(here::here("_common.R"))
+
+open_count <- filter(shop$counts, is.na(completed_at))
+scope_types <- unlist(open_count$scope)
+in_scope <- shop$products |>
+  filter(
+    type %in% scope_types,
+    created_at <= open_count$started_at,
+    is.na(archived_at)
+  )
+lines <- shop$count_lines |>
+  filter(count_id == open_count$count_id) |>
+  rowwise() |>
+  mutate(
+    expected = stock_in_shop(shop, counted_at) |>
+      filter(.data$sku == .env$sku) |>
+      pull(in_shop)
+  ) |>
+  ungroup()
+matched <- sum(lines$counted == lines$expected)
+counted_units <- sum(lines$counted)
+
+# The last earlier count of the same types: the whole-shop count, read over
+# the necklaces only.
+whole_shop <- filter(shop$counts, location == "Whole shop")
+then_lines <- shop$count_lines |>
+  filter(count_id == whole_shop$count_id) |>
+  semi_join(filter(shop$products, type %in% scope_types), by = "sku") |>
+  left_join(
+    stock_on_hand(shop, whole_shop$started_at),
+    by = "sku"
+  )
+then_matched <- sum(then_lines$counted == then_lines$on_hand)
+
+# Showcase 1, completed: what its ticks did.
+showcase_adjusted <- shop$movements |>
+  filter(kind == "count_adjustment", grepl("Showcase 1", note)) |>
+  left_join(select(shop$products, sku, name, variant, cost), by = "sku")
 ```
 
 ::: {.audience}
 For approvers
 :::
 
-::: {.callout-note}
-## Not written yet
+::: {.learn}
+- How to open a count's Review, and who may.
+- How to read Review, recount, and choose which differences to accept.
+- What completing a count does, and how to sign it.
+:::
 
-This chapter is coming in a later edition of the guide.
+## The idea
+
+When the counters submit a count, it waits for an approver. The approver's
+job is to look at what was found, check anything doubtful, and decide which
+differences become changes to the stock. Until the count is completed,
+nothing has changed.
+
+Review is where the expected numbers appear for the first time, so only an
+approver or the owner who didn't count in it may open it (@sec-setting-up).
+The owner may approve a count they counted in only when nobody else can. It
+starts with safe choices already made:
+
+- **A shortage must be recounted** before it can be accepted. Its numbers stay
+  hidden until then, and the recount is blind.
+- **Overs start unticked.** An over usually means a missing record: enter that
+  instead.
+- **A product whose stock moved during counting** and matches nothing must be
+  recounted too (@sec-cut-off).
+- **Products nobody counted keep their stock**, unless the approver chooses
+  Set to zero.
+
+The approver can change the ticks, but can't accept a shortage that hasn't
+been recounted. These rules are built into the app, not just the screen.
+
+## In the app
+
+### Open Review
+
+Open the submitted count from the Count tab and tap **Review**. The app asks
+for an approver's PIN. Only people who may approve are offered; those who
+counted are named as unable to.
+
+```{r}
+screenshot("approve-to-review.png")
+```
+
+If the count was loaded with the books, and counting went on more than half an
+hour after the time they're from, the app warns first (@sec-book-stock).
+
+### Read Review
+
+The card at the top says what was counted and how it compares:
+
+- how many products were counted, and in what units;
+- how many were **short** and **over**, in units and at cost;
+- a sentence: how many matched, what happens to those not counted, and how
+  this count compares with the last count of the same types.
+
+```{r}
+screenshot("review.png")
+```
+
+Below it come the sections:
+
+- **Not identified**: box photo pieces nobody has identified. The count can't
+  be completed until a counter identifies them (@sec-identify-later).
+- **Recount first**: shortages, and products whose stock moved, with their
+  numbers hidden.
+- [**Discrepancies**](glossary.qmd#discrepancy): every other difference, each with its tick, the ledger
+  and counted numbers, and the value at cost. The line at the end says what
+  completing would change, such as "Net if completed: −₹1.29 L at cost."
+- **Not counted**: products in the count that nobody counted, with the choice
+  **Keep their stock** or **Set to zero**.
+- **Matched**: folded away.
+
+```{r}
+screenshot("review-lower.png")
+```
+
+### Recount
+
+Tap a product under **Recount first** to recount it. The recount is blind:
+the first count and the ledger stay hidden until you tap **Done**. The app
+keeps the first count and when the recount happened, even if the recount
+confirms it.
+
+```{r}
+screenshot("review-recount-first.png")
+```
+
+```{r}
+screenshot("recount.png")
+```
+
+You can recount any line under **Discrepancies** or **Not counted** by
+tapping it.
+
+### Choose, then complete
+
+Tick the differences to accept. A ticked line sets stock to the count; an
+unticked one leaves the stock as it is. Then tap **Complete count**, or **Complete and
+adjust 3** when three lines will change.
+
+```{r}
+screenshot("complete-count.png")
+```
+
+The sheet says what will change, and what won't. Give a **reason**: it goes on
+the count and on every adjustment it writes, as "Stock count · Showcase 1 ·
+your reason". Recent reasons are offered to tap. Then **Sign with PIN and
+complete**.
+
+If the count needs more counting, close Review and tap **Reopen for counting**
+on the count, with a reason. The log records that anything counted after
+Review was counted after it.
+
+## Why it works this way
+
+- **A second person decides.** The approver didn't count (unless the owner is
+  the only one who can approve, and the count then says so), so a loss can't be
+  counted away and approved by the same person.
+- **A loss someone counted is never accepted on one count.** The recount is cheap; a wrong
+  write-off isn't.
+- **Hidden until recounted.** A recount that can see the ledger tends to find
+  the ledger's number.
+- **The reason is written on every adjustment**, so the ledger says why each
+  change happened.
+- **The PIN is a signature.** The count records who approved it, and the log
+  can't be edited afterwards.
+- **Comparisons are honest.** Review says a match rate rose or fell only when
+  the change is bigger than chance would give, with at least 10 products on
+  each side. Otherwise it says "Too few products to call that a change."
+
+## How it works
+
+Completing is one change, saved at once: if anything fails, nothing changes
+and the count stays open. Jholok freezes every line's expected and counted
+numbers, cost, cut-off and stock off the shelf, so the count reads the same
+forever. For each ticked line it writes a **count adjustment** movement for
+the difference, signed by the approver, with the reason. It records who
+approved, when and why, and logs the completion.
+
+A completed count can't be edited. Mistakes found later are put right with
+new movements, or a new count.
+
+## Try it
+
+The demo's open count, at `r open_count$location`, covers the
+`r tolower(scope_types)`. Its Review card would say: counted
+`r nrow(lines)` of `r nrow(in_scope)` products ·
+`r describe_units(counted_units, "piece")`; `r matched_words(matched, nrow(lines))`;
+`r nrow(in_scope) - nrow(lines)`
+not counted keep their stock. The last count of the necklaces was the whole
+shop count on `r date_words(whole_shop$completed_at)`:
+`r then_matched` of `r nrow(then_lines)`. Both are every product matched, so
+Review says "The same share as then."
+
+At the earlier count at Showcase 1, the approver recounted the short jhumka,
+found it still short, and ticked it. The hoops that were over, because of a
+customer's repair piece, stayed unticked. The counter had also found one
+single jhumka earring: Review showed it beside the pairs, as "+ 1 single",
+and it changed no stock. Completing wrote one count
+adjustment:
+
+```{r}
+#| label: tbl-showcase-adjustment
+#| tbl-cap: "What completing Showcase 1 wrote in the ledger."
+showcase_adjusted |>
+  transmute(
+    Product = paste(name, variant, sep = ", "),
+    Change = sub("-", minus_sign, sprintf("%+d", quantity), fixed = TRUE),
+    `At cost` = rupees(quantity * cost),
+    Note = note
+  ) |>
+  table_guide()
+```
+
+**Question.** A product shows 2 short. You want to accept it, but its tick
+won't turn on. Why?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+It hasn't been recounted. Tap it under **Recount first**, count it again
+blind, and tap Done. If it's still short, it moves to Discrepancies, already ticked.
+:::
+
+::: {.remember}
+- Only an approver or the owner who didn't count opens Review and completes.
+- Shortages, and products whose stock moved, are recounted blind first.
+- Overs start unticked; products not counted keep their stock unless you
+  choose Set to zero.
+- Give a reason and sign with your PIN. Completing changes stock only for the
+  ticked lines, and the count can't be edited afterwards.
 :::

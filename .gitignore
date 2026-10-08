@@ -2,6 +2,7 @@
 /_book/
 /.quarto/
 /_release/
+/_single/
 
 # R session files
 .Rproj.user/

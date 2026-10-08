@@ -82,7 +82,7 @@ week by week.
 
 Below it: the value at list price, what's in stock in each unit, and how many
 products there are. The small print says what the figure leaves out, such as
-products with no cost, and that past values use today's costs, so the line
+products with no cost. It also says past values use today's costs. So the line
 shows changes in stock, not in the price of gold.
 
 ### By type, Needs attention, Sales, Best sellers and Last count
@@ -96,8 +96,8 @@ screenshot("overview-lower.png")
 - **Needs attention** lists products that need something done (below).
 - **Sales** shows the value sold each week at list price, after returns.
 - **Best sellers** lists the five products that sold the most by value.
-- **Last count** says how the last count went, and which types have gone
-  longest without one.
+- **Last count** says how the last count went, and names the type that has
+  gone longest without a count, once that's over 90 days.
 
 ### Needs attention
 
@@ -111,10 +111,10 @@ Each list has a rule, and something to do about it:
 |---|---|---|
 | Below zero | The ledger shows less than none: a movement is missing | Record the missing delivery, or count it |
 | Out of stock, still selling | None left, but it sold in the last 90 days | Reorder |
-| Running low | At its recent pace, the stock won't last the supplier lead time (21 days unless you change it) | Reorder soon |
+| Running low | At its recent pace (how fast it sells), the stock won't last the supplier lead time: the days a supplier takes to deliver (21 unless you change it) | Reorder soon |
 | Not selling | In stock, with no sale in 90 days | Consider a discount, a display change, or melting |
 | No cost, No price | In stock with no cost or no list price, so values leave it out | Add the missing amount |
-| Overdue memos | Stock on jangad or with the karigar more than a week past its due date | Chase it up, or record it back in |
+| Overdue memos | Stock sent out (jangad, karigar, or an order with a due date) more than a week past its due date | Chase it up, or record it back in |
 
 A product only just added (in the last 30 days) isn't called low or not
 selling: it hasn't had time to show its pace.
@@ -125,18 +125,18 @@ selling: it hasn't had time to show its pace.
 screenshot("overview-sales.png")
 ```
 
-Each bar is a week, Sunday to Saturday. The last complete week is gold. The
+Each bar is a week, Sunday to Saturday (with the phone set to India). The last complete week is gold. The
 busiest week is labelled with its festival, when there was one.
 
 ## Why it works this way
 
-- **Values say their basis and date** ("at today's cost, 8 Oct"; "at today's
+- **Values say their basis and date** ("at today's cost, `r date_words(screens_taken_on)`"; "at today's
   list price"), because a figure without them can mislead.
 - **Sales are valued at today's list price, not the price charged.** Jholok
   doesn't record discounts, so this shows how much stock sold, not the
   takings. Your billing system has the takings.
-- **Nothing is quietly left out.** Products with no cost or price, and types
-  being counted, are named in the small print.
+- **Nothing is quietly left out.** The small print says how many products have
+  no cost or price, and names the types being counted.
 - **While a count is open, the stock of the types being counted is hidden**,
   with a note at the top: "Stock for Necklaces is hidden while the count at
   Showcase 2 is open." Sales, Best sellers and Last count stay.
@@ -150,8 +150,13 @@ the days it was in stock (at least 14), and its **cover** is how many days
 its stock lasts at that pace. Running low means cover shorter than the
 supplier lead time, which you can change in Settings → Preferences.
 
-The sales figures add up every unit sold, whatever its kind, and call them
-**items**: "9 items" can be pairs, sets and pieces together.
+The sales figures are rupees at today's list price, which can be added up.
+Units sold never are, because a pair, a set and a piece are different things.
+Under the sales bars, the Sales screen has a small panel each for pairs, sets
+and pieces sold, each on its own scale. Where a sentence needs a count, it
+lists the kinds: "Together they sold 18 pairs and 13 pieces in 90 days." Until
+products have list prices, the whole Sales section works in units this way,
+such as "79 pairs · 17 sets · 63 pieces sold".
 
 ## Try it
 
@@ -192,8 +197,7 @@ ggplot(sales, aes(week, value)) +
   theme_guide()
 ```
 
-Last week the shop sold `r rupees_short(last_week$value)`,
-`r last_week$items` items. The busiest week was `r busiest_name`, with
+Last week the shop sold `r rupees_short(last_week$value)`. The busiest week was `r busiest_name`, with
 `r rupees_short(busiest$value)`.
 
 And these are the products that need attention:

@@ -8,6 +8,7 @@ project:
   # Screenshots are placed by R, so Quarto can't find them on its own.
   resources:
     - images/app/*.png
+    - images/report/*.png
 
 execute:
   # Readers never need the R code; it only builds the examples.

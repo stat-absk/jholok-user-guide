@@ -63,10 +63,10 @@ Three habits keep it right:
 Not all stock is on the shelf. Jewellers often send pieces out and expect
 them back:
 
-- **Jangad**: pieces sent out on approval, with a memo, for a customer or
+- **Jangad**: pieces sent out on approval, with a [memo](glossary.qmd#memo), for a customer or
   another jeweller to see.
 - **Karigar**: pieces with the craftsman, for repair or alteration.
-- **Order**: pieces set aside for a customer's order.
+- **Order**: pieces set aside for a customer's [order](glossary.qmd#order).
 
 These pieces are still the shop's: they count in its stock and its value. But
 they aren't on the shelf, so a count mustn't expect them there. Jholok keeps
@@ -88,7 +88,8 @@ diagram_places()
 ### Receive, sell and return
 
 Open the product and tap **Receive** or **Sell**. You can also tap **+** in
-the Ledger and choose the product, or **Record a sale** on the Overview.
+the Ledger and choose the product, or, when no sales are recorded yet, tap
+**Record a sale** on the Overview.
 
 ```{r}
 screenshot("record-sale.png")
@@ -100,11 +101,13 @@ screenshot("record-sale.png")
 4. Check the **date and time**. If the movement happened earlier, set when it
    happened; Jholok keeps both, and the ledger shows the day it was entered
    too. A date can't be in the future.
-5. **Entered by** shows who is recording it. If it isn't you, tap **Change**
-   and enter your PIN.
+5. **Entered by** shows the owner. If someone else is entering it, tap
+   **Change**, choose your name and enter your PIN. (It appears once People is
+   set up.)
 6. Tap **Save**.
 
-Below the quantity, Jholok shows what the stock will be. If a sale would take
+Below the quantity, Jholok shows what the stock will be, unless the product
+is being counted. If a sale would take
 it below zero, it says so, but lets you save: if the sale happened, record
 it, then count the product to find what's missing.
 
@@ -138,8 +141,8 @@ screenshot("send-out.png")
   otherwise.
 
 The product's page then shows an **Off the shelf** section, with each memo,
-who has it and when it's due. When the pieces come back, tap the memo and
-choose **Back in**. If the customer keeps them, choose **Sold from here**.
+who has it and when it's due. When the pieces come back, tap **⋯** beside the
+memo and choose **Back in**. If the customer keeps them, choose **Sold from here**.
 Both are signed by an approver or the owner.
 
 A memo more than a week overdue appears under **Needs attention** on the
@@ -157,9 +160,9 @@ Overview (@sec-overview).
   unrecorded. Jholok records the truth and points to the missing piece.
 - **Adjust waits while a product is being counted.** Changing the ledger in
   the middle of a count would change what the count is checked against.
-- **Sending out needs a second person.** Stock leaving the shop is when
-  pieces go missing, so an approver or the owner signs for it, and every
-  memo is logged.
+- **Sending out needs an approver or the owner.** Stock leaving the shop is
+  when pieces go missing, so one of them signs for it, and every memo is
+  logged.
 
 ## How it works
 
@@ -174,7 +177,8 @@ other way. Sold from here records a sale from that place.
 
 If you record a movement dated before a count that has already been
 completed, Jholok checks whether that count already accounted for it, so it
-isn't counted twice. Chapter 12 explains this.
+isn't counted twice. The owner confirms the correction, and a sale needs its
+bill number. @sec-cut-off explains this.
 
 ## Try it
 
@@ -203,7 +207,7 @@ ggplot(last_30_days, aes(day, units)) +
   theme(strip.text = element_text(hjust = 0, face = "bold"))
 ```
 
-And this is the stock the demo has out of the shop:
+And this is the demo's stock off the shelf:
 
 ```{r}
 #| label: tbl-out-of-shop

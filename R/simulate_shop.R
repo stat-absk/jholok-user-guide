@@ -71,10 +71,13 @@ simulate_shop <- function(end_on = as.Date("2026-09-24"), counting = TRUE,
         started_at = to_time(day, start_minute),
         completed_at = to_time(day, end_minute)
       ) |>
-      select(count_id, location, notes, scope, started_at, completed_at),
+      mutate(reason = if_else(is.na(end_minute), NA, demo_count_reason)) |>
+      select(
+        count_id, location, notes, scope, started_at, completed_at, reason
+      ),
     count_lines = counts$lines |>
       mutate(counted_at = to_time(day, minute)) |>
-      select(count_id, sku, counted, counted_at, accepted),
+      select(count_id, sku, counted, singles, counted_at, accepted),
     end_at = to_time(end_day, end_minute),
     shift_days = shift_days
   )
@@ -107,7 +110,8 @@ story_counts <- function(plans, runs, open_count_day, counting) {
     count_id = 1L, day = whole_shop_day, start = clock(8, 30),
     end = clock(10, 30), every = 2L, location = "Whole shop",
     notes = "Financial year close", scope = character(),
-    offsets = whole_shop_offsets, unticked = character()
+    offsets = whole_shop_offsets, unticked = character(),
+    singles = integer()
   )
   showcase <- story_count(
     plans, runs,
@@ -115,7 +119,8 @@ story_counts <- function(plans, runs, open_count_day, counting) {
     end = clock(10), every = 3L, location = "Showcase 1",
     notes = "A customer's repair piece was in the tray",
     scope = c("Earrings", "Rings"),
-    offsets = showcase_offsets, unticked = showcase_unticked
+    offsets = showcase_offsets, unticked = showcase_unticked,
+    singles = showcase_singles
   )
   counts <- list(whole_shop, showcase)
   if (counting) {
@@ -128,7 +133,8 @@ story_counts <- function(plans, runs, open_count_day, counting) {
 }
 
 story_count <- function(plans, runs, count_id, day, start, end, every,
-                        location, notes, scope, offsets, unticked) {
+                        location, notes, scope, offsets, unticked,
+                        singles) {
   in_scope <- Filter(\(plan) {
     plan$open_day <= day &&
       (is.na(plan$archive_day) || plan$archive_day > day) &&
@@ -155,6 +161,7 @@ story_count <- function(plans, runs, count_id, day, start, end, every,
       count_id = count_id,
       sku = skus,
       counted = unname(on_hand) + offset,
+      singles = unname(singles[skus]),
       expected = unname(on_hand),
       day = day,
       minute = start + 1L + every * (seq_along(skus) - 1L),
@@ -191,9 +198,13 @@ open_count <- function(plans, runs, day) {
   )
 }
 
+# The demo's approver, Sita, completes both counts with this reason
+# (Jholok/DevTools/DemoReplay.swift).
+demo_count_reason <- "Monthly count. Shortages checked with Ramesh."
+
 # When a count is completed, the app records a "count adjustment" movement
 # for every difference the approver accepted, so stock stays a sum of
-# movements.
+# movements. Its note is "Stock count · {location} · {reason}".
 count_adjustments <- function(lines, counts) {
   lines |>
     inner_join(
@@ -209,7 +220,7 @@ count_adjustments <- function(lines, counts) {
       minute = end_minute,
       kind = "count_adjustment",
       quantity = counted - expected,
-      note = paste("Stock count", location, sep = " · ")
+      note = paste("Stock count", location, demo_count_reason, sep = " · ")
     )
 }
 

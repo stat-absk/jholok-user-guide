@@ -29,3 +29,13 @@ test_that("a count expects the stock in the shop, not what's out", {
     stock_in_shop(shop) |> filter(sku == "EAR-0001") |> pull(in_shop)
   )
 })
+
+test_that("with -off-shelf, the karigar's chain is out inside the open count", {
+  off_shelf <- load_shop(end_on = reference_end, off_shelf_in_count = TRUE)
+  out <- off_shelf$out_records
+  expect_equal(out$sku, "NEC-0001")
+  expect_equal(out$place, "karigar")
+  open_counts <- filter(off_shelf$counts, is.na(completed_at))
+  open_start <- open_counts$started_at
+  expect_lt(as.numeric(out$sent_at), as.numeric(open_start))
+})

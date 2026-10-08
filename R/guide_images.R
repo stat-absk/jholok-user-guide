@@ -27,10 +27,32 @@ screenshot <- function(file, caption = NULL) {
 }
 
 # Pictures live in images/ at the top of the guide; chapters sit one folder
-# down, in chapters/, so their links climb one level.
-image_path <- function(...) {
+# down, in chapters/, so their links climb one level. The single-file build
+# (scripts/build_single_file.R) sets `guide.image_root` to its smaller copies,
+# with the screenshots as JPEG.
+image_path <- function(folder, file) {
+  root <- getOption("guide.image_root")
+  if (!is.null(root)) {
+    if (folder == "app") {
+      file <- sub("\\.png$", ".jpg", file)
+    }
+    return(file.path(root, folder, file))
+  }
   input <- knitr::current_input(dir = TRUE)
   in_chapters <- !is.null(input) && basename(dirname(input)) == "chapters"
   prefix <- if (in_chapters) ".." else "."
-  file.path(prefix, "images", ...)
+  file.path(prefix, "images", folder, file)
+}
+
+# A page of the count report (scripts/capture_screens.R makes them).
+report_page <- function(number, alt, caption = NULL) {
+  htmltools::tags$figure(
+    class = "report-page",
+    htmltools::tags$img(
+      src = image_path("report", paste0("report-", number, ".png")),
+      alt = alt,
+      loading = "lazy"
+    ),
+    if (!is.null(caption)) htmltools::tags$figcaption(caption)
+  )
 }

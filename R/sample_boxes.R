@@ -124,3 +124,68 @@ pieces_on_photo <- function(number, pieces = sample_box_pieces(number)) {
     )
   bind_cols(corners, apply_transform(transform, corners$u, corners$v))
 }
+
+# The demo's tag list (JholokKit/Sources/JholokDemo/DemoTags.swift): one piece
+# tag per pair of earrings and per set, in blocks by product, as billing
+# software would export it. Codes run from TJ-000201 without gaps.
+demo_tag_blocks <- tribble(
+  ~sku, ~tags,
+  "EAR-0001", 10, "EAR-0002", 3, "EAR-0003", 8, "EAR-0004", 2,
+  "EAR-0005", 4, "EAR-0006", 8, "EAR-0007", 4, "EAR-0008", 3,
+  "SET-0001", 3, "SET-0002", 3, "SET-0003", 10, "SET-0004", 3,
+  "SET-0005", 2, "SET-0006", 5
+)
+
+demo_tag_list <- function() {
+  demo_tag_blocks |>
+    tidyr::uncount(tags) |>
+    mutate(tag = sprintf("TJ-%06d", 200 + row_number())) |>
+    select(tag, sku)
+}
+
+# Each piece of a sample box and what a tag scan of it finds: its product by
+# its tag, a tag the list doesn't know, or no tag read.
+box_tag_outcomes <- function(number, tag_list = demo_tag_list()) {
+  sample_box_pieces(number) |>
+    left_join(rename(tag_list, listed_sku = sku), by = "tag") |>
+    mutate(
+      outcome = case_when(
+        !tag_read ~ "no tag read",
+        is.na(listed_sku) ~ "tag not in the tag list",
+        .default = "identified by its tag"
+      )
+    )
+}
+
+# The demo's billing file (Jholok/DevTools/DemoBookFile.swift): every tag the
+# count's types have, on the shelf, except that the second tagged product's
+# first tag has been sold, the third's first tag is with the karigar and the
+# fourth's is on "Appro"; plus a design the catalogue doesn't have and two
+# customers' repair pieces marked "Rep".
+demo_billing_file <- function(types = c("Earrings", "Sets"), shop) {
+  in_scope <- shop$products |>
+    filter(type %in% types) |>
+    pull(sku)
+  tagged <- demo_tag_list() |>
+    filter(sku %in% in_scope) |>
+    mutate(
+      product = match(sku, unique(sku)),
+      first_tag = !duplicated(sku)
+    )
+  tagged |>
+    filter(!(product == 2 & first_tag)) |>
+    mutate(
+      status = case_when(
+        product == 3 & first_tag ~ "Karigar",
+        product == 4 & first_tag ~ "Appro",
+        .default = ""
+      )
+    ) |>
+    transmute(`Tag No` = tag, `Item Code` = sku, Status = status) |>
+    bind_rows(tribble(
+      ~`Tag No`, ~`Item Code`, ~Status,
+      "TJ-990001", "JH-22-114", "",
+      "RP-0091", "", "Rep",
+      "RP-0093", "", "Rep"
+    ))
+}

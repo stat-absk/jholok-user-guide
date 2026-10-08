@@ -145,3 +145,15 @@ test_that("moving the story keeps its weekdays and shifts every date alike", {
   )
   expect_true(all(as.numeric(moved_by) == 14))
 })
+
+test_that("odd singles sit beside the count and never change stock", {
+  showcase <- filter(shop$counts, location == "Showcase 1")
+  lines <- filter(shop$count_lines, !is.na(singles))
+  expect_equal(lines$count_id, showcase$count_id)
+  expect_equal(lines$sku, "EAR-0001")
+  expect_equal(lines$singles, 1L)
+  # Its count adjustment is the one pair short, whatever the single.
+  adjustment <- shop$movements |>
+    filter(kind == "count_adjustment", sku == "EAR-0001")
+  expect_equal(adjustment$quantity, -1L)
+})

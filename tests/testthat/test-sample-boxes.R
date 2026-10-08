@@ -38,3 +38,13 @@ test_that("every box picture says it is a drawn example", {
   expect_match(box_caption("Box 1."), "drawn example")
   expect_match(box_caption("Box 1."), "not a photo of a\\s+real shop's box")
 })
+
+test_that("box 1 leaves 3 to identify: 2 tags unread, 1 not in the list", {
+  outcomes <- count(box_tag_outcomes(1), outcome)
+  expect_equal(
+    outcomes$n[outcomes$outcome == "identified by its tag"], 12L
+  )
+  expect_equal(outcomes$n[outcomes$outcome == "no tag read"], 2L)
+  expect_equal(outcomes$n[outcomes$outcome == "tag not in the tag list"], 1L)
+  expect_equal(nrow(demo_tag_list()), 68L)
+})

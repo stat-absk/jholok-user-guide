@@ -133,3 +133,13 @@ movement_names <- c(
 movement_name <- function(kind) {
   unname(movement_names[kind])
 }
+
+# "4 of 4 matched", "11 of 13 matched (85%)": a percentage only from 10, as
+# the count's summary writes it.
+matched_words <- function(matched, counted) {
+  words <- paste(matched, "of", counted, "matched")
+  if (counted >= minimum_for_percent) {
+    words <- paste0(words, " (", percent_words(matched / counted), ")")
+  }
+  words
+}

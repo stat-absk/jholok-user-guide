@@ -9,17 +9,10 @@ products, records every piece that comes in or goes out, and helps you count
 what is really on the shelves, so you can see what is missing before it costs
 you.
 
-This guide is for anyone using Jholok for the first time: the shop's owner,
+This guide is for anyone using Jholok for the first time: the shop's [owner](chapters/glossary.qmd#owner),
 the people who approve counts, and the staff who count. You don't need to know
 anything about accounting. Each idea is explained the first time it appears,
 and every word is in the [Glossary](chapters/glossary.qmd).
-
-::: {.callout-note}
-## This guide is being written
-
-The chapters are being added one by one. Chapters that are not ready yet say
-so.
-:::
 
 ## How this guide is arranged
 

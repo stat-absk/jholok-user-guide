@@ -91,6 +91,9 @@ capture_screens <- function(pattern = NULL) {
   if (nrow(tapped) > 0) {
     capture_by_ui_test(tapped)
   }
+  if (is.null(pattern) || grepl(pattern, "report")) {
+    capture_report()
+  }
   system2("xcrun", c("simctl", "status_bar", "booted", "clear"))
   invisible(screens)
 }
@@ -129,6 +132,41 @@ capture_by_ui_test <- function(screens) {
     }
     resize_into_guide(taken, file)
   }
+}
+
+# The count report: `-report` makes the app write the latest completed demo
+# count's report (Report.pdf) to its temporary folder. Ghostscript turns each
+# A4 page into a picture.
+report_dir <- "images/report"
+
+capture_report <- function() {
+  system2("xcrun", c("simctl", "terminate", "booted", bundle_id),
+    stdout = FALSE, stderr = FALSE
+  )
+  simctl("launch", "booted", bundle_id, "-demo", "-report")
+  Sys.sleep(12)
+  container <- system2(
+    "xcrun",
+    c("simctl", "get_app_container", "booted", bundle_id, "data"),
+    stdout = TRUE
+  )
+  report <- file.path(container, "tmp", "Report.pdf")
+  if (!file.exists(report)) {
+    stop("The app didn't write Report.pdf", call. = FALSE)
+  }
+  dir.create(report_dir, showWarnings = FALSE)
+  unlink(list.files(report_dir, full.names = TRUE))
+  status <- system2(
+    "gs",
+    c(
+      "-q", "-dNOPAUSE", "-dBATCH", "-sDEVICE=png16m", "-r110",
+      "-o", file.path(report_dir, "report-%d.png"), report
+    )
+  )
+  if (status != 0) {
+    stop("Couldn't turn the report into pictures", call. = FALSE)
+  }
+  message("Saved ", length(list.files(report_dir)), " report pages")
 }
 
 resize_into_guide <- function(full_size, file) {

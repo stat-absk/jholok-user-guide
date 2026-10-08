@@ -1,4 +1,4 @@
-# What changed
+# What changed {#sec-what-changed}
 
 ```{r}
 #| include: false
@@ -12,9 +12,10 @@ For everyone
 ## Guide 0.1, for Jholok 0.1
 
 - The guide's outline and its welcome page.
-- The ideas behind the app: @sec-stock-basics, @sec-ledger and
-  @sec-counting.
-- Everyday use: @sec-setting-up, @sec-catalogue, @sec-movements and
-  @sec-overview.
-- Counting: @sec-a-count.
+- The ideas behind the app: @sec-stock-basics, @sec-ledger and @sec-counting.
+- Everyday use: @sec-setting-up, @sec-catalogue, @sec-movements and @sec-overview.
+- Counting: @sec-a-count, @sec-boxes and @sec-identify-later.
+- Checking a count: @sec-book-stock, @sec-cut-off, @sec-review and @sec-results.
+- Looking after your shop: @sec-keeping-data-safe and @sec-stories.
+- [Questions and answers](questions.qmd).
 - The [Glossary](glossary.qmd).

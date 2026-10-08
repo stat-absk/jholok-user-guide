@@ -64,8 +64,8 @@ reminds you that "Expected stock stays hidden until you review, so it can't
 sway the count." Tap **Start**.
 
 The Count tab also suggests what to count next: under **Last counted**, a
-button such as "Count Sets" starts a count of the type that has gone longest
-without one.
+button such as "Count Sets" opens a new count of the type that has gone
+longest without one.
 
 ```{r}
 screenshot("counts.png")
@@ -106,7 +106,8 @@ Each product has three controls:
 When you tap the number, choose **Add** to add to what you've counted so far
 (useful when you count tray by tray), or **Set total** to type the whole
 count. The sheet shows the count so far and the new total before you tap
-**Done**.
+**Done**. For earrings, the sheet also has **Singles**, "An earring with no
+mate": enter an odd single there, never as a pair (@sec-stock-basics).
 
 ```{r}
 screenshot("quantity-entry.png")
@@ -139,7 +140,7 @@ button at the top shows only the products **Not counted**, or only those
 **Counted**, which helps you check nothing was missed.
 
 To find a product from its label, tap the barcode button, **Find by code**.
-Scan or type a barcode, a SKU or a piece tag, and the list jumps to that
+Scan or type a barcode, a SKU or a piece tag, and the list shows only that
 product's row. Finding a product never counts it: you still tap +.
 
 ```{r}
@@ -147,19 +148,22 @@ screenshot("find-by-code.png")
 ```
 
 The buttons at the bottom, **Scan tags** and **Box photo**, count a whole tray
-or box at once. Chapter 9 explains them.
+or box at once. @sec-boxes explains them.
 
 ### Submit the count
 
-When you've counted everything, tap **Submit**. The app checks that you mean
-it.
+When you've counted everything, tap **Submit** (it stays greyed out until
+something is counted). The app checks that you mean it. If pieces in box
+photos are still to identify, it offers **Identify now** or **Submit anyway**
+(@sec-identify-later).
 
 ```{r}
 screenshot("submit-dialog.png")
 ```
 
 After you submit, counting stops and the count waits for an approver. Nobody
-can change a figure unless an approver reopens the count, with a reason.
+can change a figure unless an approver who didn't count in it, or the owner,
+taps **Reopen for counting** and gives a reason.
 
 ```{r}
 screenshot("waiting-for-approval.png")
@@ -172,8 +176,9 @@ screenshot("waiting-for-approval.png")
   a small tap of feedback with every change.
 - **No swipe changes a count by itself**, for the same reason.
 - **Nothing shows stock while you count.** Not the counting screen, and not
-  the rest of the app either: the Overview and the Catalogue show "Being
-  counted" for the types in an open count.
+  the rest of the app either: the Catalogue shows "Being counted" for the
+  types in an open count, and the Overview leaves them out, with a note at
+  the top.
 
 ```{r}
 screenshot(
@@ -192,8 +197,8 @@ screenshot(
 
 Your count is saved with every tap, together with who entered it and when.
 The activity log records each figure, so if several people count, it's clear
-who counted what. Pieces counted from box photos or tag scans add to the same
-number as your taps; chapter 9 explains how the two are kept apart.
+who counted what. Pieces counted from box photos or [tag scans](glossary.qmd#tag-scan) add to the same
+number as your taps; @sec-boxes explains how the two are kept apart.
 
 When you submit, the count waits under **In progress** in the Count tab,
 marked "Waiting for approval". An approver then reviews it, as @sec-counting
@@ -238,5 +243,6 @@ offers Undo for a few seconds.
 - Tap + for each piece. Tap the number to type a count. Swipe for None here or
   Clear, then tap.
 - Undo is offered after a change of more than one, and after every Clear.
-- Submit when you're done; after that, only an approver can reopen the count.
+- Submit when you're done; after that, only an approver who didn't count, or
+  the owner, can reopen the count.
 :::

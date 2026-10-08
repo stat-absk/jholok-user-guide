@@ -2,7 +2,7 @@
 
 The plan is in [PLAN.md](PLAN.md). Status: ☐ to do · ◐ in progress · ☑ done · ⏸ waiting on you.
 
-Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 and 4 drafted.
+Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 to 7 drafted: every chapter has a first draft. Phase 8 under way: checked against the app, waiting for the release review.
 
 ## Waiting on you
 
@@ -40,8 +40,8 @@ Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 and 4 drafted.
 | 1.8 | testthat: 50 checks, covering every rule in PLAN.md plus the showcase states and the app's money and share wording | ☑ |
 | 1.9 | Matches the app exactly: all 713 movements, 43 products and 59 count lines are identical to the app's output (`scripts/app-demo-dump`) | ☑ |
 | 1.10 | `lintr` clean; `styler` changes nothing | ☑ |
-| 1.11 | Later, for chapters 9 to 11: the `-demo-boxes` story (the open count "Strongroom", the demo tag list and the sample boxes' tags, `DemoBoxes.swift`, `DemoTags.swift`) | ☐ |
-| 1.12 | `add_stock_out()`: the stock the demo sends out at launch (jangad, karigar, order), skipping products an open count covers; `stock_in_shop()` apart from owned stock; counts expect the shop. The `-off-shelf` variant (inside the open count) is still to do, for chapter 12 | ◐ |
+| 1.11 | `demo_tag_list()` and `box_tag_outcomes()`: the demo's 68 tags and what a scan of each sample box finds (box 1: 12 by tag, 2 unread, 1 not in the list). The Strongroom count itself isn't needed yet | ◐ |
+| 1.12 | `add_stock_out()`: the stock the demo sends out at launch (jangad, karigar, order), skipping products an open count covers, and the `-off-shelf` variant inside the open count; `stock_in_shop()` apart from owned stock; counts expect the shop | ☑ |
 
 ## Phase 2: screenshots and box pictures
 
@@ -74,27 +74,27 @@ Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 and 4 drafted.
 | C6 | Recording what comes in and goes out: receive, sell, return, Adjust, send out and back in | owner, approvers | stock-states | ☑ draft |
 | C7 | Reading the Overview: stock value, by type, Needs attention, sales, best sellers, last count | owner | visual-layer, honest-summaries | ☑ draft |
 | C8 | A count from start to finish: start, who's counting, counting one-handed, Undo, Find by code, submit | counters | CLAUDE.md (Counting rules) | ☑ draft |
-| C9 | Counting boxes: tags and photos | counters | photo-counting, box-review | ☐ |
-| C10 | Pieces to identify later | counters | box-review | ☐ |
-| C11 | Book stock | owner, approvers | book-stock | ☐ |
-| C12 | Stock off the shelf and the cut-off | owner, approvers | stock-states | ☐ |
-| C13 | Submit, review and complete | approvers | people-and-log, honest-summaries | ☐ |
-| C14 | Results and the count report | owner, approvers | count-report | ☐ |
-| C15 | Keeping data safe | owner | CLAUDE.md (Data: backups, privacy) | ☐ |
-| C16 | Stories from the shop | everyone | all | ☐ |
+| C9 | Counting boxes: tags and photos: scan tags (every outcome), box photo, the review and its markers, the piece sheet, repeats, after adding; unmeasured on real boxes | counters | photo-counting, box-review | ☑ draft |
+| C10 | Pieces to identify later: adding first, the queue, lookalikes, Not in the catalogue, why only counters identify | counters | box-review | ☑ draft |
+| C11 | Book stock: the books, loading and its plan, status words, when the owner is needed, what a count finds about each tag | owner, approvers | book-stock | ☑ draft |
+| C12 | Stock off the shelf and the cut-off: what's away, the counting window (with a diagram), lines whose stock moved, late entries and cut-off corrections | owner, approvers | stock-states | ☑ draft |
+| C13 | Submit, review and complete: opening Review, reading it, recounting, ticks, completing and signing, reopening | approvers | people-and-log, honest-summaries | ☑ draft |
+| C14 | Results and the count report: the Result, the report's pages and fingerprint, exports, the record of every count | owner, approvers | count-report | ☑ draft |
+| C15 | Keeping your data safe: on the phone only, backing up (not automatic), restoring and moving phones, privacy, saves that never fail silently, diagnostics | owner | CLAUDE.md (Data: backups, privacy) | ☑ draft |
+| C16 | Stories from the shop: the first full count, Dhanteras, the pendant below zero, the customer's repair piece, the karigar's chain, a new member of staff | everyone | all | ☑ draft |
 | A | Glossary: 50 terms, each linked to its chapter; chapters 1 to 3 link each term's first use | everyone | all | ☑ draft |
-| B | Questions and answers, troubleshooting | everyone | all | ☐ |
-| C | What changed | everyone | git log | ☐ |
+| B | Questions and answers: counting, boxes and tags, Review, stock and the catalogue, data and privacy, when something goes wrong | everyone | all | ☑ draft |
+| C | What changed: guide 0.1 | everyone | git log | ☑ draft |
 
 ## Phase 8: check and ship
 
 | ID | Task | Status |
 |---|---|---|
-| 8.1 | Every rule stated checked against CLAUDE.md and docs/design | ☐ |
-| 8.2 | Plain-language pass: short sentences, each term explained first time | ☐ |
-| 8.3 | Photo counting described as unmeasured on real boxes; X1 values marked "coming" | ☐ |
+| 8.1 | Every rule stated checked against CLAUDE.md and docs/design | ☑ |
+| 8.2 | Plain-language pass: short sentences, each term explained first time | ◐ |
+| 8.3 | Photo counting described as unmeasured on real boxes; X1 values marked "coming" | ☑ |
 | 8.4 | Links, image alt text, light and dark check, phone width | ☐ |
-| 8.5 | `lintr` and testthat clean, `renv::status()` clean | ☐ |
+| 8.5 | `lintr` and testthat clean, `renv::status()` clean | ☑ |
 | 8.6 | Render the book and the single-file HTML | ☐ |
 | 8.7 | **Review point: release 1** | ⏸ |
 
@@ -120,3 +120,7 @@ Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 and 4 drafted.
 | 8 Oct 2026 | 2.12 done with a screenshot UI test in the app repo; 55 screenshots. The demo's book file asks no status-word question (its words are all known), so that question has no screenshot. |
 | 8 Oct 2026 | Phase 3 drafted: the welcome page, chapters 1 to 3 and the glossary. Every figure in the text is computed from the R shop and matches the screenshots. `date_words()` and `movement_name()` added; 68 tests pass. |
 | 8 Oct 2026 | Phase 4 drafted: chapters 4 to 8, from three fact sheets read out of the app's code. Corrections they found, now in the guide: the app has no way to flag an odd single earring (the guide says count whole pairs and tell the approver), and the Overview's sales figures add units into "items" (the guide says so). The R shop now sends stock out as the demo does, and leaves archived products out of the value line; the Overview's ₹15.1 L fall, its Bangles and Sets changes, its 11 products needing attention and its weekly sales all match. 76 tests pass. |
+| 8 Oct 2026 | Phase 5 drafted: chapters 9 and 10, from a fact sheet read out of the app's code. Corrections it found, now in the guide: picture matching compares only with product photos (never drawings) and forgets what it learnt when the app closes. |
+| 8 Oct 2026 | Phase 6 drafted: chapters 11 to 14, from two fact sheets. The report's pages are captured too (`-report`, Ghostscript), the R shop has the demo's billing file, the `-off-shelf` story and the count reason on its adjustments, and the Count tab's record (39 of 42, 11 of 13) matches the app. The glossary links every written chapter and has 59 terms. |
+| 8 Oct 2026 | Phase 7 drafted: chapters 15 and 16 and the questions and answers. Every chapter and appendix now has a first draft. Facts worth knowing: Jholok has no automatic backup, a backup doesn't carry the lock setting, and a release build has no way to erase all data. |
+| 8 Oct 2026 | Phase 8: four checks read every chapter against the app's code (about 420 claims) and found about 47 wrong or missing a condition, now fixed. The biggest: a count covers types, not a showcase; the owner can approve and reopen; the report's fingerprint changes when a product is renamed, the shop's details change or something is entered late; book stock covers tagged products only; a backup leaves out the shop's name and address. The app gained Singles (`ef586c6`), so the guide describes them, the R shop has the demo's one single, and the screenshots were retaken. Glossary terms are linked at first use in every chapter, and a Pandoc quirk that turned about 40 "See chapter" links into bare numbers is fixed. `scripts/build_single_file.R` builds the one-file guide. Raised for the app: a blank stock cell in an import reads as 0; the To identify queue always reads "1 of N"; the sales "items" break DECISIONS.md; the shop's name and address aren't backed up; the demo's karigar is called Ramesh, like a counter. |

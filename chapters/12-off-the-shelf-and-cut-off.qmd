@@ -1,16 +1,185 @@
-# Stock off the shelf and the cut-off
+# Stock off the shelf and the cut-off {#sec-cut-off}
 
 ```{r}
 #| include: false
 source(here::here("_common.R"))
+
+# The demo with the karigar's chain sent out inside the open count, as on
+# the Review screenshot in this chapter.
+off_shelf <- load_shop(off_shelf_in_count = TRUE)
+open_count <- filter(off_shelf$counts, is.na(completed_at))
+out <- off_shelf$out_records |>
+  left_join(select(off_shelf$products, sku, name, variant), by = "sku")
+chain_line <- off_shelf$count_lines |>
+  filter(count_id == open_count$count_id, sku == out$sku)
+chain_in_shop <- stock_in_shop(off_shelf, chain_line$counted_at) |>
+  filter(sku == out$sku) |>
+  pull(in_shop)
+chain_owned <- stock_on_hand(off_shelf, chain_line$counted_at) |>
+  filter(sku == out$sku) |>
+  pull(on_hand)
 ```
 
 ::: {.audience}
 For the owner and approvers
 :::
 
-::: {.callout-note}
-## Not written yet
+::: {.learn}
+- How a count treats stock that is the shop's but not on the shelf.
+- What the cut-off is, and why sales during a count don't look like losses.
+- What happens when a movement is entered after its count was completed.
+:::
 
-This chapter is coming in a later edition of the guide.
+## The idea
+
+A count compares the shelf with the ledger at one moment. Two things make
+that moment hard to pin down in a real shop: some stock is away, and the shop
+stays open while it's counted.
+
+### Stock that is away
+
+Pieces on jangad, with the karigar, or kept for an order are the shop's stock,
+but they aren't on the shelf (@sec-movements). A count expects only what's
+**in the shop**: owned stock minus what's away. The rest is listed apart, so
+nobody mistakes it for a loss.
+
+Customers' own pieces, in for repair, are never the shop's stock, wherever
+they sit.
+
+### The cut-off
+
+A count takes time. If a pair of jhumkas is sold at 9:30, and the jhumkas
+were counted between 9:05 and 9:40, which stock should the count be compared with:
+before the sale, or after?
+
+Jholok works out a [**cut-off**](glossary.qmd#cut-off) for every product in a count. It reads the
+activity log to find when that product was counted (its [**counting window**](glossary.qmd#counting-window)),
+and compares the count with the stock in the shop at the end of that window.
+If stock moved during the window, it checks every stock figure along the
+way: if the count matches any of them, the count is fine. If it matches none,
+the product needs a recount.
+
+```{r}
+#| fig-cap: >-
+#|   A sale during the counting window. A count that matches the stock before
+#|   or after the sale is fine; one that matches neither is recounted.
+#| fig-alt: >-
+#|   A stock line at 5 that drops to 4 at 9:30, inside a shaded counting
+#|   window. Counts of 5 and 4 are marked fine, a count of 3 is marked recount.
+#| fig-height: 3.2
+diagram_cut_off()
+```
+
+So the shop never has to close for a count, and a sale in the middle of
+counting is never called a loss.
+
+## In the app
+
+### Stock off the shelf in Review
+
+When stock in the count's types is away, Review's summary says so, such as
+"Off the shelf, not counted: 1 with the karigar". Under the product, it says
+how many were away when it was counted, "not expected on the shelf".
+
+```{r}
+screenshot("review-off-shelf.png")
+```
+
+If a count finds more than expected while some are away, Review asks "did some
+come back?" and offers **Back in**, so a piece that came back without being
+recorded can be put right in the count.
+
+After the count is completed, its Result and report list what was **off the
+shelf** when each product was counted.
+
+### Lines whose stock moved
+
+Under a product counted before the counting ended, or recounted, Review says
+what its expected stock was taken from, such as "Expected as of 11:42, when it was counted". A product whose count matches
+none of the stock figures during its window shows "Stock moved while
+counted", and waits under **Recount first** with its numbers hidden, like a
+shortage (@sec-review). After the recount, the recount's own time becomes the
+cut-off.
+
+### Entries made after a count
+
+Sometimes a sale is entered late, after the count that covered it was
+completed, but dated before the product was counted. If that count had already
+written the piece off as short, the shop would lose it twice: once in the
+count, and again in the sale.
+
+Jholok spots this when you record the movement. The sheet says, for example:
+"This sale is dated before Showcase 2 counted Jhumka, which wrote 1 off as
+short. Jholok will put 1 back so it isn't taken off twice." For a sale, it
+asks for the **bill number**. Putting the piece back needs the owner, who
+confirms with Face ID or the owner PIN. The correction is a [**cut-off
+correction**](glossary.qmd#cut-off-correction) movement, logged with the sale.
+
+If the owner doesn't confirm, the sale can still be saved without the
+correction; the count then lists it as entered after completion, and its
+write-off stays.
+
+The count's Result and report list every entry made after completion, and the
+next Review of those types lists the corrections, so nothing changes a past
+count quietly.
+
+## Why it works this way
+
+- **What's away isn't lost.** Counting it as short would write off stock the
+  shop still owns.
+- **A shop doesn't close for a count.** The cut-off lets sales carry on during
+  counting without spoiling it.
+- **A late sale shouldn't count twice.** The cut-off correction puts back what
+  the count took off, and only for that sale.
+- **The owner decides corrections.** Changing what a completed count did is
+  serious, so it needs the owner's proof, and it's logged and listed.
+
+## How it works
+
+For each product, the counting window runs from the first to the last time
+its count changed, as the activity log records. Expected stock is the stock
+in the shop at the window's end. If movements fell inside the window, Jholok
+compares the count with the stock before each one and after it.
+
+When every counted piece of a product had its tag read and the count has the
+books (@sec-book-stock), expected comes from the tags themselves: the pieces
+the books have on the shelf.
+
+Completing a count freezes, for each product, its cut-off, how it was decided
+and how much was off the shelf. Later movements never change what the count
+compared.
+
+## Try it
+
+In the screenshot above, a `r tolower(out$name)` (`r out$variant`) went to
+`r out$party` on `r date_words(out$sent_at)`, memo `r out$memo`. When the
+chains were counted at `r open_count$location`, the shop owned
+`r chain_owned` but had `r chain_in_shop` on the shelf. The counter counted
+`r chain_line$counted`, so Review shows it
+`r chain_line$counted - chain_in_shop` over, with
+"`r out$units` with the karigar, not expected on the shelf".
+
+One over, with one away: the likeliest story is that the chain came back from
+the karigar and nobody recorded it. Tapping **Back in** records it as back
+from when it was counted, and the line then matches.
+
+**Question.** At 9:15 you count 6 pairs of hoops. At 9:20 a pair is sold. You
+finish the earrings at 9:40. Is the hoops' count short?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+No. The hoops were counted at 9:15, before the sale, when the shop had 6.
+Their cut-off is 9:15, and your count matches the stock then. Had you
+counted 5, they would be one short: at 9:15 the sale hadn't happened yet.
+:::
+
+::: {.remember}
+- A count expects what's in the shop. Stock on jangad, with the karigar or
+  kept for an order is listed apart, never as a loss.
+- Each product's cut-off is when it was counted. Sales during counting are
+  fine if the count matches the stock at some point.
+- A product whose stock moved and matches nothing is recounted.
+- A movement entered late, dated before a completed count, gets a cut-off
+  correction that the owner confirms.
 :::

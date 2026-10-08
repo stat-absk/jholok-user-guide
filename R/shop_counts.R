@@ -13,18 +13,22 @@
 
 # A cached copy of the shop, since simulating it takes a few seconds. The
 # cache is thrown away whenever the simulation's code changes.
-load_shop <- function(end_on = screens_taken_on, counting = TRUE) {
+load_shop <- function(end_on = screens_taken_on, counting = TRUE,
+                      off_shelf_in_count = FALSE) {
   code <- list.files(here::here("R"), pattern = "\\.R$", full.names = TRUE)
   fingerprint <- tools::md5sum(code) |>
     paste(collapse = "") |>
-    paste(end_on, counting)
+    paste(end_on, counting, off_shelf_in_count)
   key <- substr(rlang::hash(fingerprint), 1, 12)
   path <- here::here("_cache", paste0("shop-", key, ".rds"))
   if (file.exists(path)) {
     return(readRDS(path))
   }
   shop <- simulate_shop(end_on = end_on, counting = counting) |>
-    add_stock_out(sent_from = story_time(as_day(end_on), screens_minute))
+    add_stock_out(
+      sent_from = story_time(as_day(end_on), screens_minute),
+      in_count = off_shelf_in_count
+    )
   dir.create(dirname(path), showWarnings = FALSE)
   saveRDS(shop, path)
   shop

@@ -48,12 +48,13 @@ weighing 8 g is another, even though both are jhumkas.
 
 Each product has a short code called its [**SKU**](glossary.qmd#sku), which stands for *stock
 keeping unit*. The Temple Lakshmi jhumka's SKU is EAR-0002. A SKU belongs to
-one product only, and it doesn't change. Jholok treats small and capital
+one product only. You can change it with Edit, but it is best to keep it the
+same, because labels and files use it. Jholok treats small and capital
 letters as the same, so `ear-0002` is the same SKU as `EAR-0002`. When you add
 a product, Jholok suggests a SKU from its type (EAR for earrings, RIN for
 rings), or you can use your own codes.
 
-How many pieces of a product the shop holds is its [**stock on hand**](glossary.qmd#on-hand).
+How many of a product the shop holds is its [**stock on hand**](glossary.qmd#on-hand).
 
 ### Types and units
 
@@ -61,37 +62,39 @@ Products are grouped into [**types**](glossary.qmd#type): in the demo shop these
 Rings, Necklaces, Bangles, Sets, Coins and Other. A type decides the [**unit**](glossary.qmd#unit)
 its products are counted in:
 
-- **Earrings are counted in pairs.** A pair is sold together, so it is
-  counted together. A single earring found on its own is not half a pair,
+- **Earrings are counted in [pairs](glossary.qmd#pair).** A pair is sold together, so it is
+  counted together. A [single earring](glossary.qmd#odd-single) found on its own is not half a pair,
   so it is never rounded into one: count the whole pairs, and add the single
   with **Singles** in the count sheet. It shows beside the pairs ("5 pairs +
   1 single"), the approver sees it in Review, and it never changes stock.
-- **Sets are counted as one.** A necklace with its matching earrings is one
+- **[Sets](glossary.qmd#set) are counted as one.** A necklace with its matching earrings is one
   set, and counts as 1, because it is sold as one.
-- **Everything else is counted in pieces**: a ring, a chain, a coin.
+- **Everything else is counted in [pieces](glossary.qmd#piece)**: a ring, a chain, a coin.
 
 Because the units are different, Jholok keeps them apart when it says what
 is in stock: "`r units_line`", not one total. Adding a pair of studs to a
 bridal set gives a number that means little.
 
-The one place you'll see them added is in the sales figures, which say how
-many **items** were sold, such as "9 items": there an item is any one unit,
-a pair, a set or a piece.
+Jholok never adds them into one count of [**items**](glossary.qmd#item), even
+for sales. Where several kinds sold, it lists each, such as "18 pairs and 13
+pieces". Where a rupee value says enough, as in "Last week sold ₹7.79 L", it
+gives the value alone.
 
 ### Cost, list price and value
 
 Each product can have two amounts:
 
-- its [**cost**](glossary.qmd#cost): what the shop paid for one, with the gold, the making charge
+- its [**cost**](glossary.qmd#cost): what the shop paid for one, with the gold, the [making charge](glossary.qmd#making-charge)
   and any stones included;
-- its [**list price**](glossary.qmd#list-price): what the shop asks a customer for one.
+- its [**list price**](glossary.qmd#list-price): what the shop asks a customer for one (the product page
+  calls it Price).
 
 [**Stock value**](glossary.qmd#stock-value) is what the stock is worth: each product's stock on hand
 times its cost, added up. Value at cost is what the shop has paid for the
 stock it holds. Value at list price is what it would take if everything sold
 at the list price. The gap between the two is the shop's margin.
 
-Large amounts are written in lakh and crore, as in the app. One lakh (L) is
+Large amounts are written in [lakh](glossary.qmd#lakh) and [crore](glossary.qmd#crore), as in the app. One lakh (L) is
 ₹1,00,000, and one crore (Cr) is 100 lakh, or ₹1,00,00,000.
 
 ## In the app
@@ -105,7 +108,7 @@ screenshot("catalogue.png")
 Tap a product to open its page. The Temple Lakshmi jhumka has
 `r describe_units(temple_jhumka$on_hand, "pair")` on hand. Its value,
 `r rupees_short(temple_jhumka$on_hand * temple_jhumka$cost)` at cost, is
-`r temple_jhumka$on_hand` × `r rupees(temple_jhumka$cost)`. **Cover** says how
+`r temple_jhumka$on_hand` × `r rupees(temple_jhumka$cost)`. [**Cover**](glossary.qmd#cover) says how
 long the stock lasts at the pace it has sold recently.
 
 ```{r}
@@ -126,8 +129,8 @@ screenshot("overview.png")
   sets" tells you something; "`r all_units` items" doesn't.
 - **A value always says what it is based on, and when.** Value at cost and
   value at list price differ by the shop's margin, and gold prices move. So
-  Jholok writes "`r rupees_short(total_at_cost)` at today's cost", never just
-  a figure.
+  Jholok writes "`r rupees_short(total_at_cost)` at today's cost, `r date_words(screens_taken_on)`", with
+  its date, never just a figure.
 - **Nothing is left out quietly.** One product in the demo shop has no cost,
   so the Overview says "Leaves out 1 product with no cost" rather than
   counting it as ₹0.

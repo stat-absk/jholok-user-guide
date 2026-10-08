@@ -9,6 +9,10 @@
 # The app sends these when it starts, timed back from that moment, and skips
 # products an open count covers. `sent_from` stands in for that moment: the
 # guide uses late afternoon on the day the screenshots were taken.
+#
+# With `in_count` (the app's `-off-shelf`), it sends only products the open
+# count covers, timed back from the day before the count started, so the
+# count's Review shows them off the shelf.
 
 stock_out_story <- tribble(
   ~type, ~at_least, ~units, ~place, ~party, ~memo, ~days_before, ~due_in,
@@ -18,11 +22,12 @@ stock_out_story <- tribble(
   "Sets", 2L, 1L, "order", "Mrs Banerjee", "O-208", 3, NA, "Sita"
 )
 
-add_stock_out <- function(shop, sent_from) {
-  open_types <- shop$counts |>
-    filter(is.na(completed_at)) |>
-    pull(scope) |>
-    unlist()
+add_stock_out <- function(shop, sent_from, in_count = FALSE) {
+  open_counts <- filter(shop$counts, is.na(completed_at))
+  open_types <- unlist(open_counts$scope)
+  if (in_count) {
+    sent_from <- min(open_counts$started_at) - 86400
+  }
   in_shop <- stock_in_shop(shop, sent_from)
   last_counted <- shop$count_lines |>
     inner_join(
@@ -32,7 +37,7 @@ add_stock_out <- function(shop, sent_from) {
     summarise(last_count = max(completed_at), .by = sku)
 
   candidates <- shop$products |>
-    filter(is.na(archived_at), !type %in% open_types) |>
+    filter(is.na(archived_at), (type %in% open_types) == in_count) |>
     left_join(in_shop, by = "sku") |>
     left_join(last_counted, by = "sku") |>
     arrange(sku)

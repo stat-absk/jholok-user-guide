@@ -300,3 +300,85 @@ diagram_places <- function() {
     coord_cartesian(xlim = c(-1, 4.6), ylim = c(-2.4, 2)) +
     theme_void()
 }
+
+# The cut-off: one product's stock in the shop through a counting window with
+# a sale in the middle. A count that matches the stock at any point in the
+# window is fine; one that matches none needs a recount.
+diagram_cut_off <- function() {
+  minute <- \(h, m = 0) h * 60 + m
+  stock <- tibble(
+    from = c(minute(9), minute(9, 30)),
+    to = c(minute(9, 30), minute(10)),
+    units = c(5, 4)
+  )
+  counts <- tibble(
+    at = c(minute(9, 15), minute(9, 15), minute(9, 15)),
+    units = c(5, 4, 3),
+    verdict = c("fine", "fine", "recount"),
+    label = c(
+      "Counted 5: the stock before the sale",
+      "Counted 4: the stock after it",
+      "Counted 3: neither, so recount"
+    )
+  )
+  hours <- \(x) sprintf("%d:%02d", x %/% 60, x %% 60)
+
+  ggplot() +
+    annotate(
+      "rect",
+      xmin = minute(9, 5), xmax = minute(9, 40), ymin = -Inf, ymax = Inf,
+      fill = guide_colours$surface_inset
+    ) +
+    annotate(
+      "text",
+      x = minute(9, 22.5), y = 6.2, label = "Counting window",
+      colour = diagram_soft, size = 3.4
+    ) +
+    geom_segment(
+      aes(x = from, xend = to, y = units, yend = units),
+      data = stock,
+      colour = diagram_ink,
+      linewidth = 1
+    ) +
+    annotate(
+      "segment",
+      x = minute(9, 30), xend = minute(9, 30), y = 5, yend = 4,
+      colour = diagram_ink, linewidth = 1, linetype = "22"
+    ) +
+    annotate(
+      "text",
+      x = minute(9, 31), y = 4.5, label = "a sale at 9:30", hjust = 0,
+      colour = diagram_soft, size = 3.2
+    ) +
+    geom_point(
+      aes(at, units, fill = verdict),
+      data = counts,
+      shape = 21, size = 3.6, colour = "white", stroke = 0.8
+    ) +
+    geom_text(
+      aes(minute(8, 58), units, label = label, colour = verdict),
+      data = counts,
+      hjust = 1, size = 3.2
+    ) +
+    scale_fill_manual(
+      values = c(fine = guide_colours$jade, recount = guide_colours$ruby),
+      guide = "none"
+    ) +
+    scale_colour_manual(
+      values = c(fine = guide_colours$jade, recount = guide_colours$ruby),
+      guide = "none"
+    ) +
+    scale_x_continuous(
+      breaks = c(minute(9), minute(9, 30), minute(10)),
+      labels = hours,
+      limits = c(minute(7, 50), minute(10))
+    ) +
+    scale_y_continuous(
+      breaks = 3:5,
+      limits = c(2.5, 6.4),
+      name = "In the shop"
+    ) +
+    labs(x = NULL) +
+    theme_guide() +
+    theme(panel.grid.major.y = element_blank())
+}

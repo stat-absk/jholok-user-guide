@@ -86,6 +86,13 @@ h1, h2, h3, .title {
   border-radius: 28px;
 }
 
+// Report pages: an A4 sheet on the page.
+.report-page img {
+  max-width: min(520px, 100%);
+  border: 1px solid $hairline;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
 // Short and over, as in the app: ruby for short, jade for over.
 .short {
   color: $ruby;
@@ -97,7 +104,10 @@ h1, h2, h3, .title {
 
 // Charts and diagrams: a raised card, as the app draws its chart cards.
 .cell-output-display img[src$=".svg"],
-.quarto-figure img[src$=".svg"] {
+.quarto-figure img[src$=".svg"],
+// In the single-file guide, pictures are inside the page.
+.cell-output-display img[src^="data:image/svg"],
+.quarto-figure img[src^="data:image/svg"] {
   border: 1px solid $hairline;
   border-radius: 14px;
 }
@@ -111,4 +121,13 @@ h1, h2, h3, .title {
 .table-caption,
 figcaption {
   color: $text-secondary;
+}
+
+// The single-file guide's part headings, between the chapters.
+h1.part {
+  margin-top: 4rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: none;
 }

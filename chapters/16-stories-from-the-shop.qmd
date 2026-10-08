@@ -1,16 +1,192 @@
-# Stories from the shop
+# Stories from the shop {#sec-stories}
 
 ```{r}
 #| include: false
 source(here::here("_common.R"))
+
+demo <- load_shop(counting = FALSE)
+names_of <- select(demo$products, sku, name, variant, cost)
+
+# 1. The first whole-shop count.
+whole_shop <- filter(demo$counts, location == "Whole shop")
+first_count <- demo$count_lines |>
+  filter(count_id == whole_shop$count_id) |>
+  left_join(
+    stock_in_shop(demo, whole_shop$started_at) |>
+      rename(expected = in_shop),
+    by = "sku"
+  ) |>
+  left_join(names_of, by = "sku") |>
+  mutate(difference = counted - expected)
+first_differences <- filter(first_count, difference != 0)
+
+# 2. Dhanteras: the busiest day for gold coins.
+dhanteras <- festivals |>
+  filter(festival == "Dhanteras", date < as.Date("2026-01-01")) |>
+  mutate(date = date + demo$shift_days)
+coins_that_day <- demo$movements |>
+  filter(
+    kind == "sold",
+    as.Date(date, tz = shop_time_zone) == dhanteras$date,
+    startsWith(sku, "COI")
+  ) |>
+  summarise(sold = -sum(quantity), .by = sku) |>
+  left_join(names_of, by = "sku") |>
+  arrange(desc(sold))
+
+# 3. The pendant below zero.
+pendant <- stock_history(demo, "NEC-0003")
+pendant_now <- sum(pendant$quantity)
+early_sale <- slice_tail(pendant, n = 1)
+
+# 4. The karigar's chain.
+karigar <- demo$out_records |>
+  filter(place == "karigar") |>
+  left_join(names_of, by = "sku")
+days_late <- as.integer(
+  difftime(demo$end_at, karigar$due_back, units = "days")
+)
+
+# 5. Showcase 1.
+showcase <- filter(demo$counts, location == "Showcase 1")
 ```
 
 ::: {.audience}
 For everyone
 :::
 
-::: {.callout-note}
-## Not written yet
+::: {.learn}
+- How the ideas and screens in this guide fit together in a shop's year.
+- What to do in situations every jeweller meets.
+:::
 
-This chapter is coming in a later edition of the guide.
+These are moments from Jholok Jewellers' year. The figures are the demo
+shop's own, so you can open the app's demo and find each of them.
+
+## The first full count
+
+Bidisha decided to count the whole shop at the end of the financial year,
+before opening on `r date_words(whole_shop$started_at, "%B")`. She had set
+up People the week before (@sec-setting-up): Ramesh and Meena to count, Sita
+to approve.
+
+Ramesh started the count in the Count tab, with **All types**, and he and
+Meena counted tray by tray, each signed in with their own PIN
+(@sec-a-count). Neither could see what the ledger expected. They finished in
+two hours and Ramesh submitted.
+
+Sita opened Review. `r matched_words(sum(first_count$difference == 0), nrow(first_count))`.
+These didn't:
+
+```{r}
+#| label: tbl-first-count
+#| tbl-cap: "What the first whole-shop count found."
+first_differences |>
+  transmute(
+    Product = paste(name, variant, sep = ", "),
+    Expected = expected,
+    Counted = counted,
+    `At cost` = rupees(difference * cost)
+  ) |>
+  table_guide()
+```
+
+The shortages waited under **Recount first**, so Sita recounted them herself,
+blind. They were still short, and she found no missing sale to explain them.
+She recounted the coins too, checked that no delivery of coins was missing,
+and accepted the extra one. She ticked all three and completed the count with
+a reason, signing with her PIN (@sec-review). Each accepted difference became
+a count adjustment in the ledger.
+
+**The lesson:** the first count sets the baseline. From then on, every count
+is compared with the last one of the same types.
+
+## Dhanteras
+
+On Dhanteras, `r date_words(dhanteras$date, "%B")`, the shop sold
+`r sum(coins_that_day$sold)` coins in one day:
+
+```{r}
+#| label: tbl-dhanteras
+#| tbl-cap: "Coins sold on Dhanteras."
+coins_that_day |>
+  transmute(Coin = paste(name, variant, sep = ", "), Sold = sold) |>
+  table_guide()
+```
+
+Every sale was recorded as it happened, so the ledger kept up. The Overview's
+sales chart labelled that week with its festival (@sec-overview), and **Needs
+attention** lists any product that, at its new pace, won't last the supplier
+lead time.
+
+**The lesson:** after a rush, count what moved fastest. Busy days are when a
+sale is most easily missed.
+
+## The pendant below zero
+
+The Overview showed one product **Below zero**: the Lakshmi pendant, at
+`r sub("-", minus_sign, pendant_now, fixed = TRUE)`. Its last movement was a sale on
+`r date_words(early_sale$date)`, with the note "`r early_sale$note`".
+
+The pendant had sold out, a delivery of 6 had arrived, and a customer bought
+one before anyone entered the delivery. Bidisha opened the pendant and tapped
+**Receive**, entered 6, and set the date to the day the delivery came. The
+stock became `r pendant_now + 6`, and the warning went away
+(@sec-movements).
+
+**The lesson:** below zero always means a missing movement. Find it, enter it
+with its real date, and the stock is right again.
+
+## The customer's repair piece
+
+At the count at `r showcase$location` on
+`r date_words(showcase$completed_at, "%B")`, the hammered hoops came out
+one pair over. Sita, approving, didn't accept it straight away: an over
+usually means a missing record. Ramesh, who led the count, told her why: a
+customer's repair piece had been left in the tray.
+
+The extra pair wasn't the shop's stock at all, so Sita left the line
+unticked. The hoops' stock didn't change, and the Result lists the line under
+**Left unchanged** (@sec-results).
+
+**The lesson:** keep customers' pieces out of the trays, or mark them, and
+never make stock up to a count without asking why.
+
+## The karigar's chain
+
+A `r tolower(karigar$name)` (`r karigar$variant`) had gone to
+`r karigar$party` for repair, memo `r karigar$memo`, due back in 30 days. By
+then it was `r days_late` days late, and the Overview's **Needs attention**
+listed it: "1 memo more than a week overdue" (@sec-movements).
+
+Bidisha called the karigar. The chain had come back the week before and was
+already in the showcase, but nobody had recorded it. Sita opened the chain,
+tapped **⋯** beside the memo under **Off the shelf**, chose **Back in**, set
+**Back on** to the day it came back, and signed with her PIN. The chain was
+in the shop again, and the next count expected it on the shelf
+(@sec-cut-off).
+
+**The lesson:** record pieces back in when they come back. Otherwise the next
+count finds them "over", and the overdue list keeps nagging.
+
+## A new member of staff
+
+When a new assistant joined, Bidisha added them in Settings → People as a
+**Counter**, and let them choose their own PIN (@sec-setting-up). Their first
+count was a small one, the rings in one showcase, with Ramesh beside them to
+show how + and the number pad work, and how − and Undo put a slip right.
+
+Counting is blind, so the ledger couldn't sway the new counter. And a
+counter can never approve a count. The activity log shows each figure they entered.
+
+**The lesson:** start new staff on small counts. The app's rules protect the
+shop and them: nobody can be blamed for a figure someone else entered.
+
+::: {.remember}
+- Count the whole shop once to set a baseline; then count often, a few types
+  at a time.
+- Record every movement when it happens, with its real date.
+- A difference is a question: below zero, over and short each have a usual
+  cause worth finding.
+- Record pieces back in when they come back from jangad or the karigar.
 :::

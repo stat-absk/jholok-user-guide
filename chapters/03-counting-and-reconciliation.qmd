@@ -1,4 +1,4 @@
-# Counting and checking against the books {#sec-counting}
+# Counting and checking against the ledger {#sec-counting}
 
 ```{r}
 #| include: false
@@ -67,11 +67,12 @@ stock take, finds what *is* there. For each product, Jholok puts the two
 numbers side by side:
 
 - [**expected**](glossary.qmd#expected): what the ledger says should be there;
-- **counted**: what the counters found.
+- **counted**: what the [counters](glossary.qmd#counter) found.
 
 Comparing them, and explaining every difference, is called
-[**reconciliation**](glossary.qmd#reconciliation). A count can cover the whole shop, or just a few types or
-one showcase.
+[**reconciliation**](glossary.qmd#reconciliation). A count can cover the whole shop or just a few types. You give it a name,
+such as Showcase 1, but Jholok expects every piece of those types to be
+counted, wherever it is in the shop.
 
 ### Short and over
 
@@ -112,13 +113,14 @@ screenshot(
 ### Two checks before stock changes
 
 1. **A shortage is counted again first.** Review won't let anyone accept a
-   shortage until the product is recounted, and the recount is blind too:
-   the first count and the ledger stay hidden. Most shortages on a first
+   shortage until the product is [recounted](glossary.qmd#recount), and the recount is blind too:
+   the first count and the ledger stay hidden. Many shortages on a first
    count are counting slips, and a recount finds them before the stock is
    changed.
 2. **Someone who didn't count approves.** The counter submits the count for
-   review. Only an [**approver**](glossary.qmd#approver) who didn't count in it can open Review and
-   complete it, signing with their PIN. This is called [**separation of
+   review. Only an [**approver**](glossary.qmd#approver) who didn't count in it, or the owner, can open
+   Review and complete it. They give a reason, then sign with their
+   [PIN](glossary.qmd#pin) (the owner can use Face ID). This is called [**separation of
    duties**](glossary.qmd#separation-of-duties): the person who might have lost a piece isn't the one who decides
    it is lost.
 
@@ -146,15 +148,15 @@ make the stock up to the count.
 
 ## In the app
 
-**Review** puts the counted and expected numbers side by side, and lists the
+[**Review**](glossary.qmd#review) puts the counted and expected numbers side by side, and lists the
 differences.
 
 ```{r}
 screenshot("review.png")
 ```
 
-A shortage waits under **Recount first**, with its numbers hidden until it is
-recounted.
+A shortage, or a line whose stock moved while it was being counted, waits
+under **Recount first**, with its numbers hidden until it is recounted.
 
 ```{r}
 screenshot("review-recount-first.png")
@@ -172,8 +174,9 @@ screenshot("result.png")
 
 - **Blind counts are honest counts.** Knowing the answer changes what people
   find.
-- **A loss is never accepted on one count.** Shortages cost the shop money,
-  and a recount is cheap.
+- **A loss someone counted is never accepted on one count.** Shortages cost the
+  shop money, and a recount is cheap. (Products nobody counted are different:
+  they keep their stock unless the approver chooses Set to zero.)
 - **Two people, not one.** One person can't count a loss away and approve it
   too. The activity log records who counted, who approved and why.
 - **Short and over are kept apart.** If a shortage of

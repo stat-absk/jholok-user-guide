@@ -6,12 +6,13 @@
 # the piece being looked at, dashed for one left out, and a numbered tab.
 
 # Every box picture says what it is: a drawing, not a real shop's box.
+drawn_box <- paste(
+  "The box is a drawn example the app uses for practice, not a photo of a",
+  "real shop's box."
+)
+
 box_caption <- function(text) {
-  paste(
-    text,
-    "The box is a drawn example the app uses for practice, not a photo of a",
-    "real shop's box."
-  )
+  paste(text, drawn_box)
 }
 
 read_box_photo <- function(number) {

@@ -42,3 +42,8 @@ test_that("dates are written without a leading zero on the day", {
   expect_equal(date_words(date), "6 Sep")
   expect_equal(date_words(date, "%B %Y"), "6 September 2026")
 })
+
+test_that("a match rate shows a percentage only from 10 products", {
+  expect_equal(matched_words(4, 4), "4 of 4 matched")
+  expect_equal(matched_words(11, 13), "11 of 13 matched (85%)")
+})

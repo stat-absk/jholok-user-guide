@@ -19,6 +19,9 @@ showcase_skus <- c(
 whole_shop_offsets <- c("EAR-0004" = -1L, "OTH-0001" = -1L, "COI-0001" = 1L)
 showcase_offsets <- c("EAR-0001" = -1L, "EAR-0006" = 1L)
 showcase_unticked <- "EAR-0006"
+# Odd single earrings found beside a count: Showcase 1's short jhumka pair
+# left one behind. Singles never change stock.
+showcase_singles <- c("EAR-0001" = 1L)
 
 clock <- function(hour, minute = 0) {
   as.integer(hour * 60 + minute)
