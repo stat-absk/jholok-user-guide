@@ -99,6 +99,7 @@ diagram_cards_not_pieces <- function() {
 # One product's year as the ledger keeps it: every kind of movement added
 # together gives the stock on hand. No number is typed in.
 diagram_ledger <- function(shop, product_sku) {
+  # In the order a year's stock builds up, then goes out.
   kinds <- c(
     opening = "Opening stock",
     received = "Received",

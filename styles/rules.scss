@@ -42,6 +42,10 @@ h1, h2, h3, .title {
   letter-spacing: 0.04em;
 }
 
+.audience > p {
+  margin: 0;
+}
+
 // "What you'll learn" at the top of a chapter and "Remember" at the end.
 .learn,
 .remember {

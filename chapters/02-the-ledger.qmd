@@ -1,16 +1,177 @@
-# The ledger: why stock is a sum
+# The ledger: why stock is a sum {#sec-ledger}
 
 ```{r}
 #| include: false
 source(here::here("_common.R"))
+
+jhumka_moves <- stock_history(shop, "EAR-0001")
+jhumka_by_kind <- jhumka_moves |>
+  summarise(change = sum(quantity), .by = kind)
+change_of <- \(kind_name) {
+  sum(jhumka_by_kind$change[jhumka_by_kind$kind == kind_name])
+}
+
+pendant <- stock_history(shop, "NEC-0003")
+pendant_last_sale <- pendant |>
+  filter(kind == "sold", on_hand == 0) |>
+  slice_tail(n = 1)
+pendant_early_sale <- slice_tail(pendant, n = 1)
+
+last_30_days <- shop$movements |>
+  filter(date > shop$end_at - 30 * 86400) |>
+  summarise(units = sum(abs(quantity)), .by = kind)
+units_of <- \(kind_name) {
+  sum(last_30_days$units[last_30_days$kind == kind_name])
+}
+
+signed <- \(n) sub("-", minus_sign, sprintf("%+d", n), fixed = TRUE)
 ```
 
 ::: {.audience}
 For everyone
 :::
 
-::: {.callout-note}
-## Not written yet
+::: {.learn}
+- What the ledger is, and what a movement is.
+- Why Jholok never lets anyone type in a stock number.
+- What it means when stock goes below zero.
+:::
 
-This chapter is coming in a later edition of the guide.
+## The idea
+
+A [**ledger**](glossary.qmd#ledger) is a record of every change to the stock, oldest first. Each
+change is a [**movement**](glossary.qmd#movement). A movement says which product, when, what kind of
+change it was, how many pieces it moved (more for stock coming in, fewer for
+stock going out), a note, and who entered it.
+
+These are the kinds of movement you'll meet first:
+
+| Movement | What happened | Stock |
+|---|---|---|
+| Opening stock | The product was added to Jholok with stock already in the shop | goes up |
+| Received | A delivery came in from a supplier or the karigar | goes up |
+| Sold | A customer bought it | goes down |
+| Returned | A customer brought it back | goes up |
+| Adjustment | A correction outside a count, with a reason, such as a piece damaged and sent for melting | up or down |
+| Count adjustment | A count found a difference and the approver accepted it (@sec-counting) | up or down |
+
+There are a few more, for loading the shop's billing records and for stock
+that leaves the shop for a while. Later chapters explain them.
+
+**Stock on hand is the sum of all a product's movements.** It works like a
+bank passbook: the balance is every deposit minus every withdrawal, and
+nobody writes in a new balance by hand.
+
+Here is the antique jhumka's year. It opened with
+`r change_of("opening")` pairs, `r change_of("received")` more were received,
+`r change_of("returned")` was returned and `r -change_of("sold")` were sold. A
+count found one pair fewer than the ledger expected, and the approver
+accepted it. That leaves
+`r describe_units(sum(jhumka_moves$quantity), "pair")` on hand.
+
+```{r}
+#| fig-cap: >-
+#|   The antique jhumka (EAR-0001) over the year: every kind of movement added
+#|   together gives the stock on hand.
+#| fig-alt: >-
+#|   A bar chart that steps up for opening stock, deliveries and returns, steps
+#|   down for sales and a count adjustment, and ends at the stock on hand.
+#| fig-height: 3.4
+diagram_ledger(shop, "EAR-0001")
+```
+
+## In the app
+
+The **Ledger** tab lists every movement, newest first. At the top it sums up
+the last 30 days. In the demo shop that is `r units_of("sold")` sold,
+`r units_of("returned")` returned and `r units_of("received")` received.
+
+```{r}
+screenshot("ledger.png")
+```
+
+To record a movement by hand, open the product and tap **Receive**, **Sell**
+or **Adjust**. Choose how many, add a note if it helps, and check the date:
+it should be when the movement happened, which may be earlier than when you
+enter it. Jholok fills in who entered it.
+
+```{r}
+screenshot("record-sale.png")
+```
+
+## Why it works this way
+
+Suppose someone could simply change the antique jhumka's stock from 8 to 7.
+The missing pair would vanish without a trace: nobody could tell whether it
+was sold, lost, or a typing slip. With a ledger, every change has a date, a
+kind, a note and a name. The question "where did it go?" always has an answer
+to look up.
+
+So a mistake is never erased. It is put right with another movement, and both
+stay in the ledger. This unbroken history is called an [**audit trail**](glossary.qmd#audit-trail). It
+lets the owner, an accountant or an insurer check the stock long after the
+day.
+
+## How it works
+
+Jholok stores movements, never stock numbers. Whenever a screen shows stock,
+Jholok adds up that product's movements up to that moment. The same sums give
+the stock on any past date, which is how the Overview draws its charts.
+
+### When stock goes below zero
+
+A shelf can't hold fewer than nothing, so stock below zero always means a
+movement is missing or wrong. The Lakshmi pendant (NEC-0003) sold its last
+piece on `r date_words(pendant_last_sale$date)`. On
+`r date_words(pendant_early_sale$date)` another sale was entered, from a
+delivery of 6 that had arrived but hadn't been entered yet. The ledger now
+says `r signed(sum(pendant$quantity))`.
+
+```{r}
+screenshot("product-below-zero.png")
+```
+
+Jholok doesn't hide this or round it to zero. It marks the product [**Below
+zero**](glossary.qmd#below-zero), lists it under Needs attention on the Overview, and suggests what to
+do: record the missing delivery, or count the product.
+
+## Try it
+
+These are the antique jhumka's last eight movements. The last column is the
+running total: each row's change added to the one before.
+
+```{r}
+#| label: tbl-jhumka-moves
+#| tbl-cap: >-
+#|   The antique jhumka's last eight movements, with the stock after each.
+jhumka_moves |>
+  slice_tail(n = 8) |>
+  transmute(
+    Date = date_words(date, "%b %Y, %H:%M"),
+    Movement = movement_name(kind),
+    Pairs = signed(quantity),
+    Note = note,
+    `On hand` = on_hand
+  ) |>
+  table_guide()
+```
+
+**Question.** A customer returns a ring they bought yesterday. How do you
+record it, and what happens to the ring's stock?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+Open the ring and record a **Returned** movement of 1. Its stock goes up by
+one. The sale stays in the ledger too, so the history shows both: sold, then
+returned.
+:::
+
+::: {.remember}
+- Every change to stock is a movement in the ledger, with a kind, a date, a
+  note and a name.
+- Stock on hand is the sum of the movements. Nobody types in a stock number.
+- Mistakes are put right with another movement, never erased.
+- Stock below zero means a movement is missing. Find it, or count the
+  product.
 :::

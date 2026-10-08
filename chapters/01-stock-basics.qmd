@@ -1,16 +1,180 @@
-# Stock basics
+# Stock basics {#sec-stock-basics}
 
 ```{r}
 #| include: false
 source(here::here("_common.R"))
+
+by_type <- stock_by_type(shop)
+on_hand <- stock_on_hand(shop) |>
+  left_join(shop$products, by = "sku")
+temple_jhumka <- filter(on_hand, sku == "EAR-0002")
+antique_jhumka <- filter(on_hand, sku == "EAR-0001")
+total_at_cost <- sum(by_type$value_at_cost)
+total_at_price <- sum(by_type$value_at_price)
+sets_share <- by_type$value_at_cost[by_type$type == "Sets"] / total_at_cost
+# As the Overview writes it: pairs, then sets, then pieces.
+units_line <- by_type |>
+  summarise(units = sum(units), .by = unit) |>
+  arrange(factor(unit, levels = c("pair", "set", "piece"))) |>
+  mutate(words = describe_units(units, unit)) |>
+  pull(words) |>
+  paste(collapse = " · ")
+all_units <- sum(by_type$units)
 ```
 
 ::: {.audience}
 For everyone
 :::
 
-::: {.callout-note}
-## Not written yet
+::: {.learn}
+- What a product is, and what its SKU is for.
+- Why earrings are counted in pairs and sets as one.
+- What cost, list price and stock value mean.
+:::
 
-This chapter is coming in a later edition of the guide.
+## The idea
+
+Your [**stock**](glossary.qmd#stock) is the jewellery the shop owns and means to sell. To look after
+it, you need to know three things about every piece: what it is, how many of
+it there are, and what it's worth. This chapter covers the first and the
+last. How many there are is the subject of the next two chapters.
+
+### Products and SKUs
+
+Each design the shop sells is a [**product**](glossary.qmd#product). A product is one design, in one
+metal and one weight, so that every piece of it is alike. The Temple Lakshmi
+jhumka in 22K gold weighing 14 g is one product. The antique jhumka in 22K
+weighing 8 g is another, even though both are jhumkas.
+
+Each product has a short code called its [**SKU**](glossary.qmd#sku), which stands for *stock
+keeping unit*. The Temple Lakshmi jhumka's SKU is EAR-0002. A SKU belongs to
+one product only, and it doesn't change. Jholok treats small and capital
+letters as the same, so `ear-0002` is the same SKU as `EAR-0002`. When you add
+a product, Jholok suggests a SKU from its type (EAR for earrings, RIN for
+rings), or you can use your own codes.
+
+How many pieces of a product the shop holds is its [**stock on hand**](glossary.qmd#on-hand).
+
+### Types and units
+
+Products are grouped into [**types**](glossary.qmd#type): in the demo shop these are Earrings,
+Rings, Necklaces, Bangles, Sets, Coins and Other. A type decides the [**unit**](glossary.qmd#unit)
+its products are counted in:
+
+- **Earrings are counted in pairs.** A pair is sold together, so it is
+  counted together. A single earring found on its own is not half a pair:
+  Jholok marks it as an odd single and never rounds it into a pair.
+- **Sets are counted as one.** A necklace with its matching earrings is one
+  set, and counts as 1, because it is sold as one.
+- **Everything else is counted in pieces**: a ring, a chain, a coin.
+
+Because the units are different, Jholok never adds them together. It says
+"`r units_line`", never one total of "items". Adding a pair of
+studs to a bridal set gives a number that means nothing.
+
+### Cost, list price and value
+
+Each product can have two amounts:
+
+- its [**cost**](glossary.qmd#cost): what the shop paid for one, with the gold, the making charge
+  and any stones included;
+- its [**list price**](glossary.qmd#list-price): what the shop asks a customer for one.
+
+[**Stock value**](glossary.qmd#stock-value) is what the stock is worth: each product's stock on hand
+times its cost, added up. Value at cost is what the shop has paid for the
+stock it holds. Value at list price is what it would take if everything sold
+at the list price. The gap between the two is the shop's margin.
+
+Large amounts are written in lakh and crore, as in the app. One lakh (L) is
+₹1,00,000, and one crore (Cr) is 100 lakh, or ₹1,00,00,000.
+
+## In the app
+
+The **Catalogue** tab lists the products, grouped by type.
+
+```{r}
+screenshot("catalogue.png")
+```
+
+Tap a product to open its page. The Temple Lakshmi jhumka has
+`r describe_units(temple_jhumka$on_hand, "pair")` on hand. Its value,
+`r rupees_short(temple_jhumka$on_hand * temple_jhumka$cost)` at cost, is
+`r temple_jhumka$on_hand` × `r rupees(temple_jhumka$cost)`. **Cover** says how
+long the stock lasts at the pace it has sold recently.
+
+```{r}
+screenshot("product-detail.png")
+```
+
+The **Overview** tab shows the whole shop: its stock value at cost,
+`r rupees_short(total_at_cost)`, and at list price,
+`r rupees_short(total_at_price)`, and what is in stock, by unit.
+
+```{r}
+screenshot("overview.png")
+```
+
+## Why it works this way
+
+- **Units are kept apart** so that every total means something. "20 sets" tells
+  you something; "`r all_units` items" doesn't.
+- **A value always says what it is based on, and when.** Value at cost and
+  value at list price differ by the shop's margin, and gold prices move. So
+  Jholok writes "`r rupees_short(total_at_cost)` at today's cost", never just
+  a figure.
+- **Nothing is left out quietly.** One product in the demo shop has no cost,
+  so the Overview says "Leaves out 1 product with no cost" rather than
+  counting it as ₹0.
+
+## How it works
+
+For each product, Jholok multiplies its stock on hand by its cost (or its
+list price) and adds the results. Stock on hand itself isn't stored anywhere:
+Jholok works it out from the ledger, as the next chapter explains. If a
+product's stock has gone below zero (a mistake the next chapter also covers),
+it counts as none in the value, because no shelf holds minus one pendant.
+
+## Try it
+
+This is Jholok Jewellers' stock at the end of the demo's story, by type.
+
+```{r}
+#| label: tbl-stock-by-type
+#| tbl-cap: >-
+#|   Jholok Jewellers' stock by type. Other leaves out 1 product with no cost,
+#|   and Coins 1 with no list price.
+by_type |>
+  transmute(
+    Type = type,
+    `In stock` = units_words,
+    `At cost` = rupees_short(value_at_cost),
+    `At list price` = rupees_short(value_at_price)
+  ) |>
+  table_guide() |>
+  gt::cols_align(align = "right", columns = -Type)
+```
+
+The shop holds only `r by_type$units[by_type$type == "Sets"]` sets, but they
+hold `r percent_words(sets_share)` of its value at cost, because each set is
+heavy and costly.
+
+**Question.** The antique jhumka (EAR-0001) costs
+`r rupees(antique_jhumka$cost)` a pair, and the shop has
+`r describe_units(antique_jhumka$on_hand, "pair")`. What are they worth at
+cost?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+`r antique_jhumka$on_hand` × `r rupees(antique_jhumka$cost)` =
+`r rupees(antique_jhumka$on_hand * antique_jhumka$cost)`, which the app writes
+as `r rupees_short(antique_jhumka$on_hand * antique_jhumka$cost)`.
+:::
+
+::: {.remember}
+- One design is one product, with its own SKU.
+- Earrings are counted in pairs, sets as one and the rest in pieces, and
+  these are never added together.
+- Stock value is stock on hand times cost (or list price). It always says
+  which, and from when.
 :::

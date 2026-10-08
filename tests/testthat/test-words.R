@@ -36,3 +36,9 @@ test_that("units are named one at a time", {
     "3 pairs, 2 sets and 5 pieces"
   )
 })
+
+test_that("dates are written without a leading zero on the day", {
+  date <- lubridate::make_datetime(2026, 9, 6, 10, 0, tz = shop_time_zone)
+  expect_equal(date_words(date), "6 Sep")
+  expect_equal(date_words(date, "%B %Y"), "6 September 2026")
+})

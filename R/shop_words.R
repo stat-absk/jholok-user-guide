@@ -110,3 +110,24 @@ percent_words <- function(ratio) {
     .default = paste0(round_plain(value), "%")
   )
 }
+
+# "26 Sep", "26 September", "26 Sep 2026, 10:00": the day without a leading
+# zero, as the app writes dates. `rest` is the format after the day.
+date_words <- function(date, rest = "%b") {
+  day <- as.integer(format(date, "%d", tz = shop_time_zone))
+  paste(day, format(date, rest, tz = shop_time_zone))
+}
+
+# A movement's kind as the app names it.
+movement_names <- c(
+  opening = "Opening stock",
+  received = "Received",
+  sold = "Sold",
+  returned = "Returned",
+  adjustment = "Adjustment",
+  count_adjustment = "Count adjustment"
+)
+
+movement_name <- function(kind) {
+  unname(movement_names[kind])
+}

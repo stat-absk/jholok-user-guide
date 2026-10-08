@@ -2,7 +2,7 @@
 
 The plan is in [PLAN.md](PLAN.md). Status: ☐ to do · ◐ in progress · ☑ done · ⏸ waiting on you.
 
-Last updated 8 Oct 2026. Phases 0, 1 and 2 done.
+Last updated 8 Oct 2026. Phases 0, 1 and 2 done; phase 3 drafted, waiting for your review.
 
 ## Waiting on you
 
@@ -64,11 +64,11 @@ Last updated 8 Oct 2026. Phases 0, 1 and 2 done.
 
 | ID | Chapter | For | Sources | Status |
 |---|---|---|---|---|
-| C0 | Welcome and how to use this guide | everyone | README | ☐ |
-| C1 | Stock basics | everyone | CLAUDE.md (Counting rules), visual-layer | ☐ |
-| C2 | The ledger: why stock is a sum | everyone | CLAUDE.md (Non-negotiables), DECISIONS | ☐ |
-| C3 | Counting and reconciliation | everyone | honest-summaries, PLAN | ☐ |
-| — | **Review point: tone and depth** | you | | ⏸ after C3 |
+| C0 | Welcome and how to use this guide: where to start for each role, the pictures | everyone | README | ☑ draft |
+| C1 | Stock basics: products and SKUs, types and units, cost, list price and value | everyone | CLAUDE.md (Counting rules), visual-layer | ☑ draft |
+| C2 | The ledger: movements, why stock is never typed, below zero | everyone | CLAUDE.md (Non-negotiables), DECISIONS | ☑ draft |
+| C3 | Counting and checking against the books: short and over, blind counts, recount first, separation of duties | everyone | honest-summaries, people-and-log, CLAUDE.md (Counting rules) | ☑ draft |
+| — | **Review point: tone and depth** | you | | ⏸ waiting for you |
 | C4 | Setting up the shop | owner | people-and-log, Settings | ☐ |
 | C5 | The catalogue | owner | Catalogue, tag list import | ☐ |
 | C6 | Recording movements | owner, approvers | stock-states | ☐ |
@@ -82,7 +82,7 @@ Last updated 8 Oct 2026. Phases 0, 1 and 2 done.
 | C14 | Results and the count report | owner, approvers | count-report | ☐ |
 | C15 | Keeping data safe | owner | CLAUDE.md (Data: backups, privacy) | ☐ |
 | C16 | Stories from the shop | everyone | all | ☐ |
-| A | Glossary | everyone | all | ☐ |
+| A | Glossary: 50 terms, each linked to its chapter; chapters 1 to 3 link each term's first use | everyone | all | ☑ draft |
 | B | Questions and answers, troubleshooting | everyone | all | ☐ |
 | C | What changed | everyone | git log | ☐ |
 
@@ -118,3 +118,4 @@ Last updated 8 Oct 2026. Phases 0, 1 and 2 done.
 | 7 Oct 2026 | The guide became its own private repository, stat-absk/jholok-user-guide, still in `Jholok/user-guide/`; the app repository ignores the folder. |
 | 8 Oct 2026 | Phase 2 except 2.12: 28 screenshots, box pictures drawn from the sample boxes' label files, and three idea diagrams. `screens_taken_on` (8 Oct 2026) moves the R shop to the screenshots' dates (the app moves its demo by 14 days today). Figures sit on a raised card so they read in dark mode. 66 tests pass. |
 | 8 Oct 2026 | 2.12 done with a screenshot UI test in the app repo; 55 screenshots. The demo's book file asks no status-word question (its words are all known), so that question has no screenshot. |
+| 8 Oct 2026 | Phase 3 drafted: the welcome page, chapters 1 to 3 and the glossary. Every figure in the text is computed from the R shop and matches the screenshots. `date_words()` and `movement_name()` added; 68 tests pass. |

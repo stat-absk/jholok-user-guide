@@ -1,16 +1,258 @@
-# Counting and checking against the books
+# Counting and checking against the books {#sec-counting}
 
 ```{r}
 #| include: false
 source(here::here("_common.R"))
+
+# Showcase 1, the demo's last completed count.
+showcase <- shop$counts |>
+  filter(location == "Showcase 1")
+showcase_lines <- shop$count_lines |>
+  filter(count_id == showcase$count_id) |>
+  left_join(
+    stock_on_hand(shop, showcase$started_at) |>
+      rename(expected = on_hand),
+    by = "sku"
+  ) |>
+  left_join(select(shop$products, sku, name, variant, cost), by = "sku") |>
+  mutate(difference = counted - expected)
+showcase_matched <- sum(showcase_lines$difference == 0)
+showcase_share <- share(showcase_matched, nrow(showcase_lines))
+showcase_short <- filter(showcase_lines, difference < 0)
+showcase_over <- filter(showcase_lines, difference > 0)
+
+# A count of the earrings and rings at the end of the story, with one pair
+# really missing, one ring counted twice and a single earring found alone.
+missing_pair <- tibble(sku = "EAR-0005", change = -1L)
+counted_twice <- tibble(sku = "RIN-0001", change = 1L)
+lone_earring <- tibble(sku = "EAR-0003", n = 1L)
+
+first_count <- simulate_count(
+  shop, shop$end_at,
+  types = c("Earrings", "Rings"),
+  shelf_changes = missing_pair,
+  mistakes = counted_twice,
+  odd_singles = lone_earring
+) |>
+  reconcile_count()
+recount <- simulate_count(
+  shop, shop$end_at,
+  types = c("Earrings", "Rings"),
+  shelf_changes = missing_pair,
+  odd_singles = lone_earring
+) |>
+  reconcile_count()
+
+line_of <- \(count, product_sku) filter(count, sku == product_sku)
+studs <- line_of(first_count, "EAR-0005")
+band <- line_of(first_count, "RIN-0001")
+matched_first <- sum(first_count$result == "matched")
+matched_recount <- sum(recount$result == "matched")
 ```
 
 ::: {.audience}
 For everyone
 :::
 
-::: {.callout-note}
-## Not written yet
+::: {.learn}
+- What a count is for, and why counting is blind.
+- What short and over mean, and the usual reasons for each.
+- Why a shortage is counted again, and why someone who didn't count approves.
+:::
 
-This chapter is coming in a later edition of the guide.
+## The idea
+
+The ledger says what *should* be in the shop. A [**count**](glossary.qmd#count), sometimes called a
+stock take, finds what *is* there. For each product, Jholok puts the two
+numbers side by side:
+
+- [**expected**](glossary.qmd#expected): what the ledger says should be there;
+- **counted**: what the counters found.
+
+Comparing them, and explaining every difference, is called
+[**reconciliation**](glossary.qmd#reconciliation). A count can cover the whole shop, or just a few types or
+one showcase.
+
+### Short and over
+
+When the two numbers agree, the product [**matched**](glossary.qmd#matched). When they don't:
+
+- [**short**](glossary.qmd#short) means fewer were found than expected;
+- [**over**](glossary.qmd#over) means more were found than expected.
+
+A difference is a question, not yet an answer. These are the usual reasons:
+
+| What happened | What the count shows |
+|---|---|
+| A piece was stolen, lost or damaged | short |
+| A sale wasn't entered | short |
+| A delivery wasn't entered | over |
+| A return wasn't entered | over |
+| A piece was put back in the wrong tray | short in one place, over in another |
+| A counter missed a piece, or counted one twice | short or over |
+| Something that isn't the shop's stock was in the tray, such as a customer's piece in for repair | over |
+
+Stock that goes missing without being sold is called [**shrinkage**](glossary.qmd#shrinkage). A count
+is how a shop finds out how much it has lost.
+
+### Counting is blind
+
+While a count is open, counters never see the expected numbers. People find
+what they expect to find: a counter who knows there should be 9 chains tends
+to stop at 9, or to look until a ninth turns up. A counter who doesn't know
+just counts. That is called a [**blind count**](glossary.qmd#blind-count).
+
+```{r}
+screenshot(
+  "counting.png",
+  caption = "Counting the necklaces in Showcase 2: no stock, nothing expected."
+)
+```
+
+### Two checks before stock changes
+
+1. **A shortage is counted again first.** Review won't let anyone accept a
+   shortage until the product is recounted, and the recount is blind too:
+   the first count and the ledger stay hidden. Most shortages on a first
+   count are counting slips, and a recount finds them before the stock is
+   changed.
+2. **Someone who didn't count approves.** The counter submits the count for
+   review. Only an [**approver**](glossary.qmd#approver) who didn't count in it can open Review and
+   complete it, signing with their PIN. This is called [**separation of
+   duties**](glossary.qmd#separation-of-duties): the person who might have lost a piece isn't the one who decides
+   it is lost.
+
+```{r}
+#| fig-cap: >-
+#|   A count's life. Counting stops when it's submitted; the approver can send
+#|   it back for more counting, with a reason.
+#| fig-alt: >-
+#|   Five steps in a row: Start, Count, Submit, Review and Complete, with a
+#|   dashed arrow from Review back to Count labelled Reopen, with a reason.
+#| fig-height: 2.4
+diagram_count_life()
+```
+
+### What completing a count changes
+
+Completing a count changes stock only for the differences the approver left
+ticked. Each one becomes a [**count adjustment**](glossary.qmd#count-adjustment) in the ledger, so stock is
+still a sum of movements. Products in the count that nobody counted keep
+their stock, unless the approver chooses **Set to zero**.
+
+Overs start unticked. An over is often a missing record (a delivery or a
+return nobody entered), and the right fix is to enter that record, not to
+make the stock up to the count.
+
+## In the app
+
+**Review** puts the counted and expected numbers side by side, and lists the
+differences.
+
+```{r}
+screenshot("review.png")
+```
+
+A shortage waits under **Recount first**, with its numbers hidden until it is
+recounted.
+
+```{r}
+screenshot("review-recount-first.png")
+```
+
+When the count is completed, its **Result** says what was counted, what was
+short and over, and what changed. This is the demo's count at
+`r showcase$location` on `r date_words(showcase$completed_at, "%B")`.
+
+```{r}
+screenshot("result.png")
+```
+
+## Why it works this way
+
+- **Blind counts are honest counts.** Knowing the answer changes what people
+  find.
+- **A loss is never accepted on one count.** Shortages cost the shop money,
+  and a recount is cheap.
+- **Two people, not one.** One person can't count a loss away and approve it
+  too. The activity log records who counted, who approved and why.
+- **Short and over are kept apart.** If a shortage of
+  `r rupees(-sum(showcase_short$difference * showcase_short$cost))` and an over
+  of `r rupees(sum(showcase_over$difference * showcase_over$cost))` were netted
+  into one figure, a real loss would hide behind something that isn't stock at
+  all.
+- **No percentages on small numbers.** Jholok writes "3 of 4 matched" rather
+  than 75% when fewer than 10 products were counted, because a percentage of a
+  handful sounds more certain than it is.
+
+## How it works
+
+At `r showcase$location`, the counters counted
+`r nrow(showcase_lines)` products of Earrings and Rings, and
+`r showcase_matched` matched: Jholok writes that as
+"`r showcase_matched` of `r nrow(showcase_lines)` matched
+(`r showcase_share`)". The `r tolower(showcase_short$name)`
+(`r showcase_short$variant`) was one pair short. It was recounted, still one
+short, and the approver accepted it: a count adjustment of
+`r sub("-", minus_sign, showcase_short$difference)`. The
+`r tolower(showcase_over$name)` (`r showcase_over$variant`) was one pair over. The count's note explains why: *`r tolower(showcase$notes)`*. It wasn't
+the shop's stock, so the over was left unticked and the stock didn't change.
+
+## Try it
+
+Suppose the earrings and rings are counted at the end of the demo's story.
+Unknown to anyone, a pair of diamond flower studs has gone missing. A counter
+also counts one plain band twice, and finds a single chandbali earring on its
+own.
+
+```{r}
+#| label: tbl-first-count
+#| tbl-cap: "The products that didn't match on the first count."
+first_count |>
+  filter(result != "matched") |>
+  transmute(
+    Product = paste(name, variant, sep = ", "),
+    Expected = describe_units(expected, unit),
+    Counted = describe_units(counted, unit),
+    Difference = paste(
+      if_else(result == "short", "short", "over"),
+      rupees(abs(value_at_cost)),
+      "at cost"
+    )
+  ) |>
+  table_guide()
+```
+
+`r matched_first` of `r nrow(first_count)` products matched
+(`r share(matched_first, nrow(first_count))`). The studs show
+short `r describe_units(abs(studs$difference), "pair")`, and the band shows
+over `r describe_units(band$difference, "piece")`. The single chandbali is
+flagged as an odd single, and isn't counted as a pair.
+
+Review asks for the studs to be recounted. The band is over, so it starts
+unticked. The approver asks for it to be counted again too. On the recount,
+the band matches: the over was a counting slip. The studs are still one pair
+short, so the loss is real. After the recount, `r matched_recount` of
+`r nrow(recount)` products match, and the approver accepts the shortage of
+`r rupees(abs(studs$value_at_cost))` at cost.
+
+**Question.** A count finds one gold coin more than expected. What should you
+check before accepting it?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+Whether a delivery or a return of coins hasn't been entered, and whether the
+coin is really the shop's (a customer's, say). If a record is missing, enter
+it and leave the over unticked: the ledger then matches the count without a
+count adjustment.
+:::
+
+::: {.remember}
+- A count compares what the ledger expects with what is really there.
+- Counting is blind: counters never see the expected numbers.
+- A difference is a question. A shortage is recounted before it's accepted,
+  and an over usually means a missing record.
+- Someone who didn't count approves, and only the differences they tick
+  change the stock.
 :::

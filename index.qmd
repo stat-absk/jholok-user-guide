@@ -34,7 +34,16 @@ so.
   from a shop's year.
 
 Each chapter says who it is for, starts with what you'll learn and ends with
-what to remember.
+what to remember. Words that may be new are linked to the
+[Glossary](chapters/glossary.qmd) the first time they appear.
+
+### Where to start
+
+- **If you count stock**, read @sec-stock-basics to @sec-counting, then the
+  chapters on counting.
+- **If you approve counts**, read those too, then the chapters on checking a
+  count.
+- **If you own the shop**, read the guide in order.
 
 ## The shop in this guide
 
@@ -42,6 +51,17 @@ Every example and picture uses the same made-up shop, **Jholok Jewellers**,
 with its owner Bidisha and staff Sita, Ramesh and Meena. It is the same shop
 that the app's demo shows, so what you read here matches what you see on the
 screen. None of its stock is real.
+
+## The pictures
+
+The screenshots are of the app on an iPhone, showing the demo shop. Your own
+screens show your shop, so the names and numbers will differ, but the screens
+are the same.
+
+The pictures of boxes of jewellery are drawn examples that the app uses for
+practice, not photos of a real shop's boxes. Counting boxes from a photo is
+new, and how well it works on real boxes hasn't been measured yet; the
+chapters on box counting say what that means for you.
 
 ## Which app this guide describes
 

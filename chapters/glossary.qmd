@@ -1,16 +1,204 @@
-# Glossary
-
-```{r}
-#| include: false
-source(here::here("_common.R"))
-```
+# Glossary {.unnumbered #sec-glossary}
 
 ::: {.audience}
 For everyone
 :::
 
-::: {.callout-note}
-## Not written yet
+The words this guide uses, in plain terms, with the chapter that explains
+each one. Chapters not written yet are given by number.
 
-This chapter is coming in a later edition of the guide.
-:::
+[Adjustment]{#adjustment}
+:   A movement that corrects stock outside a count, with a reason, such as a
+    piece damaged and sent for melting. See @sec-ledger.
+
+[Approver]{#approver}
+:   A person who can open a count's Review and complete it, but only for a
+    count they didn't count in. See @sec-counting.
+
+[Audit trail]{#audit-trail}
+:   The unbroken record of every change to the stock: what changed, when, why
+    and who entered it. Mistakes are corrected with new entries, never
+    erased. See @sec-ledger.
+
+[Below zero]{#below-zero}
+:   Stock the ledger says is less than none. It always means a movement is
+    missing or wrong, such as a sale entered before its delivery. See
+    @sec-ledger.
+
+[Blind count]{#blind-count}
+:   A count in which the counters never see what the ledger expects, so they
+    count what is there rather than what should be. See @sec-counting.
+
+[Book stock, the books]{#book-stock}
+:   The shop's billing system's own record of what is in stock. Jholok can
+    load it into a count. Chapter 11.
+
+[Box photo]{#box-photo}
+:   A photo of a box of cards, from which Jholok proposes how many of each
+    product are in it. Chapter 9.
+
+[Card]{#card}
+:   The small card each pair of earrings or each set sits on in a box.
+    Jholok's box photos count cards, not loose pieces. Chapter 9.
+
+[Cost]{#cost}
+:   What the shop paid for one piece of a product, with the metal, the making
+    charge and any stones. See @sec-stock-basics.
+
+[Count]{#count}
+:   Finding what is really in the shop and comparing it with what the ledger
+    expects. Also called a stock take. See @sec-counting.
+
+[Count adjustment]{#count-adjustment}
+:   The movement Jholok records when an approver completes a count and accepts
+    a difference. See @sec-counting.
+
+[Counter]{#counter}
+:   A person who counts. Counters count blind, and submit the count for
+    review. See @sec-counting.
+
+[Cover]{#cover}
+:   How long a product's stock lasts at the pace it has sold recently. See
+    @sec-stock-basics.
+
+[Crore (Cr)]{#crore}
+:   One hundred lakh: ₹1,00,00,000. See @sec-stock-basics.
+
+[Cut-off]{#cut-off}
+:   The moment a count line's expected stock is taken from, so that sales
+    during a count don't look like losses. Chapter 12.
+
+[Difference, discrepancy]{#discrepancy}
+:   When counted and expected don't agree: short or over. See @sec-counting.
+
+[Expected]{#expected}
+:   What the ledger says should be in the shop. Counters never see it while
+    counting. See @sec-counting.
+
+[Jangad]{#jangad}
+:   Stock sent out of the shop on approval, with a memo, for a customer or
+    another jeweller to see. It is still the shop's stock until it is sold.
+    Chapter 12.
+
+[Karigar]{#karigar}
+:   The craftsman who makes or repairs jewellery for the shop. Stock with the
+    karigar is still the shop's. Chapter 12.
+
+[Lakh (L)]{#lakh}
+:   ₹1,00,000. See @sec-stock-basics.
+
+[Ledger]{#ledger}
+:   The record of every movement of stock, oldest first. See @sec-ledger.
+
+[List price]{#list-price}
+:   What the shop asks a customer for one piece of a product. See
+    @sec-stock-basics.
+
+[Making charge]{#making-charge}
+:   What it costs to make a piece, on top of the metal. Part of a product's
+    cost. See @sec-stock-basics.
+
+[Matched]{#matched}
+:   A product whose count agrees with what was expected. See @sec-counting.
+
+[Memo]{#memo}
+:   The numbered slip that goes with stock sent out on jangad. Chapter 12.
+
+[Movement]{#movement}
+:   One change to a product's stock: opening stock, received, sold, returned,
+    an adjustment or a count adjustment, and a few more. See @sec-ledger.
+
+[Odd single]{#odd-single}
+:   A single earring found without its pair. Jholok marks it and never rounds
+    it into a pair. See @sec-stock-basics.
+
+[On hand, stock on hand]{#on-hand}
+:   How many of a product the shop has: the sum of all its movements. See
+    @sec-stock-basics and @sec-ledger.
+
+[Opening stock]{#opening-stock}
+:   The stock a product already had when it was added to Jholok. See
+    @sec-ledger.
+
+[Order]{#order}
+:   Stock set aside for a customer's order. It is not on the shelf, but it is
+    still the shop's. Chapter 12.
+
+[Over]{#over}
+:   More found than expected. Often a delivery or a return that wasn't
+    entered. See @sec-counting.
+
+[Owner]{#owner}
+:   The person who runs the shop in Jholok. The owner sets up the people,
+    proves it's them for exports and backups, and can approve a count. Chapter
+    4.
+
+[Pair]{#pair}
+:   Two matching earrings, counted and sold as one. See @sec-stock-basics.
+
+[Piece]{#piece}
+:   The unit for everything that isn't earrings or a set: a ring, a chain, a
+    coin. See @sec-stock-basics.
+
+[Piece tag]{#piece-tag}
+:   A code on one individual piece, different from every other piece's. It
+    links to its product through the tag list. Chapter 5.
+
+[PIN]{#pin}
+:   The short number each person enters to show who they are. An approver's
+    PIN is their signature on a completed count. Chapter 4.
+
+[Product]{#product}
+:   One design in one metal and weight, so that every piece of it is alike.
+    See @sec-stock-basics.
+
+[Reconciliation]{#reconciliation}
+:   Comparing what was counted with what was expected, and explaining every
+    difference. See @sec-counting.
+
+[Recount]{#recount}
+:   Counting a product again. A shortage must be recounted, blind, before it
+    can be accepted. See @sec-counting.
+
+[Review]{#review}
+:   The screen where an approver sees the counted and expected numbers side
+    by side, and decides which differences to accept. See @sec-counting.
+
+[Separation of duties]{#separation-of-duties}
+:   Making sure the person who counts isn't the person who approves, so no one
+    can hide a loss alone. See @sec-counting.
+
+[Set]{#set}
+:   Pieces sold together as one, such as a necklace with matching earrings.
+    Counted as 1. See @sec-stock-basics.
+
+[Short]{#short}
+:   Fewer found than expected. Recounted before it is accepted. See
+    @sec-counting.
+
+[Shrinkage]{#shrinkage}
+:   Stock lost without being sold: theft, damage or mistakes. See
+    @sec-counting.
+
+[SKU]{#sku}
+:   *Stock keeping unit*: a product's own short code, such as EAR-0002. See
+    @sec-stock-basics.
+
+[Stock]{#stock}
+:   The jewellery the shop owns and means to sell. See @sec-stock-basics.
+
+[Stock value]{#stock-value}
+:   What the stock is worth: each product's stock on hand times its cost, or
+    its list price, added up. See @sec-stock-basics.
+
+[Tag list]{#tag-list}
+:   The list linking each piece tag to its product, imported from a
+    spreadsheet or linked in the app. Chapter 5.
+
+[Type]{#type}
+:   A group of products, such as Earrings or Rings. A type sets the unit its
+    products are counted in. See @sec-stock-basics.
+
+[Unit]{#unit}
+:   What a type is counted in: pairs, sets or pieces. Different units are never
+    added together. See @sec-stock-basics.
