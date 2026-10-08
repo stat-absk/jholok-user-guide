@@ -91,6 +91,13 @@ h1, h2, h3, .title {
   color: $jade;
 }
 
+// Charts and diagrams: a raised card, as the app draws its chart cards.
+.cell-output-display img[src$=".svg"],
+.quarto-figure img[src$=".svg"] {
+  border: 1px solid $hairline;
+  border-radius: 14px;
+}
+
 // Tables never push the page sideways on a phone.
 .cell-output-display {
   overflow-x: auto;

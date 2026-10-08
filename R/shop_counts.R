@@ -13,7 +13,7 @@
 
 # A cached copy of the shop, since simulating it takes a few seconds. The
 # cache is thrown away whenever the simulation's code changes.
-load_shop <- function(end_on = as.Date("2026-09-24"), counting = TRUE) {
+load_shop <- function(end_on = screens_taken_on, counting = TRUE) {
   code <- list.files(here::here("R"), pattern = "\\.R$", full.names = TRUE)
   fingerprint <- tools::md5sum(code) |>
     paste(collapse = "") |>

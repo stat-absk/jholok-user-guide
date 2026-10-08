@@ -54,7 +54,16 @@ snake_case, lines under 80 characters, and comments that say why.
   demo (`fixtures/`, written by `scripts/app-demo-dump`, a small Swift tool
   run only when the app's demo changes).
 - `styles/`: the app's Velvet & Gold colours, light and dark.
-- `images/app/`: screenshots from the simulator; `images/diagrams/`: drawings.
+- `images/app/`: screenshots, taken by `scripts/capture_screens.R` from the
+  list in `scripts/screens.csv`. Rows with launch arguments open their screen
+  directly; rows marked `ui test:` are taken by the app's UI test
+  `JholokUITests/GuideScreenshotsUITests`, which taps its way there (it
+  builds the app, so that part takes several minutes). Before retaking them, set `screens_taken_on`
+  in `R/guide_settings.R` to that day: the app moves its demo story to end
+  near today, and the guide's shop must end on the same day.
+- `images/boxes/`: the app's three sample box photos, made smaller, with their
+  label files (`scripts/copy_sample_boxes.R`). `R/box_figures.R` draws the
+  app's markers on them; `R/guide_diagrams.R` draws the plain diagrams.
 - `_dependencies.R`: packages renv must record that no chapter loads by name.
 - `_freeze/`: saved results of each chapter's R code, committed so the
   numbers stay the same until a chapter changes.

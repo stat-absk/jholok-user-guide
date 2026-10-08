@@ -2,7 +2,7 @@
 
 The plan is in [PLAN.md](PLAN.md). Status: ☐ to do · ◐ in progress · ☑ done · ⏸ waiting on you.
 
-Last updated 7 Oct 2026. Phases 0 and 1 done.
+Last updated 8 Oct 2026. Phases 0, 1 and 2 done.
 
 ## Waiting on you
 
@@ -47,17 +47,18 @@ Last updated 7 Oct 2026. Phases 0 and 1 done.
 
 | ID | Task | Status |
 |---|---|---|
-| 2.1 | `capture_screens.R`: boot the simulator, launch with demo arguments, save the screenshot | ☐ |
-| 2.2 | The list of screens, with their launch arguments and file names | ☐ |
-| 2.3 | First set, about 40 screens | ☐ |
-| 2.4 | Box counting screens from the three sample boxes (`-demo-boxes -box capture\|review\|tags -sample 1\|2\|3`): capture, review with markers, piece sheet, tag scan, To identify queue | ☐ |
-| 2.5 | Diagrams: ledger flow, count life cycle, who may do what, places of stock | ☐ |
-| 2.6 | Copy the sample box photos to `images/boxes/`, made smaller (about 1,200 px); add `jpeg` (reading photos in R) to renv | ☐ |
-| 2.7 | `sample_boxes.R`: read each photo's label file (box corners, pieces, tags, products) into tidy tables | ☐ |
-| 2.8 | `box_figures.R`: draw over a photo with ggplot (outlines, numbers, Make it 2, not a piece, tray grid), in the app's marker colours | ☐ |
-| 2.9 | Plain box diagrams in R: cards not loose pieces, touching pieces warned and never split | ☐ |
-| 2.10 | The simulated shop's box counts come from the label files ("Box 1 added 15 pairs" matches the picture) | ☐ |
-| 2.11 | Every box picture captioned as a drawn example | ☐ |
+| 2.1 | `capture_screens.R`: launches each screen from its debug argument on the in-memory demo, light mode, status bar at 9:41, saves 640 px PNGs; stops if the guide's shop date (`screens_taken_on`) is not in the same week as today | ☑ |
+| 2.2 | `scripts/screens.csv`: file, chapter, launch arguments, wait and the alt text a screen reader reads; `screenshot()` places one in a chapter | ☑ |
+| 2.3 | First set: 28 screens, every one a launch argument can open (Overview and its three details, catalogue, product pages, ledger, counts, counting, who's counting, Review, Review with stock off the shelf, Result, Settings and four of its screens). Checked one by one; they match the R shop (₹2.73 Cr, 30 pairs · 20 sets · 120 pieces) | ☑ |
+| 2.4 | Box screens from the sample boxes: the Strongroom count, the capture, the three box reviews, two tag scans, the piece sheet, Add piece, the count after adding a box, and the To identify queue | ☑ |
+| 2.5 | Diagrams in R (`guide_diagrams.R`): one product's ledger as a running total (from the R shop), a count's life, the places stock can be. "Who may do what" will be a table in chapters 4 and 13 | ☑ |
+| 2.6 | `scripts/copy_sample_boxes.R` copies the photos at 1,200 px with their label files to `images/boxes/`; `jpeg` added to renv | ☑ |
+| 2.7 | `sample_boxes.R`: boxes, pieces, corners and a perspective transform from the straightened box to the photo | ☑ |
+| 2.8 | `plot_box_photo()`: outlines and numbered tabs in the app's marker style, a selected piece in gold, a left-out one dashed, and a tray grid fitted to the slots. "Make it 2" is drawn as a diagram (2.9), since no sample piece is one | ☑ |
+| 2.9 | `diagram_cards_not_pieces()`: one card is one pair, Make it 2 is the person's call, touching cards are warned and never split | ☑ |
+| 2.10 | `sample_box_counts()` reads what each box adds from its label file; tests check every piece is a shop product | ☑ |
+| 2.11 | `box_caption()` adds "a drawn example … not a photo of a real shop's box" to every box picture; tested | ☑ |
+| 2.12 | Screens reached by a tap: 27 more, taken by the app's UI test `GuideScreenshotsUITests` (skipped unless `GUIDE_SCREENSHOTS_DIR` is set), which `capture_screens.R` runs for rows marked `ui test:`. Covers the lower parts of Overview, Review and Result, the product sheets, New count, Find by code, entering a count, Undo, Submit, Waiting for approval, Recount first and the blind recount, the approver's PIN, Complete, Export, the book stock plan, and People's Add person and log. 55 screens in all | ☑ |
 
 ## Phases 3 to 7: chapters
 
@@ -115,3 +116,5 @@ Last updated 7 Oct 2026. Phases 0 and 1 done.
 | 7 Oct 2026 | Box pictures added to the plan (D9, phase 2): the app's three sample boxes for screenshots, R figures drawn over them, plain R diagrams; no new photo-like images. |
 | 7 Oct 2026 | Phase 1 done. The R shop reproduces the app's demo exactly (713 movements, 59 count lines). Simulating takes about 11 seconds, so `load_shop()` caches it. The demo's stock at the end is ₹2.73 Cr at cost. |
 | 7 Oct 2026 | The guide became its own private repository, stat-absk/jholok-user-guide, still in `Jholok/user-guide/`; the app repository ignores the folder. |
+| 8 Oct 2026 | Phase 2 except 2.12: 28 screenshots, box pictures drawn from the sample boxes' label files, and three idea diagrams. `screens_taken_on` (8 Oct 2026) moves the R shop to the screenshots' dates (the app moves its demo by 14 days today). Figures sit on a raised card so they read in dark mode. 66 tests pass. |
+| 8 Oct 2026 | 2.12 done with a screenshot UI test in the app repo; 55 screenshots. The demo's book file asks no status-word question (its words are all known), so that question has no screenshot. |

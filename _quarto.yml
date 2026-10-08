@@ -5,6 +5,9 @@ project:
   render:
     - index.qmd
     - chapters/*.qmd
+  # Screenshots are placed by R, so Quarto can't find them on its own.
+  resources:
+    - images/app/*.png
 
 execute:
   # Readers never need the R code; it only builds the examples.
@@ -81,3 +84,7 @@ knitr:
     fig.width: 7
     fig.height: 4
     dev: svglite
+    # Figures sit on a raised card in both light and dark pages, so their
+    # dark text always reads (styles/rules.scss rounds the card).
+    dev.args:
+      bg: "#FFFDF8"

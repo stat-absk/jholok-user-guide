@@ -128,5 +128,17 @@ test_that("stock below zero counts as none in the stock value", {
 })
 
 test_that("the same seed gives the same shop", {
-  expect_identical(simulate_shop()$movements, shop$movements)
+  expect_identical(simulate_shop(reference_end)$movements, shop$movements)
+})
+
+test_that("moving the story keeps its weekdays and shifts every date alike", {
+  moved <- load_shop(end_on = as.Date("2026-10-08"))
+  expect_equal(moved$shift_days, 14L)
+  expect_equal(moved$movements$quantity, shop$movements$quantity)
+  moved_by <- difftime(
+    moved$movements$date,
+    shop$movements$date,
+    units = "days"
+  )
+  expect_true(all(as.numeric(moved_by) == 14))
 })
