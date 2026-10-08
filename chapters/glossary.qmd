@@ -114,8 +114,9 @@ each one. Chapters not written yet are given by number.
 
 [Odd single]{#odd-single}
 :   A single earring found without its pair. It is never rounded into a pair:
-    count only whole pairs, and tell whoever approves the count. See
-    @sec-stock-basics.
+    count the whole pairs and add it with **Singles** in the count sheet. It
+    shows beside the pairs in Review, the result, the report and the CSV, and
+    never changes stock. See @sec-stock-basics.
 
 [On hand, stock on hand]{#on-hand}
 :   How many of a product the shop has: the sum of all its movements. See

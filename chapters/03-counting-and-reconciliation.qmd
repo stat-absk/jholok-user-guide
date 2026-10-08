@@ -227,8 +227,10 @@ first_count |>
 (`r share(matched_first, nrow(first_count))`). The studs show
 short `r describe_units(abs(studs$difference), "pair")`, and the band shows
 over `r describe_units(band$difference, "piece")`. The single chandbali isn't
-counted as a pair: the counter counts only whole pairs, and tells the approver
-about the single earring so it can be looked into.
+counted as a pair: the counter enters the whole pairs as usual and adds the
+single earring with **Singles** in the count sheet. Review shows it beside the
+pairs ("+ 1 single"), so the approver can look into it, and it
+changes no stock.
 
 Review asks for the studs to be recounted. The band is over, so it starts
 unticked. The approver asks for it to be counted again too. On the recount,

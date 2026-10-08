@@ -63,8 +63,9 @@ its products are counted in:
 
 - **Earrings are counted in pairs.** A pair is sold together, so it is
   counted together. A single earring found on its own is not half a pair,
-  so it is never rounded into one: count only whole pairs, and tell whoever
-  approves the count about the single one.
+  so it is never rounded into one: count the whole pairs, and add the single
+  with **Singles** in the count sheet. It shows beside the pairs ("5 pairs +
+  1 single"), the approver sees it in Review, and it never changes stock.
 - **Sets are counted as one.** A necklace with its matching earrings is one
   set, and counts as 1, because it is sold as one.
 - **Everything else is counted in pieces**: a ring, a chain, a coin.
