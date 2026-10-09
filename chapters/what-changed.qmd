@@ -9,13 +9,34 @@ source(here::here("_common.R"))
 For everyone
 :::
 
+The guide grows with the app. Each edition is listed here, newest first, with
+what's new in it, so you can see what to read again after an update.
+
 ## Guide 0.1, for Jholok 0.1
 
-- The guide's outline and its welcome page.
-- The ideas behind the app: @sec-stock-basics, @sec-ledger and @sec-counting.
-- Everyday use: @sec-setting-up, @sec-catalogue, @sec-movements and @sec-overview.
-- Counting: @sec-a-count, @sec-boxes and @sec-identify-later.
-- Checking a count: @sec-book-stock, @sec-cut-off, @sec-review and @sec-results.
-- Looking after your shop: @sec-keeping-data-safe and @sec-stories.
-- [Questions and answers](questions.qmd).
-- The [Glossary](glossary.qmd).
+The first edition: the whole app, for people using it for the first time.
+
+- **The ideas behind the app:** stock, units and value (@sec-stock-basics),
+  the ledger (@sec-ledger), and counting and checking against it
+  (@sec-counting).
+- **Everyday use:** setting up the shop and its people (@sec-setting-up), the
+  catalogue (@sec-catalogue), recording what comes in and goes out
+  (@sec-movements), and the Overview (@sec-overview).
+- **Counting:** a count from start to finish (@sec-a-count), counting boxes by
+  their tags or a photo (@sec-boxes), and identifying pieces later
+  (@sec-identify-later).
+- **Checking a count:** book stock (@sec-book-stock), stock off the shelf and
+  the cut-off (@sec-cut-off), Review (@sec-review), and the Result and the
+  count report (@sec-results).
+- **Looking after your shop:** backups and privacy (@sec-keeping-data-safe),
+  and stories from a shop's year (@sec-stories).
+- The [Questions and answers](questions.qmd) and the [Glossary](glossary.qmd).
+
+It already covers two recent changes to the app:
+
+- **Single earrings.** An earring found without its pair is added with
+  **Singles** on the count sheet, beside the pairs, and never changes stock
+  (@sec-stock-basics, @sec-a-count).
+- **Units kept apart.** The Overview never adds pairs, sets and pieces into
+  one number of "items": it gives values, or lists each kind
+  (@sec-overview).

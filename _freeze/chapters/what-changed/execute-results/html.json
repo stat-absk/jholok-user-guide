@@ -1,9 +1,11 @@
 {
-  "hash": "8c4f9b76f5421b5ac568e4c2a75cbde1",
+  "hash": "893694a879a6eb6f04bba694abd66497",
   "result": {
     "engine": "knitr",
-    "markdown": "# What changed {#sec-what-changed}\n\n\n\n::: {.audience}\nFor everyone\n:::\n\n## Guide 0.1, for Jholok 0.1\n\n- The guide's outline and its welcome page.\n- The ideas behind the app: @sec-stock-basics, @sec-ledger and @sec-counting.\n- Everyday use: @sec-setting-up, @sec-catalogue, @sec-movements and @sec-overview.\n- Counting: @sec-a-count, @sec-boxes and @sec-identify-later.\n- Checking a count: @sec-book-stock, @sec-cut-off, @sec-review and @sec-results.\n- Looking after your shop: @sec-keeping-data-safe and @sec-stories.\n- [Questions and answers](questions.qmd).\n- The [Glossary](glossary.qmd).\n",
-    "supporting": [],
+    "markdown": "# What changed {#sec-what-changed}\n\n\n\n::: {.audience}\nFor everyone\n:::\n\nThe guide grows with the app. Each edition is listed here, newest first, with\nwhat's new in it, so you can see what to read again after an update.\n\n## Guide 0.1, for Jholok 0.1\n\nThe first edition: the whole app, for people using it for the first time.\n\n- **The ideas behind the app:** stock, units and value (@sec-stock-basics),\n  the ledger (@sec-ledger), and counting and checking against it\n  (@sec-counting).\n- **Everyday use:** setting up the shop and its people (@sec-setting-up), the\n  catalogue (@sec-catalogue), recording what comes in and goes out\n  (@sec-movements), and the Overview (@sec-overview).\n- **Counting:** a count from start to finish (@sec-a-count), counting boxes by\n  their tags or a photo (@sec-boxes), and identifying pieces later\n  (@sec-identify-later).\n- **Checking a count:** book stock (@sec-book-stock), stock off the shelf and\n  the cut-off (@sec-cut-off), Review (@sec-review), and the Result and the\n  count report (@sec-results).\n- **Looking after your shop:** backups and privacy (@sec-keeping-data-safe),\n  and stories from a shop's year (@sec-stories).\n- The [Questions and answers](questions.qmd) and the [Glossary](glossary.qmd).\n\nIt already covers two recent changes to the app:\n\n- **Single earrings.** An earring found without its pair is added with\n  **Singles** on the count sheet, beside the pairs, and never changes stock\n  (@sec-stock-basics, @sec-a-count).\n- **Units kept apart.** The Overview never adds pairs, sets and pieces into\n  one number of \"items\": it gives values, or lists each kind\n  (@sec-overview).\n",
+    "supporting": [
+      "what-changed_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

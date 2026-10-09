@@ -22,6 +22,44 @@ Chapters keep their results in `_freeze/` and only run again when the
 chapter itself changes. After changing anything in `R/`, delete `_freeze/`
 before rendering, so every chapter picks the change up.
 
+## The single-file guide
+
+For shops with poor internet, one HTML file holds the whole guide, every
+picture and style inside it:
+
+```bash
+Rscript scripts/build_single_file.R
+```
+
+It writes `_release/jholok-user-guide-<version>.html` (not committed), about
+19 MB. It uses macOS's `sips` to make the screenshots JPEG.
+
+## Keep it current
+
+When the app changes, list what in the guide may be out of date:
+
+```bash
+Rscript scripts/check_sources.R
+```
+
+It compares the app with the commit the guide was last checked against (the
+last row of `scripts/releases.csv`) and lists, for each chapter whose sources
+changed, the changed files, their commits and the chapter's screenshots. It
+also flags the R shop (the app's demo changed), the sample boxes and the
+screenshot tools. `scripts/sources.csv` says which app files each chapter
+relies on; add a row when a chapter comes to rely on a new one (a test checks
+that every chapter has sources and that every source still exists).
+
+To release the guide:
+
+1. Update the chapters the check lists, retake their screenshots, and render.
+2. Add an entry to `chapters/what-changed.qmd` and raise `version` in
+   `_quarto.yml`.
+3. Add a row to `scripts/releases.csv` with the guide and app versions, the
+   date and the app commit the guide now matches.
+4. Build the single file and send it, with the link to the book if it's
+   hosted.
+
 ## Check the code
 
 ```r

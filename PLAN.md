@@ -38,7 +38,7 @@ It is a large piece of work. It is roughly a short book, not one page.
 ### What is out of scope
 
 - Teaching R. The R code builds the guide; readers never need to read or run it, and code is hidden in the output by default.
-- Translations. The guide is planned in English only for now (open question 3).
+- Translations. The guide is in English only until the app itself is translated (question 3).
 - Developer documentation. That stays in `docs/`.
 
 ## Decisions taken by default (change any of them)
@@ -55,13 +55,25 @@ It is a large piece of work. It is roughly a short book, not one page.
 | D8 | Each release of the guide matches an app version ("Guide for Jholok 1.3"), with a "What changed" page. | Users know which app the guide describes. |
 | D9 | Box pictures come from the app's three sample boxes (see "Box pictures" below). R draws over them and draws plain diagrams. It never makes new photo-like images, and `jholok-synth` is not run for more boxes without your say. | The sample boxes are already drawn from the demo shop's tags, so screenshots, figures and numbers all describe the same boxes. |
 
-## Open questions for you
+## Open questions, answered (9 Oct 2026)
 
-1. **Where it ships:** a website (GitHub Pages or similar), a zip of HTML files, a PDF too, or a link from inside the app?
-2. **Format:** is the multi-page book (D2) right, or do you want one long HTML page?
-3. **Languages:** English only, or Bengali and Hindi later? Translation is much easier to plan for now (short sentences, no text inside images).
-4. **Tooling:** settled. Quarto 1.9.38 comes with RStudio (`/Applications/RStudio.app/Contents/Resources/app/quarto/bin/quarto`), and `quarto check` passes with R 4.6.1. Only `lintr` and `styler` still need installing in R.
-5. **Readers:** owner, approvers and counters all read one guide, with "For counters" and "For the owner" markers on each chapter. Or do you want separate short guides for counters?
+1. **Where it ships:** release 1 goes out as the single offline HTML file
+   (`scripts/build_single_file.R`), which opens on any phone or computer
+   without internet. Later, the book is hosted (GitHub Pages, or a public copy
+   of the built site only) and linked from Settings → About in the app. No
+   PDF: the screenshots and tables are laid out for screens.
+2. **Format:** both, as built: the multi-page book (search, contents sidebar)
+   and the single file.
+3. **Languages:** English only for now, written to translate easily (short
+   sentences, the app's own words, no text drawn in pictures). Bengali or
+   Hindi waits for the app itself to be translated, so its screenshots match.
+4. **Tooling:** settled. Quarto 1.9.38 comes with RStudio
+   (`/Applications/RStudio.app/Contents/Resources/app/quarto/bin/quarto`),
+   and `quarto check` passes with R 4.6.1.
+5. **Readers:** one guide, with "For counters", "For approvers" and "For the
+   owner" on each chapter. A short counters' quick guide (chapters 1, 3, 8 and
+   9 trimmed, with the counting questions) is a later add-on, worth making if
+   counters are new staff who won't read the whole guide.
 
 ## The R project
 

@@ -2,17 +2,17 @@
 
 The plan is in [PLAN.md](PLAN.md). Status: ☐ to do · ◐ in progress · ☑ done · ⏸ waiting on you.
 
-Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 to 7 drafted: every chapter has a first draft. Phase 8 done up to the release review (8.7).
+Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 to 7 drafted: every chapter has a first draft. Phase 8 done up to the release review (8.7); phase 9 done.
 
 ## Waiting on you
 
 | ID | Question | Status |
 |---|---|---|
-| Q1 | Where the guide ships (website, zip, PDF, a link in the app) | ⏸ |
-| Q2 | Multi-page book or one long page | ⏸ (default: book) |
-| Q3 | English only, or Bengali and Hindi later | ⏸ (default: English) |
+| Q1 | Where the guide ships (website, zip, PDF, a link in the app) | ☑ release 1 as the single file; hosted book and an app link later (L1) |
+| Q2 | Multi-page book or one long page | ☑ both |
+| Q3 | English only, or Bengali and Hindi later | ☑ English; translations wait for the app's |
 | Q4 | Quarto: use the copy bundled with RStudio | ☑ (1.9.38) |
-| Q5 | One guide for everyone, or a short separate one for counters | ⏸ (default: one, with markers) |
+| Q5 | One guide for everyone, or a short separate one for counters | ☑ one guide; a counters' quick guide later (L2) |
 
 ## Phase 0: set up
 
@@ -102,9 +102,16 @@ Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 to 7 drafted: every chapte
 
 | ID | Task | Status |
 |---|---|---|
-| 9.1 | `check_sources.R`: chapters whose sources changed since the last guide release, and changes to `Jholok/DevTools/DemoBoxes/` | ☐ |
-| 9.2 | A line in the project CLAUDE.md: a feature change updates its chapter and screenshots | ☐ |
-| 9.3 | A "What changed" entry for each release | ☐ |
+| 9.1 | `check_sources.R`: chapters whose sources changed since the last guide release, and changes to `Jholok/DevTools/DemoBoxes/` | ☑ |
+| 9.2 | A line in the project CLAUDE.md: a feature change updates its chapter and screenshots | ☑ |
+| 9.3 | A "What changed" entry for each release | ☑ |
+
+## Later
+
+| ID | Task | Status |
+|---|---|---|
+| L1 | Host the book (GitHub Pages, or a public copy of the built site) and link it from Settings → About in the app | ☐ |
+| L2 | A counters' quick guide: chapters 1, 3, 8 and 9 trimmed, with the counting questions, if counters are new staff | ☐ |
 
 ## Log
 
@@ -125,3 +132,5 @@ Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 to 7 drafted: every chapte
 | 8 Oct 2026 | Phase 7 drafted: chapters 15 and 16 and the questions and answers. Every chapter and appendix now has a first draft. Facts worth knowing: Jholok has no automatic backup, a backup doesn't carry the lock setting, and a release build has no way to erase all data. |
 | 8 Oct 2026 | Phase 8: four checks read every chapter against the app's code (about 420 claims) and found about 47 wrong or missing a condition, now fixed. The biggest: a count covers types, not a showcase; the owner can approve and reopen; the report's fingerprint changes when a product is renamed, the shop's details change or something is entered late; book stock covers tagged products only; a backup leaves out the shop's name and address. The app gained Singles (`ef586c6`), so the guide describes them, the R shop has the demo's one single, and the screenshots were retaken. Glossary terms are linked at first use in every chapter, and a Pandoc quirk that turned about 40 "See chapter" links into bare numbers is fixed. `scripts/build_single_file.R` builds the one-file guide. Raised for the app: a blank stock cell in an import reads as 0; the To identify queue always reads "1 of N"; the sales "items" break DECISIONS.md; the shop's name and address aren't backed up; the demo's karigar is called Ramesh, like a counter. |
 | 9 Oct 2026 | Phase 8 checks done. The app merged "Units apart on the Overview" (`41be77b`), so sales are values or kinds listed apart, never "items"; the guide already says so. Screenshots and report pages retaken from the merged build on 9 Oct (`screens_taken_on`), showing the single earring. Every page fits a phone (375 pt) with no sideways scroll; links, glossary anchors and alt text are whole; tables now take the page's colours, as gt's own grey was unreadable in dark mode. `scripts/build_single_file.R` builds `_release/jholok-user-guide-0.1.html` (18.6 MB: 59 JPEG pictures, the box figures and both colour themes). Waiting for the release 1 review. |
+| 9 Oct 2026 | Phase 9 done. `scripts/check_sources.R` lists the chapters, screenshots, R shop, sample boxes and screenshot tools whose app sources changed since the commit in `scripts/releases.csv` (0.1 was checked against `41be77b`), with the commits; `scripts/sources.csv` maps 106 app files, folders and design documents to the chapters (128 rows), and a test keeps every chapter mapped and every source present. The app's CLAUDE.md says a visible change updates the guide and how. "What changed" now reads as a note for users; the README says how to keep the guide current and release it. |
+| 9 Oct 2026 | Q1 to Q3 and Q5 answered (PLAN.md): release 1 ships as the single offline file; book and single file both kept; English only until the app is translated; one guide, with a counters' quick guide and hosting with an app link noted for later (L1, L2). |
