@@ -110,7 +110,7 @@ Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 to 7 drafted: every chapte
 
 | ID | Task | Status |
 |---|---|---|
-| L1 | Host the book (GitHub Pages, or a public copy of the built site) and link it from Settings → About in the app | ☐ |
+| L1 | Host the book (GitHub Pages, or a public copy of the built site) and link it from Settings → About in the app | ◐ hosted; the app link waits |
 | L2 | A counters' quick guide: chapters 1, 3, 8 and 9 trimmed, with the counting questions, if counters are new staff | ☐ |
 
 ## Log
@@ -134,3 +134,4 @@ Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 to 7 drafted: every chapte
 | 9 Oct 2026 | Phase 8 checks done. The app merged "Units apart on the Overview" (`41be77b`), so sales are values or kinds listed apart, never "items"; the guide already says so. Screenshots and report pages retaken from the merged build on 9 Oct (`screens_taken_on`), showing the single earring. Every page fits a phone (375 pt) with no sideways scroll; links, glossary anchors and alt text are whole; tables now take the page's colours, as gt's own grey was unreadable in dark mode. `scripts/build_single_file.R` builds `_release/jholok-user-guide-0.1.html` (18.6 MB: 59 JPEG pictures, the box figures and both colour themes). Waiting for the release 1 review. |
 | 9 Oct 2026 | Phase 9 done. `scripts/check_sources.R` lists the chapters, screenshots, R shop, sample boxes and screenshot tools whose app sources changed since the commit in `scripts/releases.csv` (0.1 was checked against `41be77b`), with the commits; `scripts/sources.csv` maps 106 app files, folders and design documents to the chapters (128 rows), and a test keeps every chapter mapped and every source present. The app's CLAUDE.md says a visible change updates the guide and how. "What changed" now reads as a note for users; the README says how to keep the guide current and release it. |
 | 9 Oct 2026 | Q1 to Q3 and Q5 answered (PLAN.md): release 1 ships as the single offline file; book and single file both kept; English only until the app is translated; one guide, with a counters' quick guide and hosting with an app link noted for later (L1, L2). |
+| 9 Oct 2026 | The book is hosted at https://stat-absk.github.io/jholok-guide/, a resource folder of the owner's Quarto site (`scripts/publish_book.R`; site commit `1d08da5`). The book's resource patterns are anchored to the top folder, as they also matched the single-file build's copies. The link from Settings → About in the app is still to do. |

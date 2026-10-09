@@ -22,6 +22,21 @@ Chapters keep their results in `_freeze/` and only run again when the
 chapter itself changes. After changing anything in `R/`, delete `_freeze/`
 before rendering, so every chapter picks the change up.
 
+## Publish the book
+
+The book is hosted on the owner's GitHub Pages site, at
+<https://stat-absk.github.io/jholok-guide/>. After rendering:
+
+```bash
+Rscript scripts/publish_book.R
+```
+
+It copies `_book/` into the site's folder (`~/Github_Page`, the
+stat-absk.github.io repository): into `jholok-guide/`, which the site's
+`_quarto.yml` lists under `resources`, and into `docs/jholok-guide/`, which
+Pages serves. Then commit and push the site. The site's link check also
+checks the guide's pages.
+
 ## The single-file guide
 
 For shops with poor internet, one HTML file holds the whole guide, every
@@ -57,8 +72,8 @@ To release the guide:
    `_quarto.yml`.
 3. Add a row to `scripts/releases.csv` with the guide and app versions, the
    date and the app commit the guide now matches.
-4. Build the single file and send it, with the link to the book if it's
-   hosted.
+4. Publish the book (`scripts/publish_book.R`), build the single file, and
+   send the file with the link.
 
 ## Check the code
 
