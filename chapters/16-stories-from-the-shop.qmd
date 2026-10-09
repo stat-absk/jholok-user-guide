@@ -79,7 +79,7 @@ Sita opened Review. `r matched_words(sum(first_count$difference == 0), nrow(firs
 These didn't:
 
 ```{r}
-#| label: tbl-first-count
+#| label: tbl-whole-shop-count
 #| tbl-cap: "What the first whole-shop count found."
 first_differences |>
   transmute(

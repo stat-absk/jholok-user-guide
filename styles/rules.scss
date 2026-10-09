@@ -131,3 +131,21 @@ h1.part {
   text-transform: uppercase;
   border-bottom: none;
 }
+
+// gt writes its own dark grey text into each table; take the page's colours
+// instead, so tables read in dark mode too.
+.gt_table,
+.gt_table .gt_col_heading,
+.gt_table .gt_row,
+.gt_table .gt_heading,
+.gt_table .gt_title,
+.gt_table .gt_subtitle,
+.gt_table .gt_sourcenote,
+.gt_table .gt_footnote {
+  color: $body-color !important;
+  background-color: transparent !important;
+}
+
+.gt_table .gt_col_heading {
+  color: $text-secondary !important;
+}

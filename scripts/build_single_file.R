@@ -106,6 +106,8 @@ front_matter <- function(book, version) {
     "",
     "```{r}",
     "#| include: false",
+    "# The folder's own _quarto.yml would make here() start in _single.",
+    'here::i_am("_single/guide.qmd")',
     'options(guide.image_root = "images")',
     "```",
     ""

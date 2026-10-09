@@ -1,8 +1,8 @@
 {
-  "hash": "8e392d70dc1595a031f414c70d257d94",
+  "hash": "8c4f9b76f5421b5ac568e4c2a75cbde1",
   "result": {
     "engine": "knitr",
-    "markdown": "# What changed {#sec-what-changed}\n\n\n\n::: {.audience}\nFor everyone\n:::\n\n## Guide 0.1, for Jholok 0.1\n\n- The guide's outline and its welcome page.\n- The ideas behind the app: @sec-stock-basics, @sec-ledger and\n  @sec-counting.\n- Everyday use: @sec-setting-up, @sec-catalogue, @sec-movements and\n  @sec-overview.\n- Counting: @sec-a-count, @sec-boxes and @sec-identify-later.\n- Checking a count: @sec-book-stock, @sec-cut-off, @sec-review and\n  @sec-results.\n- Looking after your shop: @sec-keeping-data-safe and @sec-stories.\n- [Questions and answers](questions.qmd).\n- The [Glossary](glossary.qmd).\n",
+    "markdown": "# What changed {#sec-what-changed}\n\n\n\n::: {.audience}\nFor everyone\n:::\n\n## Guide 0.1, for Jholok 0.1\n\n- The guide's outline and its welcome page.\n- The ideas behind the app: @sec-stock-basics, @sec-ledger and @sec-counting.\n- Everyday use: @sec-setting-up, @sec-catalogue, @sec-movements and @sec-overview.\n- Counting: @sec-a-count, @sec-boxes and @sec-identify-later.\n- Checking a count: @sec-book-stock, @sec-cut-off, @sec-review and @sec-results.\n- Looking after your shop: @sec-keeping-data-safe and @sec-stories.\n- [Questions and answers](questions.qmd).\n- The [Glossary](glossary.qmd).\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
