@@ -34,7 +34,7 @@ count, and at least once a week.
 
 ### Back up
 
-Open **Settings**, then **Backup**.
+Open **Settings**, then **Backup**, under **Backup and security**.
 
 ```{r}
 screenshot(
@@ -82,19 +82,22 @@ phone (@sec-setting-up).
 ### Privacy
 
 - **The lock**: Jholok asks for Face ID or the phone's passcode when it opens
-  and, by default, after a minute away; Settings → Security changes it
-  (@sec-setting-up).
+  and, by default, after a minute away. It starts once there is something to
+  protect: the next time Jholok opens after the first product or count. The
+  first lock explains itself ("Jholok locks to keep your stock private") and
+  waits for you to tap **Unlock**. **Require Face ID** and **Lock**, in
+  Settings under **Backup and security**, change it (@sec-setting-up).
 - **The cover**: whenever Jholok isn't in front, a plain cover hides it from
   the list of open apps.
-- **The owner, every time**: every export, backup, restore, report and box
-  photo export asks the owner to confirm, with Face ID or the owner PIN (or the phone's
+- **The owner, every time**: every export (Settings → Advanced → Export),
+  backup, restore, report and box photo export asks the owner to confirm, with Face ID or the owner PIN (or the phone's
   passcode, until People is set up).
 - **Nothing left behind**: files made for sharing are deleted as soon as the
   share sheet closes, and any left over are deleted when Jholok opens.
 
 ### Box photos and space
 
-Box photos take space. **Settings → Photo counting → Storage** says how much,
+Box photos take space. **Settings → Advanced → Photo counting → Storage** says how much,
 and can **remove photos of counts completed over 12 months ago**. Each box's
 pieces and numbers stay; only the photos go.
 
@@ -113,7 +116,8 @@ pieces and numbers stay; only the photos go.
 
 ## How it works
 
-### Saving never fails silently
+::: {.callout-note collapse="true" title="Read how it works"}
+**Saving never fails silently**
 
 Every change is saved at once. If a save fails (most often because the phone
 is nearly full), Jholok puts everything back as it was, so the screen matches
@@ -121,7 +125,7 @@ what's stored, and says so: "The send out wasn't saved, so it's back as it
 was. If the phone is nearly full, free some space and try again." A count
 whose completion fails stays open, with no stock changed.
 
-### If Jholok can't open its data
+**If Jholok can't open its data**
 
 If the data can't be opened (after a failed update, say), Jholok doesn't
 stop. It shows "Jholok can't open its data", and says nothing has been
@@ -129,7 +133,7 @@ deleted. You can **Try again**, **Restore from a backup…**, or **Save the data
 file…**, which saves the raw data so it can be repaired. That file isn't a
 backup and can't be restored.
 
-### Restoring safely
+**Restoring safely**
 
 Jholok first copies the backup next to your data, checks it and brings it up
 to date with the app. Only then does it replace your data. If the
@@ -138,13 +142,14 @@ A backup made by an older version of Jholok is brought up to date as it's
 restored. One made by a newer version can't be restored until you update the
 app.
 
-### Diagnostics
+**Diagnostics**
 
-**Settings → Diagnostics**, under About, keeps reports of crashes and hangs from iOS, and a
+**Settings → Advanced → Diagnostics** keeps reports of crashes and hangs from iOS, and a
 log of what went wrong in the app, such as a failed save or a camera that
 stopped. It never records stock, products, prices or tags. Nothing leaves the
 phone unless the owner taps **Share diagnostics**, which makes one file to
 send to whoever supports the app.
+:::
 
 ## Try it
 

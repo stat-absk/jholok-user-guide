@@ -7,6 +7,24 @@ For everyone
 The words this guide uses, in plain terms, with the chapter that explains
 each one.
 
+## Words you need for a count
+
+Twelve words cover a first count. The rest are below, for when you meet them.
+
+- [Product](#product) and [SKU](#sku): one thing you sell, and its code.
+- [Type](#type) and [unit](#unit): a group of products, counted in
+  [pairs](#pair), [sets](#set) or [pieces](#piece).
+- [On hand](#on-hand): what the records say you have.
+- [Ledger](#ledger) and [movement](#movement): the record of every change, one
+  entry at a time.
+- [Count](#count) and [blind count](#blind-count): counting what's there,
+  without seeing what should be.
+- [Review](#review): where the count meets the records.
+- [Short](#short) and [over](#over): fewer or more than the records say.
+- [Recount](#recount): counting a short line again before it changes stock.
+
+## All the words
+
 [Adjustment]{#adjustment}
 :   A movement that corrects stock outside a count, with a reason, such as a
     piece damaged and sent for melting. See @sec-ledger.
@@ -33,8 +51,8 @@ each one.
     load it into a count. See @sec-book-stock.
 
 [Box photo]{#box-photo}
-:   A photo of a box of cards, from which Jholok proposes how many of each
-    product are in it. See @sec-boxes.
+:   A photo of a box of cards, from which Jholok finds how many of each
+    product are in it. They count only once you add the box. See @sec-boxes.
 
 [Card]{#card}
 :   The small card each pair of earrings or each set sits on in a box.
@@ -49,8 +67,8 @@ each one.
     expects. Also called a stock take. See @sec-counting.
 
 [Count adjustment]{#count-adjustment}
-:   The movement Jholok records when an approver completes a count and accepts
-    a difference. See @sec-counting.
+:   The movement Jholok records when a count is completed with a difference
+    ticked to accept. See @sec-counting.
 
 [Counter]{#counter}
 :   A person who counts. Counters count blind, and submit the count for
@@ -177,7 +195,8 @@ each one.
 
 [Proposal]{#proposal}
 :   What a box photo or tag scan finds, before you check it and add it to the
-    count. See @sec-boxes.
+    count. The box review says "found" and "Not added yet" until you add it.
+    See @sec-boxes.
 
 [Reconciliation]{#reconciliation}
 :   Comparing what was counted with what was expected, and explaining every
@@ -188,8 +207,8 @@ each one.
     can be accepted. See @sec-counting.
 
 [Review]{#review}
-:   The screen where an approver sees the counted and expected numbers side
-    by side, and decides which differences to accept. See @sec-counting.
+:   The screen where an approver (or the owner, counting alone) sees the
+    counted and expected numbers side by side, and decides which differences to accept. See @sec-counting.
 
 [Separation of duties]{#separation-of-duties}
 :   Making sure the person who counts isn't the person who approves, so no one
@@ -199,6 +218,12 @@ each one.
 :   Pieces sold together as one, such as a necklace with matching earrings.
     Counted as 1. See @sec-stock-basics.
 
+[Settings]{#settings}
+:   The tab for setting up the shop: its catalogue imports, People, the
+    shop's details, and Backup and security. **Advanced**, at the end, holds
+    the exports and tools such as Photo counting and Diagnostics. See
+    @sec-setting-up.
+
 [Short]{#short}
 :   Fewer found than expected. Recounted before it is accepted. See @sec-counting.
 
@@ -207,6 +232,11 @@ each one.
 
 [SKU]{#sku}
 :   *Stock keeping unit*: a product's own short code, such as EAR-0002. See @sec-stock-basics.
+
+[Solo path]{#solo-path}
+:   Counting alone, before People is set up: the owner taps **Review**
+    instead of Submit, and completes without a PIN. The count says "The owner
+    (People not set up)". See @sec-solo-path.
 
 [Stock]{#stock}
 :   The jewellery the shop owns and means to sell. See @sec-stock-basics.

@@ -21,6 +21,9 @@ source("R/shop_calendar.R")
 source("R/simulate_shop.R")
 
 bundle_id <- "com.abhishekbhattacharjee.jholok"
+# The simulator to use: its UDID when more than one is booted
+# (GUIDE_SIMULATOR=<udid> Rscript scripts/capture_screens.R).
+device <- Sys.getenv("GUIDE_SIMULATOR", "booted")
 out_dir <- "images/app"
 # Shown at 320 points wide in the guide, so 640 pixels keeps them sharp.
 saved_width <- 640
@@ -34,9 +37,9 @@ simctl <- function(...) {
 
 # The same moment on every picture: a full battery, full signal, 9:41.
 prepare_simulator <- function() {
-  simctl("ui", "booted", "appearance", "light")
+  simctl("ui", device, "appearance", "light")
   simctl(
-    "status_bar", "booted", "override",
+    "status_bar", device, "override",
     "--time", "9:41",
     "--batteryState", "charged", "--batteryLevel", "100",
     "--cellularMode", "active", "--cellularBars", "4",
@@ -45,13 +48,13 @@ prepare_simulator <- function() {
 }
 
 capture_screen <- function(file, arguments, wait_seconds) {
-  system2("xcrun", c("simctl", "terminate", "booted", bundle_id),
+  system2("xcrun", c("simctl", "terminate", device, bundle_id),
     stdout = FALSE, stderr = FALSE
   )
-  simctl("launch", "booted", bundle_id, strsplit(arguments, " ")[[1]])
+  simctl("launch", device, bundle_id, strsplit(arguments, " ")[[1]])
   Sys.sleep(wait_seconds)
   full_size <- tempfile(fileext = ".png")
-  simctl("io", "booted", "screenshot", "--type=png", full_size)
+  simctl("io", device, "screenshot", "--type=png", full_size)
   resize_into_guide(full_size, file)
 }
 
@@ -94,7 +97,7 @@ capture_screens <- function(pattern = NULL) {
   if (is.null(pattern) || grepl(pattern, "report")) {
     capture_report()
   }
-  system2("xcrun", c("simctl", "status_bar", "booted", "clear"))
+  system2("xcrun", c("simctl", "status_bar", device, "clear"))
   invisible(screens)
 }
 
@@ -140,14 +143,14 @@ capture_by_ui_test <- function(screens) {
 report_dir <- "images/report"
 
 capture_report <- function() {
-  system2("xcrun", c("simctl", "terminate", "booted", bundle_id),
+  system2("xcrun", c("simctl", "terminate", device, bundle_id),
     stdout = FALSE, stderr = FALSE
   )
-  simctl("launch", "booted", bundle_id, "-demo", "-report")
+  simctl("launch", device, bundle_id, "-demo", "-report")
   Sys.sleep(12)
   container <- system2(
     "xcrun",
-    c("simctl", "get_app_container", "booted", bundle_id, "data"),
+    c("simctl", "get_app_container", device, bundle_id, "data"),
     stdout = TRUE
   )
   report <- file.path(container, "tmp", "Report.pdf")

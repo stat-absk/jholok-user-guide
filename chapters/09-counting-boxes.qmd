@@ -21,6 +21,10 @@ tag_list <- demo_tag_list()
 For counters
 :::
 
+::: {.callout-note appearance="simple" icon=false}
+You need this only if you count boxes of pieces on cards or slots, by their tags or from a photo. Counting by hand is covered in @sec-a-count.
+:::
+
 ::: {.learn}
 - The two ways to count a whole box at once: scanning its tags, or taking a
   photo.
@@ -35,7 +39,8 @@ count a whole box at once, in one of two ways:
 
 - **Scan tags.** If each piece carries its own piece tag (@sec-catalogue),
   move the camera over the box. Each tag read counts its piece, once. This is
-  the most reliable way, which is why **Scan tags** is the gold button.
+  the most reliable way, which is why **Scan tags** is the gold button once
+  any product in the count has a piece tag.
 - **Box photo.** Photograph the box. Jholok finds the box, straightens it,
   finds each card, reads any tags it can see, and suggests a product for the
   rest from their pictures.
@@ -45,8 +50,8 @@ its own slot. So the app counts **cards**, not loose pieces: one card is one
 pair, or one set.
 
 Either way, the result is a [**proposal**](glossary.qmd#proposal). The review says "15 pairs
-proposed": nothing reaches the count until you've checked it and tapped
-**Add**.
+found", with "Not added yet" under it: nothing reaches the count until you've
+checked it and tapped **Add**. Then it says "15 pairs added".
 
 ::: {.callout-important}
 ## How well box photos work hasn't been measured yet
@@ -71,8 +76,11 @@ diagram_cards_not_pieces()
 ## In the app
 
 On the counting screen, the two buttons at the bottom open the camera:
-**Scan tags** and **Box photo**. The camera button beside each type's name
-photographs a box of that type.
+**Scan tags** and **Box photo**. While any product in the count has a piece
+tag, **Scan tags** is the gold one. When nothing in the count is tagged,
+**Box photo** is gold, Scan tags sits beside it, and a line under the bar
+says "Have barcode tags? Import your tag list to scan them." If the count
+covers several types, the camera asks which type the box holds.
 
 ```{r}
 screenshot("counting-strongroom.png")
@@ -170,16 +178,27 @@ screenshot("piece-sheet.png", caption = drawn_box)
 
 If the app missed a piece, tap **Add piece**, then tap where it is. For a tray
 with one piece per slot, such as rings, turn on **Count by tray grid**, set
-the rows and columns, and drag the corners to fit the tray.
+the rows and columns, and drag the corners to fit the tray. The switch shows
+under the photo for rings, for a type you've counted by tray grid before, and
+while it's on. For any other box photo, tap the box's name at the top and
+choose **Count by tray grid** from that menu.
+
+The same menu has **Rename** and **Help with box counting**, which opens this
+chapter. If the owner has turned on **Mark test photos** in Settings →
+Advanced → Photo counting (it's off at first), the menu also has **Keep as a
+test photo**: a test photo is kept out of training and used to measure how
+well the app counts.
 
 ```{r}
 screenshot("add-piece.png", caption = drawn_box)
 ```
 
 When everything looks right, tap **Add 15 pairs to count**. Any piece still
-without a product goes to the To identify queue. A piece whose picture match
-you haven't checked keeps the box from being added: accept it, change it, or
-choose Identify later first.
+without a product goes to the To identify queue; the note under the button
+says so, such as "3 pieces have no design yet: you'll pick them later from
+the To identify list." A piece whose picture match you haven't checked keeps
+the box from being added: accept it, change it, or choose Identify later
+first.
 
 ### If the box was counted already
 
@@ -209,7 +228,8 @@ screenshot("counting-after-box.png")
   together and sets are large; guessing would be wrong too often. Where one
   outline may hold two, the app asks; where pieces touch, it warns.
 - **A proposal, never automatic.** The app can't yet show it counts real boxes
-  well, so a person checks every box. Settings → Photo counting keeps score.
+  well, so a person checks every box. Settings → Advanced → Photo counting
+  keeps score.
 - **Not a piece is kept, left out.** What the app got wrong is exactly what a
   better version needs to learn from, so the outline stays with the box,
   marked, and is never counted.
@@ -218,18 +238,20 @@ screenshot("counting-after-box.png")
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 Every added box keeps its photo, the straightened box, and every piece you
 confirmed. These are kept so that, in future, the app can learn from your
-real boxes. The owner can export them from Settings → Export → Box photos and
-labels, which asks the owner to confirm each time.
+real boxes. The owner can export them from Settings → Advanced → Export →
+Box photos and labels, which asks the owner to confirm each time.
 
-Settings → Photo counting compares the app's count of each box with the
+Settings → Advanced → Photo counting compares the app's count of each box with the
 count you added after checking it. Those numbers lean towards the app,
 because you saw its proposal first, so they aren't an independent measure.
 
 ```{r}
 screenshot("settings-photo-counting.png")
 ```
+:::
 
 ## Try it
 
@@ -267,8 +289,8 @@ by_outcome |>
 The tag on one pair, `r unknown_tag`, isn't among the `r nrow(tag_list)` tags
 in the demo's tag list: that pair arrived after the list was exported, so the
 review asks to link it. Two tags can't be read. That leaves `r to_identify`
-pairs to identify, as the review says: "`r to_identify` to identify later,
-from the count."
+pairs to identify, as the note under Add says: "`r to_identify` pieces have no
+design yet: you'll pick them later from the To identify list."
 
 The empty card in the bottom corner holds no jewellery. If the app had
 outlined it, you would tap it and choose **Not a piece**.

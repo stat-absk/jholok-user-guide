@@ -14,29 +14,50 @@ the people who approve counts, and the staff who count. You don't need to know
 anything about accounting. Each idea is explained the first time it appears,
 and every word is in the [Glossary](chapters/glossary.qmd).
 
+## What Jholok is, and isn't
+
+- **It is** a stock list, a record of every piece in and out, and a way to
+  count what's on your shelves and see what's missing.
+- **It runs on one phone.** Your stock stays on it, not in the cloud. Back it
+  up yourself (@sec-keeping-data-safe).
+- **It isn't billing software.** It doesn't make invoices or GST returns. It
+  can read the stock file your billing software exports, to check a count
+  against it (@sec-book-stock).
+
 ## How this guide is arranged
 
-- **The ideas behind the app** explains stock, the ledger and counting in plain
-  words. Read this part first, even if you only count.
-- **Everyday use** sets the shop up and keeps the catalogue and stock up to
-  date.
-- **Counting** walks through a count, from opening it to counting boxes of
-  pieces.
-- **Checking a count** is for the owner and the people who approve counts.
-- **Looking after your shop** covers backups and privacy, and ends with stories
-  from a shop's year.
+- **Start here** takes you to a first count in half an hour
+  (@sec-first-count), then walks through a count in full (@sec-a-count).
+- **How counting works** explains stock, the ledger and counting in plain
+  words, and how a count is checked and finished.
+- **Everyday use** sets the shop up, keeps the catalogue and stock up to date,
+  and keeps your data safe.
+- **Boxes, tags and billing files** is for shops that count boxes of pieces,
+  use piece tags or export stock from billing software.
+- **Advanced** covers stock that's away from the shop and entries keyed in
+  late.
+- **From the shop** tells stories from a shop's year.
 
 Each chapter says who it is for, starts with what you'll learn and ends with
-what to remember. Words that may be new are linked to the
-[Glossary](chapters/glossary.qmd) the first time they appear.
+what to remember. Chapters you can skip say so at the top, and the "How it
+works" parts are folded away until you open them. Words that may be new are
+linked to the [Glossary](chapters/glossary.qmd), which starts with the twelve
+you need for a count.
 
 ### Where to start
 
-- **If you count stock**, read @sec-stock-basics to @sec-counting, then the
-  chapters on counting.
-- **If you approve counts**, read those too, then the chapters on checking a
-  count.
-- **If you own the shop**, read the guide in order.
+- **If you own the shop and are new to Jholok**, start with @sec-first-count.
+  The getting-started card on the app's Overview follows the same steps
+  (@sec-overview).
+- **If you count stock**, keep the two-page quick guide to hand
+  (@sec-counters-quick-guide), and read @sec-a-count when you have time, then
+  @sec-counting for why counts are blind.
+- **If you approve counts**, read those, then @sec-review and @sec-results.
+- **If you count alone**, you can skip setting up people: you count, review
+  and complete each count yourself (@sec-solo-path).
+
+In the app, **Settings → User guide**, under More, opens this guide. Review's
+**?** button opens the chapter on reviewing a count.
 
 ## The shop in this guide
 
@@ -58,5 +79,5 @@ chapters on box counting say what that means for you.
 
 ## Which app this guide describes
 
-This is guide 0.1, for Jholok 0.1. The [What changed](chapters/what-changed.qmd)
+This is guide 0.2, for Jholok 0.1. The [What changed](chapters/what-changed.qmd)
 page lists what is new in each edition of the guide.

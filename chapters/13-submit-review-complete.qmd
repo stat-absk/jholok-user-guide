@@ -43,18 +43,19 @@ showcase_adjusted <- shop$movements |>
 ```
 
 ::: {.audience}
-For approvers
+For approvers, and owners who count alone
 :::
 
 ::: {.learn}
 - How to open a count's Review, and who may.
 - How to read Review, recount, and choose which differences to accept.
 - What completing a count does, and how to sign it.
+- How it goes when you count alone, before People is set up.
 :::
 
 ## The idea
 
-When the counters submit a count, it waits for an approver. The approver's
+Once People is set up (@sec-setting-up), when the counters submit a count, it waits for an approver. The approver's
 job is to look at what was found, check anything doubtful, and decide which
 differences become changes to the stock. Until the count is completed,
 nothing has changed.
@@ -76,12 +77,17 @@ starts with safe choices already made:
 The approver can change the ticks, but can't accept a shortage that hasn't
 been recounted. These rules are built into the app, not just the screen.
 
+If you count alone and haven't set up People, there is no Submit and no
+second person: you open Review yourself, and the same safe choices apply
+([Counting alone](#sec-solo-path), below).
+
 ## In the app
 
 ### Open Review
 
-Open the submitted count from the Count tab and tap **Review**. The app asks
-for an approver's PIN. Only people who may approve are offered; those who
+This is how it goes once People is set up. (Counting alone? See
+[Counting alone](#sec-solo-path).) Open the submitted count from the Count
+tab and tap **Review**. The app asks for an approver's PIN. Only people who may approve are offered; those who
 counted are named as unable to.
 
 ```{r}
@@ -99,6 +105,9 @@ The card at the top says what was counted and how it compares:
 - how many were **short** and **over**, in units and at cost;
 - a sentence: how many matched, what happens to those not counted, and how
   this count compares with the last count of the same types.
+
+The **Help** button (the question mark, top right) opens this chapter of the
+guide.
 
 ```{r}
 screenshot("review.png")
@@ -158,6 +167,39 @@ If the count needs more counting, close Review and tap **Reopen for counting**
 on the count, with a reason. The log records that anything counted after
 Review was counted after it.
 
+### Counting alone: People not set up {#sec-solo-path}
+
+Until People is set up, nobody is asked who they are, and the owner counts,
+reviews and completes. Everything above about reading Review, recounting and
+ticks is the same. Counting is still blind: the counting screen never shows
+stock, and Review does. What changes:
+
+- **Review instead of Submit.** The gold button on the counting screen is
+  **Review**. It asks for Face ID or the phone's passcode once, then opens
+  Review. The log still records that the count was submitted and that Review
+  was opened.
+- **Pieces still to identify.** If box photo pieces are still waiting to be
+  identified, Review asks first: **Identify now** opens the To identify list
+  (@sec-identify-later), or **Review anyway** opens Review.
+- **Identify now, from Review.** Review's **Not identified** section says how
+  many pieces aren't identified, such as "15 pairs in 1 box photo aren't
+  identified. Identify them now; the count can't be completed until they
+  are." Its **Identify now** button reopens the count, logged with the reason
+  "To identify pieces", and opens the To identify list.
+- **In review, and Count more.** Go back from Review and the count shows an
+  **In review** card, such as "You opened Review at 4:12. Count more to change
+  anything." **Count more** reopens the count at once, logged as "Counted more
+  after Review". It doesn't ask for Face ID again.
+- **Complete without a second check.** Tap **Complete count**. The sheet says
+  what will change. A reason is optional: tap **Add a reason** to give one;
+  without one, the count and its adjustments say "Stock count". The sign-off
+  line reads "Counted and approved by: The owner (People not set up)". Then
+  tap the gold **Complete count**. There's no PIN to enter.
+
+The Result and the report keep that sign-off line, so anyone reading them
+later can see that one person counted and approved (@sec-results). When you
+want a second person to check, set up People, and the steps above apply.
+
 ## Why it works this way
 
 - **A second person decides.** The approver didn't count (unless the owner is
@@ -171,12 +213,16 @@ Review was counted after it.
   change happened.
 - **The PIN is a signature.** The count records who approved it, and the log
   can't be edited afterwards.
+- **Counting alone stays honest.** Without People, nobody else can approve,
+  so Jholok doesn't pretend: the count says "The owner (People not set up)",
+  and the log still records each step.
 - **Comparisons are honest.** Review says a match rate rose or fell only when
   the change is bigger than chance would give, with at least 10 products on
   each side. Otherwise it says "Too few products to call that a change."
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 Completing is one change, saved at once: if anything fails, nothing changes
 and the count stays open. Jholok freezes every line's expected and counted
 numbers, cost, cut-off and stock off the shelf, so the count reads the same
@@ -186,6 +232,7 @@ approved, when and why, and logs the completion.
 
 A completed count can't be edited. Mistakes found later are put right with
 new movements, or a new count.
+:::
 
 ## Try it
 
@@ -230,10 +277,13 @@ blind, and tap Done. If it's still short, it moves to Discrepancies, already tic
 :::
 
 ::: {.remember}
-- Only an approver or the owner who didn't count opens Review and completes.
+- Once People is set up, only an approver or the owner who didn't count
+  opens Review and completes. Counting alone, you tap Review, and the count
+  says "The owner (People not set up)".
 - Shortages, and products whose stock moved, are recounted blind first.
 - Overs start unticked; products not counted keep their stock unless you
   choose Set to zero.
-- Give a reason and sign with your PIN. Completing changes stock only for the
+- Give a reason and sign with your PIN (alone, the reason is optional).
+  Completing changes stock only for the
   ticked lines, and the count can't be edited afterwards.
 :::

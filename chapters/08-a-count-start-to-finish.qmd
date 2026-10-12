@@ -25,7 +25,7 @@ For counters
 ::: {.learn}
 - How to start a count, and choose what it covers.
 - How to count each product quickly, with one hand, and put mistakes right.
-- How to submit the count when you're done.
+- How to hand the count over for review when you're done.
 :::
 
 ## The idea
@@ -47,7 +47,10 @@ Three things are worth knowing before you start:
 
 ### Start a count
 
-In the **Count** tab, tap **New count** (the + at the top).
+The **Count** tab lists the counts **In progress** first, then a **Start a
+count** row, then the **Completed** counts. Tap **Start a count** (or the + at
+the top). While the first-run card is showing its second step, "Count one
+tray", the card takes the row's place.
 
 ```{r}
 screenshot("new-count.png")
@@ -63,9 +66,10 @@ The line under the types says how many products the count covers, and
 reminds you that "Expected stock stays hidden until you review, so it can't
 sway the count." Tap **Start**.
 
-The Count tab also suggests what to count next: under **Last counted**, a
-button such as "Count Sets" opens a new count of the type that has gone
-longest without one.
+Further down, the Count tab also suggests what to count next: under **Last
+counted**, a button such as "Count Sets" opens a new count of the type that
+has gone longest without one. **Record accuracy** comes below that. With no
+products yet, the tab offers **Open the Catalogue** instead.
 
 ```{r}
 screenshot("counts.png")
@@ -135,9 +139,11 @@ screenshot("undo-banner.png")
 
 ### Find a product quickly
 
-Type in **Find a product** to search by name, SKU or barcode. The filter
-button at the top shows only the products **Not counted**, or only those
-**Counted**, which helps you check nothing was missed.
+Type in **Find a product** to search by name, SKU or barcode. The ⋯ menu at
+the top right holds **Show**: choose **Not counted** or **Counted** to see only
+those products, which helps you check nothing was missed, and **All
+products** to see them all again. The ⋯ fills in while only some products
+are shown.
 
 To find a product from its label, tap the barcode button, **Find by code**.
 Scan or type a barcode, a SKU or a piece tag, and the list shows only that
@@ -148,7 +154,14 @@ screenshot("find-by-code.png")
 ```
 
 The buttons at the bottom, **Scan tags** and **Box photo**, count a whole tray
-or box at once. @sec-boxes explains them.
+or box at once. When any product in the count has a piece tag, **Scan tags**
+is the gold button, with **Box photo** beside it. Otherwise **Box photo** is
+the gold one, and a line under the bar says "Have barcode tags? Import your
+tag list to scan them." @sec-boxes explains both.
+
+**Load book stock** (@sec-book-stock) is a row in the list once any product
+in the catalogue has a piece tag, or the count has loaded the books. Until
+then it's in the ⋯ menu.
 
 ### Submit the count
 
@@ -156,6 +169,11 @@ When you've counted everything, tap **Submit** (it stays greyed out until
 something is counted). The app checks that you mean it. If pieces in box
 photos are still to identify, it offers **Identify now** or **Submit anyway**
 (@sec-identify-later).
+
+If People isn't set up, there's no Submit: the gold button says **Review**.
+It asks for Face ID or the passcode once and opens Review straight away
+(@sec-solo-path). The rest of this section is about counts with People set
+up.
 
 ```{r}
 screenshot("submit-dialog.png")
@@ -195,6 +213,7 @@ screenshot(
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 Your count is saved with every tap, together with who entered it and when.
 The activity log records each figure, so if several people count, it's clear
 who counted what. Pieces counted from box photos or [tag scans](glossary.qmd#tag-scan) add to the same
@@ -203,6 +222,7 @@ number as your taps; @sec-boxes explains how the two are kept apart.
 When you submit, the count waits under **In progress** in the Count tab,
 marked "Waiting for approval". An approver then reviews it, as @sec-counting
 explained.
+:::
 
 ## Try it
 
@@ -244,5 +264,6 @@ offers Undo for a few seconds.
   Clear, then tap.
 - Undo is offered after a change of more than one, and after every Clear.
 - Submit when you're done; after that, only an approver who didn't count, or
-  the owner, can reopen the count.
+  the owner, can reopen the count. Without People set up, tap **Review**
+  instead.
 :::

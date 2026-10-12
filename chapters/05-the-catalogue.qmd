@@ -62,7 +62,8 @@ list**](glossary.qmd#tag-list) says which product each piece tag belongs to.
 
 ### Add a product
 
-In the **Catalogue** tab, tap **+**.
+In the **Catalogue** tab, tap **+**. While the catalogue is empty, it says
+"No products yet" and offers **Add product** and **Import catalogue**.
 
 ```{r}
 screenshot("product-editor.png")
@@ -83,6 +84,10 @@ screenshot("product-editor.png")
   receipts, sales, returns, adjustments and counts.
 
 Editing a product later never changes its stock.
+
+Under each product in the catalogue, small bars show its weekly sales for
+the last 13 weeks. The first time you open the catalogue, a note above it says
+so. Tap **×** to hide the note for good.
 
 ### A product's page
 
@@ -116,8 +121,10 @@ their hand.
 
 ### Import a catalogue from a spreadsheet
 
-Save the spreadsheet as a CSV file, then open **Settings** and tap **Import
-catalogue from CSV**.
+Save the spreadsheet as a CSV file, then open **Settings** and, under
+**Catalogue**, tap **Import catalogue**. While the catalogue is empty, the
+**Import catalogue** button on the empty Catalogue and on the Overview does
+the same. Each opens the Files picker, to choose the file.
 
 The file needs a **name** and a **type** column. These are optional: **sku**,
 **variant**, **barcode**, **cost**, **price** and **on_hand** (the stock).
@@ -133,7 +140,7 @@ with the reason and the line number, so you can fix them in the spreadsheet.
 
 To link tags you already have, import a tag list: a CSV file with a **tag**
 and a **sku** column, such as an export from your billing software. Open
-**Settings** and tap **Import tag list from CSV**. The preview shows the new
+**Settings** and, under **Catalogue**, tap **Import tag list**. The preview shows the new
 tags and anything it can't use: tags already on another product, SKUs not in
 the catalogue, and product codes that aren't piece tags.
 
@@ -161,12 +168,14 @@ won't scan can be typed.
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 The import matches rows to products by SKU. A row with a SKU Jholok knows
 updates that product's details. A row with a new SKU, or no SKU, makes a new
 product, and its **on_hand** becomes its opening stock. A type Jholok hasn't
 seen becomes a new type. Jholok guesses its unit: pairs if the name has
 "earring" in it, sets if the name is or ends in "set" or "sets", and pieces
 for the rest. You can change it in Settings → Product types.
+:::
 
 ## Try it
 

@@ -123,6 +123,9 @@ screenshot(
    [PIN](glossary.qmd#pin) (the owner can use Face ID). This is called [**separation of
    duties**](glossary.qmd#separation-of-duties): the person who might have lost a piece isn't the one who decides
    it is lost.
+   This applies once People is set up. An owner who counts alone, without
+   People, taps **Review** instead of Submit and completes without a PIN, and
+   the count says "The owner (People not set up)" (@sec-solo-path).
 
 ```{r}
 #| fig-cap: >-
@@ -190,6 +193,7 @@ screenshot("result.png")
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 At `r showcase$location`, the counters counted
 `r nrow(showcase_lines)` products of Earrings and Rings, and
 `r showcase_matched` matched: Jholok writes that as
@@ -200,6 +204,7 @@ short, and the approver accepted it: a count adjustment of
 `r sub("-", minus_sign, showcase_short$difference)`. The
 `r tolower(showcase_over$name)` (`r showcase_over$variant`) was one pair over. The count's note explains why: *`r tolower(showcase$notes)`*. It wasn't
 the shop's stock, so the over was left unticked and the stock didn't change.
+:::
 
 ## Try it
 

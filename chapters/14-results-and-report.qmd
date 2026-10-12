@@ -95,7 +95,10 @@ Below it:
 
 - when the count was completed, and what it covered;
 - where expected stock came from (Jholok's ledger, or the books);
-- who counted, and who approved and why;
+- who counted, and who approved and why. A count done before People was set
+  up says "Counted and approved by: The owner (People not set up)"
+  (@sec-solo-path). If named people counted but nobody approved, it says
+  "Approved by: The owner (People not set up)";
 - the count's part of the activity log, and whether it's **intact**.
 
 If the phone hasn't been backed up since, a reminder says "This count is
@@ -132,13 +135,14 @@ Jholok asks for the shop's name and address, to print at the top. The files
 are made only for sharing: once the share sheet closes, Jholok deletes its
 copies.
 
-Settings → Export also has **Count results**: every line of every completed
+Settings → Advanced → Export also has **Count results**: every line of every completed
 count, in one spreadsheet. While a count is open, exports that would show its
 stock wait until it's reviewed or discarded.
 
 ### The record of every count
 
-The Count tab keeps score. Under **Last counted**, each type shows how long
+The Count tab keeps score. Below the counts in progress and completed, under
+**Last counted**, each type shows how long
 since it was counted. Under **Record accuracy**, every completed count is
 listed with how many products matched and what was short and over. With
 fewer than 8 counts, it's a table; from 8, a chart shows each count's match
@@ -165,7 +169,9 @@ report_page(
 
 - **The first page**: the shop's name and address; the count's place, types
   and times; what expected stock came from; the **sign-off** (who started,
-  counted, submitted, reviewed and approved, and the reason); the log's code;
+  counted, submitted, reviewed and approved, and the reason; a count done
+  before People was set up says "The owner (People not set up)" as its
+  approver); the log's code;
   totals **by type**; and the **discrepancies**, each with how it was counted.
 
 ```{r}
@@ -217,12 +223,14 @@ The report gives quantities, not rupee values.
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 Completing a count freezes its counts and numbers. Product names and SKUs are
 printed as they are on the day (the report says so), and entries made after
 completion are added. The fingerprint is a code worked out from everything in
 the report except the time it was printed. The log's code on the report is the code
 of the count's log as it was at completion: if anyone altered the log, the report would
 say so.
+:::
 
 ## Try it
 

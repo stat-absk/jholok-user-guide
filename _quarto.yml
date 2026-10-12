@@ -23,7 +23,7 @@ book:
   description: >
     How to use Jholok, why it works the way it does, and the shop and
     accounting ideas behind it, in plain words.
-  version: "Guide 0.1 · for Jholok 0.1"
+  version: "Guide 0.2 · for Jholok 0.1"
   date: last-modified
   date-format: "D MMMM YYYY"
   search: true
@@ -33,33 +33,39 @@ book:
   page-navigation: true
   chapters:
     - index.qmd
-    - part: "The ideas behind the app"
+    # Re-tiered by the simplicity review (12 Oct 2026): what a new owner needs first, then the
+    # ideas, then the rest. File names stay, so the app's Help links keep working.
+    - part: "Start here"
+      chapters:
+        - chapters/00-first-count.qmd
+        - chapters/08-a-count-start-to-finish.qmd
+    - part: "How counting works"
       chapters:
         - chapters/01-stock-basics.qmd
         - chapters/02-the-ledger.qmd
         - chapters/03-counting-and-reconciliation.qmd
+        - chapters/13-submit-review-complete.qmd
+        - chapters/14-results-and-report.qmd
     - part: "Everyday use"
       chapters:
         - chapters/04-setting-up.qmd
         - chapters/05-the-catalogue.qmd
         - chapters/06-recording-movements.qmd
         - chapters/07-the-overview.qmd
-    - part: "Counting"
+        - chapters/15-keeping-data-safe.qmd
+    - part: "Boxes, tags and billing files"
       chapters:
-        - chapters/08-a-count-start-to-finish.qmd
         - chapters/09-counting-boxes.qmd
         - chapters/10-identify-later.qmd
-    - part: "Checking a count"
-      chapters:
         - chapters/11-book-stock.qmd
-        - chapters/12-off-the-shelf-and-cut-off.qmd
-        - chapters/13-submit-review-complete.qmd
-        - chapters/14-results-and-report.qmd
-    - part: "Looking after your shop"
+    - part: "Advanced"
       chapters:
-        - chapters/15-keeping-data-safe.qmd
+        - chapters/12-off-the-shelf-and-cut-off.qmd
+    - part: "From the shop"
+      chapters:
         - chapters/16-stories-from-the-shop.qmd
   appendices:
+    - chapters/counters-quick-guide.qmd
     - chapters/glossary.qmd
     - chapters/questions.qmd
     - chapters/what-changed.qmd

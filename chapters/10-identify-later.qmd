@@ -14,6 +14,10 @@ most_common <- slice_head(box_two, n = 1)
 For counters
 :::
 
+::: {.callout-note appearance="simple" icon=false}
+You need this only if you add box photos before every piece has a product. Otherwise skip it.
+:::
+
 ::: {.learn}
 - Why a box photo can be added before every piece in it is identified.
 - How to identify pieces from the To identify queue.
@@ -44,7 +48,9 @@ said which pieces were its.
 
 In the review of an untagged box, every piece without a product is marked
 for identifying later. The gold button still adds the box, and the note under
-it says how many pieces are left: here, all `r untagged$pieces`.
+it says how many pieces are left: here, all `r untagged$pieces`. It reads
+"`r untagged$pieces` pieces have no design yet: you'll pick them later from
+the To identify list."
 
 ```{r}
 screenshot("box-review-2.png", caption = drawn_box)
@@ -96,6 +102,15 @@ be completed until they're done. The approver's Review then says how many
 pieces aren't identified, and **Complete** stays off until they are. The
 approver reopens the count, with a reason, and a counter identifies them.
 
+If People isn't set up (@sec-review), there's no Submit: you tap **Review**.
+With pieces left, the app first asks "Pieces still to identify", with
+**Identify now** or **Review anyway**. If you review anyway, Review's **Not
+identified** section says, for example, "15 pairs in 1 box photo aren't
+identified. Identify them now; the count can't be completed until they are."
+Its **Identify now** button reopens the count (the log gives the reason "To
+identify pieces") and opens the To identify queue. Review itself never
+identifies a piece.
+
 ## Why it works this way
 
 - **It's quicker.** One list for every box, one tap per piece, and lookalikes
@@ -114,6 +129,7 @@ approver reopens the count, with a reason, and a counter identifies them.
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 Each identification is saved at once, with who made it and when, in the
 activity log. The piece's product is set, and that product's count goes up.
 Identified pieces also help picture matching: until the app is closed, a
@@ -126,6 +142,7 @@ this guide's screenshots, the queue never offers lookalikes.
 Like everything about box photos, picture matching was tuned on drawn
 example boxes. How well it does on a real shop's boxes hasn't been measured
 yet: always check the product before you tap it.
+:::
 
 ## Try it
 

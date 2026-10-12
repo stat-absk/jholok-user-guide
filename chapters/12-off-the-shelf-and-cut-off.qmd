@@ -24,6 +24,10 @@ chain_owned <- stock_on_hand(off_shelf, chain_line$counted_at) |>
 For the owner and approvers
 :::
 
+::: {.callout-note appearance="simple" icon=false}
+You need this only if stock leaves the shop on approval (jangad), goes to the karigar, or is kept for orders, or if sales are keyed in late. A shop that keeps everything on its shelves can skip it.
+:::
+
 ::: {.learn}
 - How a count treats stock that is the shop's but not on the shelf.
 - What the cut-off is, and why sales during a count don't look like losses.
@@ -136,6 +140,7 @@ count quietly.
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 For each product, the counting window runs from the first to the last time
 its count changed, as the activity log records. Expected stock is the stock
 in the shop at the window's end. If movements fell inside the window, Jholok
@@ -148,6 +153,7 @@ the books have on the shelf.
 Completing a count freezes, for each product, its cut-off, how it was decided
 and how much was off the shelf. Later movements never change what the count
 compared.
+:::
 
 ## Try it
 

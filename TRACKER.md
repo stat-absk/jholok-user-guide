@@ -110,8 +110,27 @@ Last updated 8 Oct 2026. Phases 0 to 2 done; phases 3 to 7 drafted: every chapte
 
 | ID | Task | Status |
 |---|---|---|
-| L1 | Host the book (GitHub Pages, or a public copy of the built site) and link it from Settings → About in the app | ◐ hosted; the app link waits |
-| L2 | A counters' quick guide: chapters 1, 3, 8 and 9 trimmed, with the counting questions, if counters are new staff | ☐ |
+| L1 | Host the book (GitHub Pages, or a public copy of the built site) and link it from Settings → About in the app | ☑ hosted; Settings → More → User guide links it, and Review and the box review link their chapters |
+| L2 | A counters' quick guide: chapters 1, 3, 8 and 9 trimmed, with the counting questions, if counters are new staff | ☑ an appendix page, printable (guide 0.2) |
+
+## Guide 0.2: the simplicity review (12 Oct 2026)
+
+From the app repo's `docs/reviews/2026-10-11-simplicity-review.md`, Phase A for the guide, with the app's
+packages 1 to 7 (DECISIONS §22).
+
+| ID | Task | Status |
+|---|---|---|
+| S1 | Chapters 3 to 15, the glossary and the questions brought up to date with the app: Settings regrouped, the lock, the first-run card, the counting bar, the solo path | ☑ |
+| S2 | New first chapter, Your first count in 30 minutes (G1), and What Jholok is, and isn't, on the welcome page (G9) | ☑ |
+| S3 | Parts re-tiered: Start here, How counting works, Everyday use, Boxes, tags and billing files, Advanced, From the shop (G2, G3). File names kept for the app's links | ☑ |
+| S4 | "You need this only if…" at the top of chapters 9 to 12 (G3) | ☑ |
+| S5 | "How it works" folded into a closed note in every chapter (G4) | ☑ |
+| S6 | "If you count alone" in chapter 4 (G6) | ☑ |
+| S7 | Counters' quick guide (L2, G7) | ☑ |
+| S8 | Glossary opens with the twelve words a count needs (G5); lakh and crore were already in it (G10) | ☑ |
+| S9 | Screenshots retaken, with three new ones for the first chapter | ☑ |
+| S10 | A Contents link at the top of each chapter for phones (G11): Quarto's sidebar button covers it; revisit after real-phone feedback | ☐ |
+| S11 | Real-phone screenshots after the first real count (G12) | ☐ |
 
 ## Log
 

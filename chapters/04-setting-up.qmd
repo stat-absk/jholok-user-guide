@@ -50,8 +50,33 @@ it fit your shop:
    stock.
 2. **Products**: add them one by one, or import a spreadsheet (@sec-catalogue).
 3. **Shop details**: your shop's name and address, printed on count reports.
-4. **People**: who counts and who approves, each with their own PIN.
-5. **The lock**: on by default, so the app stays private.
+4. **People** (optional): who counts and who approves, each with their own
+   PIN. If you count alone, you can skip it.
+5. **The lock**: on by default, so the app stays private. It starts once you
+   add your first product or start a count.
+
+Until all of this is done, a **getting-started card** on the Overview walks
+you through the first three steps, one at a time (@sec-overview).
+
+### Where things are in Settings
+
+Settings has five groups:
+
+- **Catalogue**: Product types, Import catalogue and Import tag list.
+- **Counting**: People.
+- **Shop**: your shop's details, Currency, Appearance and Supplier lead time.
+- **Backup and security**: Backup, the Require Face ID switch, and how soon
+  the app locks.
+- **More**: **Advanced** (the exports, Photo counting, Book stock words and
+  Diagnostics), **User guide**, which opens this guide, and the app's
+  **Version**.
+
+::: {.callout-tip title="If you count alone"}
+Skip People. Until it's set up, you count, review and complete each count
+yourself, with Face ID or the passcode, and every count says "Counted and
+approved by: The owner (People not set up)". Set People up when staff start
+counting (@sec-solo-path).
+:::
 
 ### Owner, approvers and counters
 
@@ -71,11 +96,14 @@ Bidisha (one person)".
 Each counter and approver has a **PIN** of 4 to 6 digits. It shows who entered each figure,
 and an approver's PIN is their signature on a completed count.
 
+All of this applies once People is set up. If you count alone, you don't need
+it: you count, review and complete the count yourself (@sec-solo-path).
+
 ## In the app
 
 ### Product types
 
-Open **Settings**, then **Product types**. Each type shows how many products
+Open **Settings**, then **Product types**, under **Catalogue**. Each type shows how many products
 it has and the unit it's counted in.
 
 ```{r}
@@ -90,9 +118,9 @@ screenshot("product-types.png")
 - Tap **Edit** to drag the types into the order you like.
 - A type that has products can't be deleted.
 
-### Shop details and preferences
+### Shop details
 
-In **Settings**, under **Preferences**:
+In **Settings**, under **Shop**:
 
 - **Shop**: your shop's name and address. They head every count report. Add
   your GSTIN after the address if your accountant wants it on the reports.
@@ -107,9 +135,16 @@ screenshot("settings.png")
 
 ### People
 
-Open **Settings**, then **People**. Until you set People up, Jholok asks
-nobody who's counting, and counts name nobody. That's fine for trying the app
-out, but set it up before your first real count.
+Open **Settings**, then **People**, under **Counting**. People is optional.
+Until you set it up, Jholok asks nobody who's counting, and you count, open
+Review and complete the count yourself, with Face ID or the phone's passcode.
+The count then says "Counted and approved by: The owner (People not set up)".
+That suits a shop where one person counts: @sec-solo-path shows that path. Set
+People up when more than one person counts, so that counting and approving
+are kept apart.
+
+On the getting-started card, the last step is **Add the people who count**:
+tap **Set up People**, or **I count alone** to skip it.
 
 1. Enter your name and tap **Set up People**. On a phone with Face ID, Face
    ID proves it's you; an owner PIN is optional, as a second way in. On a
@@ -146,11 +181,17 @@ screenshot("activity-log.png")
 
 ### The lock
 
-In **Settings**, under **Security**, **Require Face ID** is on from the
-start. Jholok asks for Face ID, or the phone's passcode, when it opens and
-when you come back after a minute away. You can choose how soon it locks:
-straight away, or after 1, 5 or 15 minutes. Whenever the app isn't in front,
-a plain cover hides it from the phone's list of open apps.
+In **Settings**, under **Backup and security**, **Require Face ID** is on
+from the start. Jholok asks for Face ID, or the phone's passcode, when it
+opens and when you come back after a minute away. You can choose how soon it
+locks, in **Lock**: immediately, or after 1, 5 or 15 minutes. Whenever the app
+isn't in front, a plain cover hides it from the phone's list of open apps.
+
+While Jholok is empty, it doesn't lock: there is nothing to protect yet. It
+starts locking the next time it opens after you add your first product or
+start your first count, and the footer under the switch says so until then.
+The first time it locks, it explains why: "Jholok locks to keep your stock
+private." Tap **Unlock** to go on. After that, it asks straight away.
 
 Turning the lock off asks the owner to prove it's them.
 
@@ -170,6 +211,7 @@ Turning the lock off asks the owner to prove it's them.
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 PINs are never stored as typed: Jholok keeps them in a scrambled form that
 can't be turned back into the PIN. Each log entry carries a code made from
 its own details and the code of the entry before it, so the entries form a
@@ -180,6 +222,7 @@ instead of "intact".
 If the owner forgets their PIN on a phone without Face ID, it can be reset
 with the phone's passcode. The log records that, and the next count's result
 says so, so a reset can't go unnoticed.
+:::
 
 ## Try it
 
@@ -215,10 +258,11 @@ approver is left, and the count would say "one person".
 
 ::: {.remember}
 - Check the product types first: a type's unit can't convert stock later.
-- Set up People before the first real count: the owner, then each counter
-  and approver with their own PIN.
+- If more than one person counts, set up People before the first real count:
+  the owner, then each counter and approver with their own PIN. If you count
+  alone, you can skip it.
 - Counting and approving are kept apart. The owner approves alone only when
   nobody else can.
-- The lock is on from the start, and only the owner can take data off the
-  phone.
+- The lock is on from the start and begins with the first product or count.
+  Only the owner can take data off the phone.
 :::

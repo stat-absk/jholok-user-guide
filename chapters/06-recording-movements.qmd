@@ -166,6 +166,7 @@ Overview (@sec-overview).
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 Each movement stores its date, its kind, its quantity and note, who entered
 it and when it was entered. An Adjust stores the difference between the
 stock before and the correct stock you entered.
@@ -179,6 +180,7 @@ If you record a movement dated before a count that has already been
 completed, Jholok checks whether that count already accounted for it, so it
 isn't counted twice. The owner confirms the correction, and a sale needs its
 bill number. @sec-cut-off explains this.
+:::
 
 ## Try it
 

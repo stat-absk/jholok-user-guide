@@ -65,6 +65,26 @@ last 90 days.
 
 ## In the app
 
+### Getting started
+
+When Jholok is new and empty, the Overview has no figures yet. It says
+"Welcome to Jholok · Three steps to your first stock count", with a
+getting-started card under it. The card shows one step at a time:
+
+1. **Add your products**: **Add product**, or **Import catalogue**, which
+   opens the Files picker to choose your spreadsheet (@sec-catalogue).
+2. **Count one tray**: **Start a count** (@sec-counting). While that count is
+   open, the step reads "Finish your first count", with **Continue count**. It's
+   done when a count is completed.
+3. **Add the people who count**: **Set up People** (@sec-setting-up), or
+   **I count alone** to skip it. This step is optional.
+
+Above the step, dots and "Step 2 of 3" show how far you've got. Under its
+buttons, a "Then: …" line names what comes after. Once you have products, the
+card sits at the top of the Overview, above the figures; from step 2 it also
+shows on the Count tab. It goes once all three steps are done. Tap **×** to
+hide it for good before then.
+
 ### Stock value
 
 ```{r}
@@ -143,12 +163,13 @@ busiest week is labelled with its festival, when there was one.
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 The value line takes each product's stock on each day, from the ledger, and
 values it at today's cost. Archived products are left out. A product's
 **pace** is the number it sold in the last 90 days, after returns, divided by
 the days it was in stock (at least 14), and its **cover** is how many days
 its stock lasts at that pace. Running low means cover shorter than the
-supplier lead time, which you can change in Settings → Preferences.
+supplier lead time, which you can change in Settings, under Shop.
 
 The sales figures are rupees at today's list price, which can be added up.
 Units sold never are, because a pair, a set and a piece are different things.
@@ -157,6 +178,7 @@ and pieces sold, each on its own scale. Where a sentence needs a count, it
 lists the kinds: "Together they sold 18 pairs and 13 pieces in 90 days." Until
 products have list prices, the whole Sales section works in units this way,
 such as "79 pairs · 17 sets · 63 pieces sold".
+:::
 
 ## Try it
 

@@ -137,11 +137,13 @@ screenshot("overview.png")
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 For each product, Jholok multiplies its stock on hand by its cost (or its
 list price) and adds the results. Stock on hand itself isn't stored anywhere:
 Jholok works it out from the ledger, as the next chapter explains. If a
 product's stock has gone below zero (a mistake the next chapter also covers),
 it counts as none in the value, because no shelf holds minus one pendant.
+:::
 
 ## Try it
 

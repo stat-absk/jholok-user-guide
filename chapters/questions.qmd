@@ -24,7 +24,8 @@ chosen. @sec-a-count
 
 **Why can't I see how many there should be?**
 Counting is blind on purpose: knowing the answer changes what people find.
-The approver sees the expected numbers in Review. @sec-counting
+The expected numbers appear only in Review, for the approver, or for the
+owner when they count alone. @sec-counting
 
 **I found a single earring without its pair.**
 Count the whole pairs, then add the odd one with **Singles** on the same
@@ -74,14 +75,27 @@ It hasn't been recounted. Tap it under **Recount first** and count it again. @se
 
 **Complete is greyed out.**
 Some pieces in box photos aren't identified. Reopen the count so a counter
-can identify them. @sec-identify-later
+can identify them. Counting alone, tap **Identify now** in Review.
+@sec-identify-later
 
 **Everyone who approves counted in this count.**
 Then the owner approves it. If the owner counted too, the count says one
 person counted and approved it. @sec-setting-up
 
 **We need to count some more after submitting.**
-An approver taps **Reopen for counting** on the count and gives a reason. @sec-review
+An approver taps **Reopen for counting** on the count and gives a reason.
+Counting alone, tap **Count more** on the count's In review card. @sec-review
+
+**I count alone. Do I need People?**
+No. Until People is set up, the counting screen's gold button is **Review**
+instead of Submit, Face ID or the passcode opens it once, and completing
+needs no PIN. The count says "The owner (People not set up)". Set up People
+when someone else counts, or you want a second person to approve.
+@sec-solo-path
+
+**Where is Load book stock?**
+Once any product has a piece tag, it's a row in the counting list. Before
+that, it's in the counting screen's ⋯ menu, top right. @sec-book-stock
 
 **The books are older than the counting.**
 Pieces sold in between would look missing. Load newer books, or give the
@@ -125,6 +139,11 @@ phone, but that replaces what the other phone had. @sec-keeping-data-safe
 **How often should I back up?**
 After every completed count, and at least once a week. Jholok doesn't back
 up by itself. @sec-keeping-data-safe
+
+**Jholok opened without asking for Face ID.**
+A new, empty shop opens unlocked. The lock starts at the next launch after
+the first product or count is added. Settings → Backup and security turns it
+off or on. @sec-keeping-data-safe
 
 **Why does every export ask for Face ID?**
 A file that leaves the phone can't be taken back, so the owner confirms each

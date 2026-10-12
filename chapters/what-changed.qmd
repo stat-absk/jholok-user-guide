@@ -12,6 +12,30 @@ For everyone
 The guide grows with the app. Each edition is listed here, newest first, with
 what's new in it, so you can see what to read again after an update.
 
+## Guide 0.2, for Jholok 0.1 (build 60)
+
+Simpler to start, for the app and the guide.
+
+- **A new first chapter**, Your first count in 30 minutes (@sec-first-count):
+  from a new install to a finished count, one step at a time.
+- **The parts are re-ordered**: Start here, How counting works, Everyday use,
+  Boxes, tags and billing files, Advanced, and the stories. Nothing was taken
+  out. The chapters you can skip say so at the top.
+- **Counting alone.** If you haven't set up People, Review is one step, the
+  reason is optional, and the result says the owner counted and approved it
+  (@sec-review).
+- **The first-run card** on the Overview shows three steps to a first count
+  (@sec-overview).
+- **The lock** starts once you've added a product or a count, and explains
+  itself the first time (@sec-setting-up).
+- **Settings** is shorter: exports, Photo counting, Book stock words and
+  Diagnostics are under Settings → Advanced (@sec-setting-up).
+- **The counting bar**: when nothing in a count is tagged, Box photo is the
+  main button, and Load book stock waits in the ⋯ menu until you have tags
+  (@sec-a-count, @sec-book-stock).
+- **Box photos** read "15 pairs found, not added yet" until you add them
+  (@sec-boxes).
+
 ## Guide 0.1, for Jholok 0.1
 
 The first edition: the whole app, for people using it for the first time.

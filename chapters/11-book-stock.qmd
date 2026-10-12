@@ -17,6 +17,10 @@ dropped <- demo_tag_list() |>
 For the owner and approvers
 :::
 
+::: {.callout-note appearance="simple" icon=false}
+You need this only if your billing software can export the tags in stock and you want each count checked against it. Without it, counts check against Jholok's own records.
+:::
+
 ::: {.learn}
 - What "the books" are, and why a count can be checked against them.
 - How to load them, and what the plan before loading tells you.
@@ -58,8 +62,10 @@ once, and remembers.
 
 ### Load the books
 
-On the counting screen, tap **Load book stock**. An approver or the owner
-signs in, then chooses the file.
+On the counting screen, tap **Load book stock**. It's a row in the list once
+any product in the catalogue has a piece tag, or the count has loaded the
+books. Before that, it's in the **⋯** menu at the top right. An approver or
+the owner signs in, then chooses the file.
 
 Set **As of** to the time the file was taken from the billing system. Jholok
 suggests the time the file was saved.
@@ -82,7 +88,8 @@ If the file uses a status word Jholok doesn't know, the plan asks: "This file
 says "rep" for 14 rows. What does it mean?" The owner chooses one of On the
 shelf, Sold, Jangad, Karigar, Order or Customer's piece, and taps **Use this
 meaning**. Jholok remembers the answer for every later file. The owner can
-change answers in Settings → Book stock words.
+change answers in Settings → Advanced → Book stock words, which shows there
+once a book file has been loaded or a word answered.
 
 Tap **Load**. The counting screen then shows when the books are from.
 
@@ -129,6 +136,7 @@ sold in between would look missing. Load newer books, or give a reason and
 
 ## How it works
 
+::: {.callout-note collapse="true" title="Read how it works"}
 Loading is one change, saved at once:
 
 - For each tagged product in the count, and each place, Jholok records a **Book
@@ -143,7 +151,7 @@ The count's first load sets the starting point. A later load during the count
 can show pieces **sold during the count**: on the shelf in the first file,
 gone from the later one.
 
-### What the count finds about each tag
+**What the count finds about each tag**
 
 When the count is completed, Jholok freezes what it found for each product,
 and Result, the report and the CSV list:
@@ -156,6 +164,7 @@ and Result, the report and the CSV list:
 - **Found, not in the books**: read in the count, but the books don't have
   them in stock.
 - **Out of the shop**: read in the count, but recorded as out, on jangad, say.
+:::
 
 ## Try it
 

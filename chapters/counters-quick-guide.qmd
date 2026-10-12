@@ -1,0 +1,89 @@
+# For counters: the quick guide {#sec-counters-quick-guide}
+
+```{r}
+#| include: false
+source(here::here("_common.R"))
+```
+
+::: {.audience}
+For counters
+:::
+
+Two pages to keep by the counter. Print this page from your browser, or keep
+it open on the phone. The full steps are in @sec-a-count and @sec-boxes.
+
+## Before you start
+
+- **You count blind.** Nothing on the counting screen shows how many there
+  should be. Count what's in front of you, not what you expect.
+- **Every tap is saved.** If the phone rings or the app closes, your count is
+  still there.
+- **No swipe changes a count by itself.** A swipe only shows a button; you
+  still tap it.
+
+## Start or join a count
+
+1. Open the **Count** tab. Tap a count under **In progress**, or **Start a
+   count** for a new one (location, what to count, then **Start**).
+2. If the app asks **Who's counting?**, choose your name and enter your PIN.
+   You stay signed in while the count is open, through 15 minutes away.
+
+## Count each product
+
+- **+** adds one, for each piece, pair or set you pick up. **−** takes one
+  away. A dash (–) means not counted yet.
+- **Tap the number** to type a count: **Add** adds to what you have so far
+  (tray by tray), **Set total** replaces it.
+- **Earrings are counted in pairs.** An earring with no mate goes under
+  **Singles** on the same sheet, never as a pair.
+- **Swipe right, then tap None here**, when you've looked and there are none.
+  That counts 0, which isn't the same as leaving it uncounted.
+- **Swipe left, then tap Clear**, to start a product again.
+- **Undo** shows for a few seconds after a change of more than one, and after
+  every Clear. It puts the count back exactly as it was.
+
+## Find a product
+
+- Type in **Find a product**: a name, SKU or barcode.
+- The **⋯** menu's **Show** lists only the products **Not counted**, to check
+  nothing was missed.
+- **Find by code** (the barcode button) finds a product from its label. It
+  never counts it: you still tap +.
+
+## A box or tray at once
+
+- **Scan tags** reads the piece tags on a tray. **Box photo** counts a box of
+  pieces on cards from a photo.
+- Nothing counts until you check the box and tap **Add**. Box photos aren't
+  yet measured on real shop boxes, so check every piece.
+- Pieces with no design yet go to **To identify** on the counting screen. Tap
+  it and pick each one from the list.
+
+## When you're done
+
+- Tap **Submit**. Counting stops and the count waits for an approver who
+  didn't count in it.
+- If more needs counting after you submit, ask an approver to **Reopen for
+  counting**.
+- If the owner counts alone, without People set up, there's no Submit: the
+  owner taps **Review** instead (@sec-solo-path).
+
+## Counting questions
+
+**Why can't I see how many there should be?**
+So the number can't sway your count. The approver sees it in Review.
+
+**I counted the wrong product.**
+Tap − or Undo, or swipe left and tap Clear, then count it again.
+
+**A product isn't in the list.**
+It may be a type this count doesn't cover, or archived. Tell the owner;
+don't count it under another product.
+
+**The app asked for my PIN again.**
+You were away for more than 15 minutes, or left the count. Your figures are
+all still there.
+
+**I found one earring on its own.**
+Add it under **Singles**. It's flagged for the owner and never changes the
+pairs.

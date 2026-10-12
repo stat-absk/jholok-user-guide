@@ -127,3 +127,13 @@ the sample boxes,Jholok/DevTools/DemoBoxes/*
 the screenshots,Jholok/App/DebugLaunch*.swift
 the screenshots,Jholok/DevTools/ReportDebugLaunch.swift
 the screenshots,JholokUITests/GuideScreenshotsUITests.swift
+00-first-count,Jholok/Shared/FirstRunCard.swift
+00-first-count,JholokKit/Sources/JholokDomain/FirstRun.swift
+00-first-count,JholokKit/Sources/JholokDomain/People/SoloSentences.swift
+00-first-count,Jholok/Features/Count/CompleteCountSheet.swift
+00-first-count,Jholok/App/AppLock.swift
+13-submit-review-complete,JholokKit/Sources/JholokDomain/People/SoloSentences.swift
+07-the-overview,Jholok/Shared/FirstRunCard.swift
+04-setting-up,Jholok/Features/Settings/SettingsAdvancedView.swift
+counters-quick-guide,Jholok/Features/Count/CountingView.swift
+counters-quick-guide,Jholok/Features/Count/QuantityEntryView.swift
