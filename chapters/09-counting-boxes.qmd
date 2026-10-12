@@ -145,32 +145,36 @@ You can also **Choose photo** to use one you took earlier.
 ### Check the box
 
 The review shows the photo with every piece outlined and numbered. A small
-mark on each outline says how its product was found:
+mark on a number says what the piece still needs:
 
-- a **tag**: read from its tag;
-- **sparkles**: suggested by its picture, waiting for you to check it;
-- a **question mark**: still needs a product;
-- no mark: confirmed.
+- a **question mark**: it needs a product;
+- an **eye**: check it. Its picture match is waiting for you to accept it,
+  or it's flagged, such as a piece that may be two, or one found only by its
+  tag;
+- no mark: it's done, read from its tag or chosen by you.
 
-A **dashed** outline is a piece left out, and a red **!** is a piece that may
-be two, or was found only by its tag.
+A piece left out is dimmed, with a dashed outline and its reason beside the
+number, such as "Counted in Box 2".
 
 ```{r}
 screenshot("box-review-1.png", caption = drawn_box)
 ```
 
 Tap any piece to open it. The sheet shows its tag, its product, and the
-products it may be, with a search at the top. From there:
+products it may be, with a search at the top. **Choose the product**, or
+**accept** the suggested one. Under that, the actions that apply to the piece
+are listed in this order:
 
-- **choose the product**, or **accept** the suggested one;
-- **Make it 2**, on a piece marked with a red **!** as maybe two. If one
-  outline holds two pieces and isn't marked, use **Add piece**;
-- [**Not a piece**](glossary.qmd#not-a-piece), when the outline isn't jewellery (an empty card, a
-  label). You can undo it until your next change;
 - [**Not in the catalogue**](glossary.qmd#not-in-the-catalogue), for a design the shop has no product for;
+- **Make it 2**, on a piece flagged as maybe two. If one outline holds two
+  pieces and isn't flagged, use **Add piece**;
+- **Link tag**, to link a tag the app doesn't know to a product;
 - **Identify later**, on a picture match you can't check now: it clears the
   match, and the piece waits in the [To identify](glossary.qmd#to-identify) queue
-  (@sec-identify-later). A piece with no product goes there anyway.
+  (@sec-identify-later). A piece with no product goes there anyway;
+- **Count it anyway**, on a piece the app left out, if it should count;
+- [**Not a piece**](glossary.qmd#not-a-piece), last, when the outline isn't jewellery (an empty card, a
+  label). You can undo it until your next change.
 
 ```{r}
 screenshot("piece-sheet.png", caption = drawn_box)

@@ -32,23 +32,25 @@ it open on the phone. The full steps are in @sec-a-count and @sec-boxes.
 
 - **+** adds one, for each piece, pair or set you pick up. **−** takes one
   away. A dash (–) means not counted yet.
-- **Tap the number** to type a count: **Add** adds to what you have so far
-  (tray by tray), **Set total** replaces it.
+- **Tap the number** to type a count. It opens in **Set total**, which
+  replaces the count; **Add** adds to what you have so far (tray by tray).
+- **Tap the 0** (where − will be) for **None here**, when you've looked and
+  there are none. That counts 0, which isn't the same as leaving it
+  uncounted. Swiping right, then tapping None here, does the same.
 - **Earrings are counted in pairs.** An earring with no mate goes under
   **Singles** on the same sheet, never as a pair.
-- **Swipe right, then tap None here**, when you've looked and there are none.
-  That counts 0, which isn't the same as leaving it uncounted.
 - **Swipe left, then tap Clear**, to start a product again.
 - **Undo** shows for a few seconds after a change of more than one, and after
   every Clear. It puts the count back exactly as it was.
 
 ## Find a product
 
-- Type in **Find a product**: a name, SKU or barcode.
+- Type in the search field, **Name, SKU, barcode or tag**. Type a piece tag
+  and tap Return to find its product.
 - The **⋯** menu's **Show** lists only the products **Not counted**, to check
   nothing was missed.
-- **Find by code** (the barcode button) finds a product from its label. It
-  never counts it: you still tap +.
+- **Find by code** (the scanner button at the right end of the search field)
+  finds a product from its label. It never counts it: you still tap +.
 
 ## A box or tray at once
 

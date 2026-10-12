@@ -46,8 +46,8 @@ said which pieces were its.
 
 ### Add the box
 
-In the review of an untagged box, every piece without a product is marked
-for identifying later. The gold button still adds the box, and the note under
+In the review of an untagged box, every piece without a product has a
+question mark on its number, for identifying later. The gold button still adds the box, and the note under
 it says how many pieces are left: here, all `r untagged$pieces`. It reads
 "`r untagged$pieces` pieces have no design yet: you'll pick them later from
 the To identify list."

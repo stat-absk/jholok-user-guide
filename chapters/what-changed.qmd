@@ -12,6 +12,26 @@ For everyone
 The guide grows with the app. Each edition is listed here, newest first, with
 what's new in it, so you can see what to read again after an update.
 
+## Guide 0.3, for Jholok 0.1
+
+Quicker counting, before the first real count.
+
+- **One search field** on the counting screen, "Name, SKU, barcode or tag",
+  with Find by code inside it. Type a piece tag and tap Return to find its
+  product (@sec-a-count).
+- **None here by a tap**: an uncounted product shows a 0 where − will be, and
+  the number sheet has None here above the keyboard. The swipe still works
+  (@sec-a-count).
+- **The number sheet opens in Set total.** In Add, the new total is the large
+  figure, with "Counted so far" under it (@sec-a-count).
+- **Box review marks** are simpler: a question mark needs a product, an eye
+  needs a check, and a piece that's done has no mark. A piece left out is
+  dimmed, with its reason (@sec-boxes).
+- **The piece sheet's actions** are in the order you'll need them, with Not a
+  piece last (@sec-boxes).
+- **The Ledger's +** asks first what you're recording: Received, Sold,
+  Returned or Adjust (@sec-movements).
+
 ## Guide 0.2, for Jholok 0.1 (build 60)
 
 Simpler to start, for the app and the guide.

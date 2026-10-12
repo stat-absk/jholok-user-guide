@@ -14,8 +14,8 @@ Tap − to take one off. After a change of more than one, the bar at the bottom
 offers **Undo** for a few seconds. @sec-a-count
 
 **I typed the wrong count.**
-Tap the number again and choose **Set total**, or swipe left on the product
-and tap **Clear** to start again. @sec-a-count
+Tap the number again and type the right total: the sheet opens in **Set
+total**. Or swipe left on the product and tap **Clear** to start again. @sec-a-count
 
 **The phone rang, or the app closed, in the middle of counting.**
 Nothing is lost: every tap is saved at once. Open the count again from the
@@ -32,7 +32,8 @@ Count the whole pairs, then add the odd one with **Singles** on the same
 sheet. A single is shown beside the pairs and is never rounded into a pair. @sec-stock-basics
 
 **A product I'm holding isn't in the list.**
-Search for it, or use **Find by code**. If it still isn't there, it may be
+Search for it, or use **Find by code**, the scanner button in the search
+field. If it still isn't there, it may be
 a type this count doesn't cover, an archived product, or a design not yet in
 the catalogue: tell the owner. @sec-a-count
 
@@ -41,7 +42,8 @@ Take turns on the shop's phone. Each time, go back to the counts list, open
 the count and choose your own name. The count lists you both. @sec-a-count
 
 **What's the difference between "None here" and leaving a product blank?**
-"None here" counts 0: you looked and there were none. A product left with a
+"None here" counts 0: you looked and there were none. Tap the 0 on the
+product's row, or None here on the number sheet. A product left with a
 dash wasn't counted, and keeps its stock unless the approver chooses Set to
 zero. @sec-a-count
 

@@ -62,7 +62,8 @@ When you have products, the card moves on to **Count one tray**. Tap
   tray.
 
 Tap **Start**. Now count what's in front of you: tap **+** once for each
-piece, or tap the number to type it. Nothing on this screen shows how many
+piece, or tap the number to type it. If there are none of a product, tap the
+**0** on its row for None here. Nothing on this screen shows how many
 there should be. That is on purpose: a count that can't see the answer can't
 be swayed by it. @sec-counting explains why.
 

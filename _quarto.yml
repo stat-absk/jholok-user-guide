@@ -23,7 +23,7 @@ book:
   description: >
     How to use Jholok, why it works the way it does, and the shop and
     accounting ideas behind it, in plain words.
-  version: "Guide 0.2 · for Jholok 0.1"
+  version: "Guide 0.3 · for Jholok 0.1"
   date: last-modified
   date-format: "D MMMM YYYY"
   search: true

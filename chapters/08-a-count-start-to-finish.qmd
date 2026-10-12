@@ -103,24 +103,27 @@ Each product has three controls:
 
 - **+** adds one. Tap it once for each piece, pair or set as you pick it up.
   It sits on the right, under your thumb.
-- **−** takes one away, if you tapped once too often.
+- **−** takes one away, if you tapped once too often. Before a product is
+  counted, a **0** sits there instead: tap it for **None here**, when you've
+  looked and there are none.
 - **The number** shows your count. A dash (–) means the product hasn't been
   counted yet. Tap the number to type a count instead.
 
-When you tap the number, choose **Add** to add to what you've counted so far
-(useful when you count tray by tray), or **Set total** to type the whole
-count. The sheet shows the count so far and the new total before you tap
-**Done**. For earrings, the sheet also has **Singles**, "An earring with no
+When you tap the number, the sheet opens in **Set total**: type the whole
+count. Choose **Add** to add to what you've counted so far (useful when you
+count tray by tray): the new total shows large, with "Counted so far" under
+it. **None here**, above the keyboard, counts 0. Tap **Done** to save. For
+earrings, the sheet also has **Singles**, "An earring with no
 mate": enter an odd single there, never as a pair (@sec-stock-basics).
 
 ```{r}
 screenshot("quantity-entry.png")
 ```
 
-Two quick actions are hidden behind a swipe on a product:
+Two quick actions are also hidden behind a swipe on a product:
 
-- **Swipe right for None here**, when you've looked and there are none. This
-  counts 0, which is different from not counting it at all.
+- **Swipe right for None here**, the same as tapping the 0. This counts 0,
+  which is different from not counting it at all.
 - **Swipe left for Clear**, to take your count off and start again. It's
   there once you've counted the product yourself.
 
@@ -139,14 +142,15 @@ screenshot("undo-banner.png")
 
 ### Find a product quickly
 
-Type in **Find a product** to search by name, SKU or barcode. The ⋯ menu at
+Type in the search field at the top, **Name, SKU, barcode or tag**. If you
+type a piece tag and tap Return, the list shows its product. The ⋯ menu at
 the top right holds **Show**: choose **Not counted** or **Counted** to see only
 those products, which helps you check nothing was missed, and **All
 products** to see them all again. The ⋯ fills in while only some products
 are shown.
 
-To find a product from its label, tap the barcode button, **Find by code**.
-Scan or type a barcode, a SKU or a piece tag, and the list shows only that
+To find a product from its label, tap **Find by code**, the scanner button at
+the right end of the search field. Scan or type a barcode, a SKU or a piece tag, and the list shows only that
 product's row. Finding a product never counts it: you still tap +.
 
 ```{r}
@@ -260,8 +264,8 @@ offers Undo for a few seconds.
 
 ::: {.remember}
 - Start a count from the Count tab, and choose where and what it covers.
-- Tap + for each piece. Tap the number to type a count. Swipe for None here or
-  Clear, then tap.
+- Tap + for each piece. Tap the number to type a count. Tap the 0 for None
+  here. Swipe left for Clear, then tap.
 - Undo is offered after a change of more than one, and after every Clear.
 - Submit when you're done; after that, only an approver who didn't count, or
   the owner, can reopen the count. Without People set up, tap **Review**

@@ -88,14 +88,15 @@ diagram_places()
 ### Receive, sell and return
 
 Open the product and tap **Receive** or **Sell**. You can also tap **+** in
-the Ledger and choose the product, or, when no sales are recorded yet, tap
-**Record a sale** on the Overview.
+the Ledger, choose **Received**, **Sold**, **Returned** or **Adjust**, then
+the product: the form opens on that kind. Or, when no sales are recorded
+yet, tap **Record a sale** on the Overview.
 
 ```{r}
 screenshot("record-sale.png")
 ```
 
-1. Choose the kind: **Received**, **Sold** or **Returned**.
+1. Choose or check the kind: **Received**, **Sold** or **Returned**.
 2. Set the **quantity**.
 3. Add a **note** if it will help: the supplier, the bill number.
 4. Check the **date and time**. If the movement happened earlier, set when it
@@ -114,7 +115,8 @@ it, then count the product to find what's missing.
 ### Put a stock figure right
 
 If a product's stock is wrong for a reason you know (a piece damaged and
-sent for melting, say), open it, tap **Adjust**, and enter the **correct
+sent for melting, say), open it and tap **Adjust** (or choose **Adjust** from
+the Ledger's **+**), and enter the **correct
 stock**. A **reason** is required. Jholok records the difference as an
 adjustment, with your reason, in the ledger.
 
