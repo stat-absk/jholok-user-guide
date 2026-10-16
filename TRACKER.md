@@ -129,7 +129,7 @@ packages 1 to 7 (DECISIONS §22).
 | S7 | Counters' quick guide (L2, G7) | ☑ |
 | S8 | Glossary opens with the twelve words a count needs (G5); lakh and crore were already in it (G10) | ☑ |
 | S9 | Screenshots retaken, with three new ones for the first chapter | ☑ |
-| S10 | A Contents link at the top of each chapter for phones (G11): Quarto's sidebar button covers it; revisit after real-phone feedback | ☐ |
+| S10 | A Contents button above each chapter's title on phones, opening the chapter list, and the top bar's breadcrumb on one line (G11; `styles/phone-contents.html`) | ☑ |
 | S11 | Real-phone screenshots after the first real count (G12) | ☐ |
 
 ## Log
@@ -155,3 +155,4 @@ packages 1 to 7 (DECISIONS §22).
 | 9 Oct 2026 | Q1 to Q3 and Q5 answered (PLAN.md): release 1 ships as the single offline file; book and single file both kept; English only until the app is translated; one guide, with a counters' quick guide and hosting with an app link noted for later (L1, L2). |
 | 9 Oct 2026 | The book is hosted at https://stat-absk.github.io/jholok-guide/, a resource folder of the owner's Quarto site (`scripts/publish_book.R`; site commit `1d08da5`). The book's resource patterns are anchored to the top folder, as they also matched the single-file build's copies. The link from Settings → About in the app is still to do. |
 | 9 Oct 2026 | The repository was made public, so the book on the site can link to its source (Home and Notes, site commit `0dee195`). History checked for keys and private data first; `scripts/sources.csv` names app source files, which stay in the private app repository. |
+| 16 Oct 2026 | S10 done: on phones (under 992 px) a Contents button above each chapter's title opens the chapter list, as the top bar's icon does, and the bar's breadcrumb shows only the chapter, on one line. Checked at 375 px; hidden on wide screens. The single-file edition has its own contents and is unchanged. |

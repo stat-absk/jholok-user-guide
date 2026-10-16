@@ -1,0 +1,19 @@
+<!-- A "Contents" button above each chapter's title, on phones only (simplicity review G11):
+     there the chapter list hides behind an icon in the top bar. It opens that same list. -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var title = document.getElementById("title-block-header");
+  var toggle = document.querySelector(".quarto-secondary-nav .quarto-btn-toggle");
+  if (!title || !toggle) return;
+  var button = document.createElement("button");
+  button.type = "button";
+  button.className = "phone-contents d-lg-none";
+  button.setAttribute("aria-controls", "quarto-sidebar");
+  button.innerHTML = '<i class="bi bi-list" aria-hidden="true"></i> Contents';
+  button.addEventListener("click", function () {
+    window.scrollTo({ top: 0 });
+    toggle.click();
+  });
+  title.parentNode.insertBefore(button, title);
+});
+</script>

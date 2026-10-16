@@ -85,6 +85,7 @@ format:
     fig-responsive: true
     link-external-newwindow: true
     lang: en-GB
+    include-after-body: styles/phone-contents.html
 
 knitr:
   opts_chunk:

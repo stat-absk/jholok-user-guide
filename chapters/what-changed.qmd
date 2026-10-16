@@ -31,6 +31,8 @@ Quicker counting, before the first real count.
   piece last (@sec-boxes).
 - **The Ledger's +** asks first what you're recording: Received, Sold,
   Returned or Adjust (@sec-movements).
+- **On a phone**, a Contents button above each chapter's title opens the
+  list of chapters (added 16 October).
 
 ## Guide 0.2, for Jholok 0.1 (build 60)
 

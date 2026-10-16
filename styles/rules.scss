@@ -149,3 +149,47 @@ h1.part {
 .gt_table .gt_col_heading {
   color: $text-secondary !important;
 }
+
+// Phones: a Contents button above the title (styles/phone-contents.html), and the top bar's
+// breadcrumb on one line, the chapter alone, cut short with "…" (simplicity review G11).
+.phone-contents {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  margin: 0 0 0.75rem;
+  padding: 0 1rem;
+  border: 1px solid $hairline;
+  border-radius: 999px;
+  background: $surface-raised;
+  color: $text-secondary;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 991.98px) {
+  .quarto-secondary-nav .breadcrumb {
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+
+  .quarto-secondary-nav .breadcrumb-item:not(:last-child) {
+    display: none;
+  }
+
+  .quarto-secondary-nav .breadcrumb-item:last-child {
+    min-width: 0;
+    padding-left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .quarto-secondary-nav .breadcrumb-item:last-child::before {
+    display: none;
+  }
+
+  .quarto-secondary-nav .quarto-page-breadcrumbs {
+    min-width: 0;
+    overflow: hidden;
+  }
+}
