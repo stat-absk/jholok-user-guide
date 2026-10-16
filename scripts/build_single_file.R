@@ -60,6 +60,22 @@ unnumbered <- function(lines) {
   lines
 }
 
+# Appendices are unnumbered here, so "@sec-…" can't name them as the book's
+# "Appendix A" does: those references become links titled by the appendix.
+link_appendices <- function(lines, appendices) {
+  for (file in appendices) {
+    heading <- grep("^# ", readLines(here::here(file)), value = TRUE)[[1]]
+    id <- sub("^#", "", regmatches(heading, regexpr("#sec-[A-Za-z0-9-]+", heading)))
+    title <- trimws(sub("\\{.*$", "", sub("^# ", "", heading)))
+    lines <- gsub(
+      paste0("@", id, "\\b"),
+      paste0("[", title, "](#", id, ")"),
+      lines
+    )
+  }
+  lines
+}
+
 part_heading <- function(heading) {
   if (is.null(heading)) {
     return(character())
@@ -162,6 +178,7 @@ build_single_file <- function() {
       }))
     )
   }))
+  body <- link_appendices(body, unlist(book$appendices))
   writeLines(
     c(front_matter(book, version), body),
     file.path(build_dir, "guide.qmd")
